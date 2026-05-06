@@ -1,6 +1,9 @@
 export function Hero() {
   return (
-    <section id="hero" className="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-surface-base">
+    <section
+      id="hero"
+      className="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-surface-base"
+    >
       <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-ink-primary mb-3">
         Alejandro Granados
       </h1>
