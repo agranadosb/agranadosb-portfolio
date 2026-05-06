@@ -1,0 +1,49 @@
+// .devcontainer/devcontainer.json
+{
+  "name": "agranadosb-portfolio",
+  "dockerFile": "Dockerfile",
+  "initializeCommand": ".devcontainer/init-command.sh",
+  "postAttachCommand": ".devcontainer/post-attach.sh",
+  "postCreateCommand": ".devcontainer/post-create.sh",
+  "runArgs": [
+    "--init",
+    "--name",
+    "devcontainer-agranadosb-portfolio",
+    "--add-host=host.docker.internal:host-gateway",
+    "--env=HOST_PROJECT_PATH=${localWorkspaceFolder}"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dsznajder.es7-react-js-snippets",
+        "biomejs.biome",
+        "bradlc.vscode-tailwindcss",
+        "GitHub.copilot",
+        "GitHub.copilot-chat"
+      ],
+      "settings": {
+        "editor.linkedEditing": true,
+        "editor.defaultFormatter": "biomejs.biome",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll": "always",
+          "source.fixAll.biome": "always"
+        },
+        "js/ts.preferences.importModuleSpecifier": "non-relative",
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "icon": "terminal-bash",
+            "path": "bash"
+          },
+          "zsh": {
+            "path": "zsh"
+          }
+        }
+      }
+    }
+  },
+  "forwardPorts": [5173],
+  "mounts": ["source=${localWorkspaceFolder},target=/workspaces/portfolio,type=bind"],
+  "workspaceFolder": "/workspaces/portfolio"
+}

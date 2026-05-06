@@ -1,0 +1,32 @@
+{
+  "name": "agranadosb-portfolio",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "biome lint",
+    "lint:fix": "biome check --write",
+    "format": "biome format --write",
+    "check": "biome check",
+    "check-format": "biome format",
+    "audit": "npm audit --audit-level=high"
+  },
+  "dependencies": {
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.7",
+    "@tailwindcss/vite": "^4.1.9",
+    "@types/node": "^22.15.29",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@vitejs/plugin-react-swc": "^3.9.0",
+    "tailwindcss": "^4.1.9",
+    "typescript": "^5.8.3",
+    "vite": "^7.2.7"
+  }
+}
