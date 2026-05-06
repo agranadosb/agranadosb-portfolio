@@ -56,7 +56,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 USER $USERNAME
 
 # Oh My Zsh
-RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.5/zsh-in-docker.sh)" -- \
+RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.2.1/zsh-in-docker.sh)" -- \
     -t robbyrussell
 
 ENV PATH=$PATH:/home/$USERNAME/.local/bin
