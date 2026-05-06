@@ -11,7 +11,7 @@ Personal portfolio built with **React + TypeScript + Vite + Tailwind CSS**, runn
 
 1. Open this folder in VS Code.
 2. Run the command **Dev Containers: Reopen in Container**.
-3. The first build installs Node 20 and runs `npm install` automatically.
+3. The first build installs Node 20 and runs `npm ci` automatically.
 4. Once attached, start the dev server:
 
    \`\`\`bash
