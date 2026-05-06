@@ -1,6 +1,6 @@
 export function Hero() {
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-surface-base">
+    <section id="hero" className="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-surface-base">
       <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-ink-primary mb-3">
         Alejandro Granados
       </h1>
@@ -12,7 +12,7 @@ export function Hero() {
       </p>
       <div className="flex flex-wrap gap-4 justify-center">
         <a
-          href="#projects"
+          href="#about"
           className="px-6 py-3 bg-accent text-surface-base font-semibold rounded-lg hover:opacity-90 transition-opacity"
         >
           View Projects
@@ -25,7 +25,7 @@ export function Hero() {
           Download CV
         </a>
         <a
-          href="#contact"
+          href="mailto:agranadosb55199@outlook.com"
           className="px-6 py-3 border border-border text-ink-primary font-semibold rounded-lg hover:bg-surface-raised transition-colors"
         >
           Contact

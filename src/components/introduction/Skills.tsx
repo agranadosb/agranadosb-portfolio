@@ -30,7 +30,7 @@ export function Skills() {
     <section id="stack" className="py-24 px-6 bg-surface-base">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl font-bold text-ink-primary mb-12 text-center">Skills</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {STACK.map(({ category, items }) => (
             <div key={category}>
               <h3 className="text-accent font-semibold text-sm uppercase tracking-widest mb-4">
