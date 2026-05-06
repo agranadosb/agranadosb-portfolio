@@ -19,7 +19,8 @@
         "biomejs.biome",
         "bradlc.vscode-tailwindcss",
         "GitHub.copilot",
-        "GitHub.copilot-chat"
+        "GitHub.copilot-chat",
+        "anthropic.claude-code"
       ],
       "settings": {
         "editor.linkedEditing": true,
