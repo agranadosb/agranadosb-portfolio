@@ -18,7 +18,7 @@ const STATS = [
   { label: "Experience", value: "10+ years" },
   { label: "Current Role", value: "CTO · Heligráfics" },
   { label: "Expertise", value: "Software Engineering · AI" },
-  { label: "Education", value: "PhD · MSc · BSc" },
+  { label: "Education", value: "MSc · BSc" },
 ];
 
 interface AboutProps {
@@ -40,8 +40,7 @@ export function About({ photoSrc }: AboutProps) {
             </p>
             <p className="text-ink-secondary leading-relaxed text-lg">
               Currently CTO at Heligráfics in Valencia, leading technical strategy and AI product
-              development. Finishing a PhD in Artificial Intelligence at the Polytechnic University
-              of Valencia.
+              development across multiple engineering teams.
             </p>
           </div>
         </div>
