@@ -1,7 +1,7 @@
 const STACK = [
   {
-    category: "Languages",
-    items: ["Python", "Scala", "Typescript"],
+    category: "Languages / Architectures",
+    items: ["Python", "Typescript", "DDD", "Hexagonal Architecture", "Microservices"],
   },
   {
     category: "AI / ML",
@@ -29,7 +29,7 @@ export function Skills() {
   return (
     <section id="stack" className="py-24 px-6 bg-surface-base">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold text-ink-primary mb-12 text-center">Skills</h2>
+        <h2 className="text-3xl font-bold text-ink-primary mb-12 text-center">Main Skills</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {STACK.map(({ category, items }) => (
             <div key={category}>

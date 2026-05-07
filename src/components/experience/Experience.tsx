@@ -4,37 +4,73 @@ const JOBS = [
     company: "Heligráfics",
     companyContext: "AI & geospatial imaging company",
     location: "Valencia",
-    period: "Jan 2026 - Present",
+    period: "Jan 2026 – Present",
+    summary:
+      "Leading all technical strategy and engineering execution across the company. Responsible for teams, architecture, processes, tooling, and compliance — the sole technical foundation behind every product and project.",
     highlights: [
-      "Lead and mentor 5 engineering teams (3-5 engineers each) across AI research, data engineering, and infrastructure.",
-      "Redesigning platform architecture towards DDD and Hexagonal Architecture, structuring the system around infrastructure domains (auth, observability, storage) and business-line data products.",
+      "Lead and mentor 5 engineering teams (3–5 engineers each, 20–40 engineers total) across AI research, data engineering, and infrastructure.",
+      "Oversee all technical development across the company — sole technical base and delivery arm for every product and project.",
+      "Redesigning platform architecture towards Domain-Driven Design (DDD) and Hexagonal Architecture.",
+      "Structuring the system around infrastructure domains (auth, observability, storage) and business-line data products.",
       "Driving a data-first approach to enable rapid development of client-facing UIs grounded in well-defined domain models and business logic.",
       "Championing AI-assisted development (GitHub Copilot, Claude) to shift engineering focus from implementation to business logic specification and architectural design.",
-      "Defined company-wide procedures for software development, infrastructure management, CI/CD, project creation, and task tracking.",
+      "Defined company-wide engineering standards: branching strategy, PR review policies, Definition of Done, sprint ceremonies, CI/CD workflows, infrastructure management, and project onboarding procedures.",
       "Built an AI-powered employee performance dashboard integrating ERP and GitHub data, enabling quick visibility into sprint progress, task status, and per-project delivery state.",
       "Conducting internal compliance audits against company procedures and ISO regulatory requirements.",
       "Personally leading the ISO 27001 certification process towards ENS (Esquema Nacional de Seguridad) compliance.",
+    ],
+    skills: [
+      "DDD",
+      "Hexagonal Architecture",
+      "Python",
+      "React",
+      "Django",
+      "GitHub Enterprise",
+      "GitHub Actions",
+      "GitHub Copilot",
+      "Claude",
+      "ISO 27001",
+      "ENS",
     ],
   },
   {
     role: "Project Manager & Staff AI Engineer",
     company: "Heligráfics",
     location: "Valencia",
-    period: "Feb 2024 - Dec 2025",
+    period: "Feb 2024 – Dec 2025",
+    summary:
+      "Owned end-to-end delivery of AI products for precision forestry, managing 5 simultaneous projects across cross-functional teams. Drove the company's ISO 42001 certification and modernized the entire engineering workflow.",
     highlights: [
+      "Led ISO 42001 certification (AI Management Systems) — one of the first companies in Spain to obtain it — by formalizing existing data governance and ML practices, requiring minimal new implementation.",
       "Led delivery of AI products for precision forestry: automated detection of plants, weeds, bare zones, and planting rows from TBs of airborne multispectral imagery.",
-      "Managed 5 simultaneous projects with cross-functional teams of 3-5 engineers across engineering, QA, and product.",
+      "Managed 5 simultaneous projects with cross-functional teams of 3–5 engineers across engineering, QA, and product.",
       "Designed a hybrid on-premise/cloud architecture to control data transfer costs: image validation, mosaic generation, and geomatics processing on a local PC cluster + NAS; GPU-intensive training and inference on GCP Vertex AI.",
       "Built geomatics pipelines to georeference airborne imagery and accurately align mosaics to their geographic footprint.",
-      "Led ISO 42001 certification by formalizing existing data governance and ML practices already enforced across teams — minimal new implementation required.",
       "Led company-wide migration from GitLab to GitHub Enterprise, including repository management, permissions, and project structure; introduced GitHub Copilot and built CI/CD pipelines with GitHub Actions, rolling them out across all teams.",
+    ],
+    skills: [
+      "GCP",
+      "Vertex AI",
+      "PyTorch",
+      "Python",
+      "Geomatics",
+      "Multispectral Imagery",
+      "On-premise",
+      "NAS",
+      "Proxmox",
+      "GitHub Enterprise",
+      "GitHub Actions",
+      "GitHub Copilot",
+      "ISO 42001",
     ],
   },
   {
     role: "Senior AI Engineer",
     company: "Heligráfics",
     location: "Valencia",
-    period: "Sep 2023 - Feb 2024",
+    period: "Sep 2023 – Feb 2024",
+    summary:
+      "Built the technical and AI foundations that underpinned the company's subsequent product delivery: MLOps platform, key product PoCs, cross-team architecture advisory, and several standalone applications. Promoted to Staff AI Engineer within 5 months.",
     highlights: [
       "Laid the technical foundations for a forest pruning management platform (React, Django, PostgreSQL, Oven Media Engine) covering operational management and live video surveillance.",
       "Developed PoCs for airborne plant detection and an automated image segmentation system for aerial firefighting flight-phase analysis — both evolved into production products.",
@@ -42,13 +78,28 @@ const JOBS = [
       "Established the data engineering and AI governance practices that became the company's technical foundation for subsequent AI product delivery.",
       "Advised all technical teams on software architecture and design patterns for the correct design of services and applications.",
       "Built an asset synchronization application between aircraft and their coordination center, handling intermittent connectivity: reliable transfer of operational data to aircraft and video streaming back to base under unstable internet conditions.",
+      "Promoted to Staff AI Engineer within 5 months, recognizing the AI and data engineering foundations built during this role.",
+    ],
+    skills: [
+      "Python",
+      "PyTorch",
+      "React",
+      "Django",
+      "PostgreSQL",
+      "Oven Media Engine",
+      "MLOps",
+      "Computer Vision",
+      "Geomatics",
     ],
   },
   {
     role: "Data Engineer",
     company: "New Work",
+    companyContext: "German-listed professional network (XING) · ~1,500 employees",
     location: "Valencia",
-    period: "Sep 2022 - Sep 2023",
+    period: "Sep 2022 – Sep 2023",
+    summary:
+      "Built distributed event-driven data pipelines and AI-powered content analysis at scale in a Scala-first engineering team, while leading architecture decisions for all Python and AI/LLM initiatives.",
     highlights: [
       "Built Kafka pipelines processing user event streams (profile updates, new posts, account deletions) with GDPR-compliant cascade deletion across distributed MySQL and Cassandra stores.",
       "Developed REST services to expose processed event data to internal microservices.",
@@ -56,64 +107,178 @@ const JOBS = [
       "Built a BERT-based fuzzy sentiment classifier to detect positive/negative signal in user-generated messages (PyTorch, Transformers).",
       "Served as internal Python consultant for the team, leading architecture and tooling decisions for AI/LLM initiatives in a predominantly Scala codebase.",
     ],
+    skills: [
+      "Scala",
+      "Python",
+      "Kafka",
+      "MySQL",
+      "Cassandra",
+      "Kubernetes",
+      "AWS",
+      "Jenkins",
+      "GitHub Actions",
+      "PyTorch",
+      "Transformers",
+      "BERT",
+      "GDPR",
+    ],
   },
   {
     role: "AI Scientist",
     company: "Heligráfics",
     location: "Valencia",
-    period: "Jul 2021 - Sep 2022",
+    period: "Jul 2021 – Sep 2022",
+    summary:
+      "Developed computer vision systems for aerial imagery analysis across two domains — wildfire damage assessment and electrical infrastructure inspection — implementing state-of-the-art architectures directly from research papers.",
     highlights: [
       "Developed segmentation and classification models to automatically detect and calculate burned area extents from airborne sensor image mosaics.",
       "Built computer vision systems for electrical infrastructure inspection: automatic tower detection and structural issue identification in aerial imagery.",
       "Implemented YOLOR from scratch based on the original paper, adapting it for production use on domain-specific datasets.",
       "Combined U-Net segmentation with genetic algorithms for loss function optimization and classical image filters for post-processing, improving accuracy on complex aerial imagery.",
     ],
+    skills: [
+      "Python",
+      "PyTorch",
+      "U-Net",
+      "YOLOR",
+      "ViT",
+      "Computer Vision",
+      "Genetic Algorithms",
+      "Geomatics",
+    ],
   },
   {
     role: "Full-Stack Developer",
     company: "Dekalabs",
     location: "Valencia",
-    period: "Mar 2020 - Jul 2021",
+    period: "Mar 2020 – Jul 2021",
+    summary:
+      "Delivered web applications across multiple industries and explored early generative AI research, prototyping a pipeline to create personalized NFTs from user images.",
     highlights: [
       "Developed client web applications across hospitality, real estate, crypto, and sports sectors using Python and Vue.js.",
       "Implemented CI/CD pipelines (Docker, Jenkins, GitHub).",
-      "Researched and prototyped a generative pipeline (VAE, GANs) to create personalized NFTs from user images.",
+      "Researched and prototyped a generative image personalization pipeline (VAE, GANs) mapping user images to unique visual representations.",
     ],
+    skills: ["Python", "Vue.js", "Docker", "Jenkins", "GitHub", "VAE", "GANs"],
   },
   {
     role: "Software Engineer",
     company: "Praxya",
     location: "Valencia",
-    period: "Oct 2019 - Mar 2020",
+    period: "Oct 2019 – Mar 2020",
+    summary:
+      "Built ERP integrations and data migrations for client projects using Python and Odoo, owning the full lifecycle from requirements to deployment.",
     highlights: [
       "Built ERP solutions using Python (Odoo), including integrations and data migrations (ETL).",
       "Worked closely with product owners across the full project lifecycle.",
       "Delivered solutions from requirements definition to deployment.",
     ],
+    skills: ["Python", "Odoo", "ETL", "PostgreSQL"],
   },
   {
     role: "Junior Software Engineer",
     company: "Visiion-Solutec",
     location: "Valencia",
-    period: "Aug 2017 - Jun 2019",
+    period: "Aug 2017 – Jun 2019",
+    summary:
+      "Started career building ERP solutions and AI-powered distribution algorithms, progressively taking on full project ownership including client communication and delivery.",
     highlights: [
       "Developed ERP-based solutions (Odoo) including integrations and automation systems.",
       "Built data pipelines and distribution algorithms using AI techniques.",
       "Led projects end-to-end in later stages, including client communication and delivery.",
     ],
+    skills: ["Python", "Odoo", "ETL"],
   },
   {
     role: "Independent Developer",
     company: "Personal & Client Projects",
     location: "Valencia",
-    period: "2015 - Aug 2017",
+    period: "2015 – Aug 2017",
+    summary:
+      "First steps in software development — building websites and small applications for private clients, learning the full cycle from requirements to delivery.",
     highlights: [
       "Built small websites and web applications for private clients as an independent developer.",
       "Delivered end-to-end projects covering requirements gathering, development, and deployment.",
       "First hands-on experience managing client relationships and delivering software independently.",
     ],
+    skills: ["HTML", "CSS", "JavaScript", "PHP"],
   },
 ];
+
+interface JobHeaderProps {
+  role: string;
+  company: string;
+  location: string;
+  period: string;
+  companyContext?: string;
+}
+
+function JobHeader({ role, company, location, period, companyContext }: JobHeaderProps) {
+  return (
+    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-3">
+      <div>
+        <h3 className="text-ink-primary font-semibold text-lg leading-tight">{role}</h3>
+        <p className="text-accent text-sm font-medium">
+          {company} · {location}
+          {companyContext && (
+            <span className="text-ink-muted font-normal"> — {companyContext}</span>
+          )}
+        </p>
+      </div>
+      <span className="text-ink-muted text-sm whitespace-nowrap sm:pt-0.5">{period}</span>
+    </div>
+  );
+}
+
+function SkillBadge({ label }: { label: string }) {
+  return (
+    <span className="px-2 py-1 rounded text-xs bg-surface-overlay border border-border text-ink-secondary">
+      {label}
+    </span>
+  );
+}
+
+interface JobItemProps {
+  role: string;
+  company: string;
+  location: string;
+  period: string;
+  companyContext?: string;
+  summary?: string;
+  highlights: string[];
+  skills?: string[];
+}
+
+function JobItem({ role, company, location, period, companyContext, summary, highlights, skills }: JobItemProps) {
+  return (
+    <div className="relative">
+      <div className="absolute -left-8.25 top-1.5 w-3 h-3 rounded-full bg-accent border-2 border-surface-raised" />
+      <JobHeader
+        role={role}
+        company={company}
+        location={location}
+        period={period}
+        companyContext={companyContext}
+      />
+      {skills && skills.length > 0 && (
+        <div className="flex flex-wrap gap-2 mb-4">
+          {skills.map((s) => <SkillBadge key={s} label={s} />)}
+        </div>
+      )}
+      {summary && (
+        <p className="text-ink-secondary text-sm leading-relaxed mb-4 italic">{summary}</p>
+      )}
+      <ul className="space-y-2">
+        {highlights.map((h) => (
+          <li key={h} className="flex gap-2 text-ink-secondary text-sm leading-relaxed">
+            <span className="text-accent mt-0.5 shrink-0">›</span>
+            <span>{h}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 export function Experience() {
   return (
@@ -121,30 +286,18 @@ export function Experience() {
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl font-bold text-ink-primary mb-12 text-center">Experience</h2>
         <div className="relative border-l border-border pl-8 space-y-12">
-          {JOBS.map(({ role, company, companyContext, location, period, highlights }) => (
-            <div key={`${role}-${company}-${period}`} className="relative">
-              <div className="absolute -left-8.25 top-1.5 w-3 h-3 rounded-full bg-accent border-2 border-surface-raised" />
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-3">
-                <div>
-                  <h3 className="text-ink-primary font-semibold text-lg leading-tight">{role}</h3>
-                  <p className="text-accent text-sm font-medium">
-                    {company} · {location}
-                    {companyContext && (
-                      <span className="text-ink-muted font-normal"> — {companyContext}</span>
-                    )}
-                  </p>
-                </div>
-                <span className="text-ink-muted text-sm whitespace-nowrap sm:pt-0.5">{period}</span>
-              </div>
-              <ul className="space-y-2">
-                {highlights.map((h) => (
-                  <li key={h} className="flex gap-2 text-ink-secondary text-sm leading-relaxed">
-                    <span className="text-accent mt-0.5 shrink-0">›</span>
-                    <span>{h}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {JOBS.map(({ role, company, companyContext, location, period, summary, highlights, skills }) => (
+            <JobItem
+              key={`${role}-${company}-${period}`}
+              role={role}
+              company={company}
+              location={location}
+              period={period}
+              companyContext={companyContext}
+              summary={summary}
+              highlights={highlights}
+              skills={skills}
+            />
           ))}
         </div>
       </div>
