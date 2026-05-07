@@ -25,7 +25,7 @@ const STACK = [
   },
 ];
 
-export function Skills() {
+export function MainSkills() {
   return (
     <section id="stack" className="py-24 px-6 bg-surface-base">
       <div className="max-w-4xl mx-auto">
