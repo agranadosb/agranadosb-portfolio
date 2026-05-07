@@ -1,3 +1,5 @@
+import { JobItem } from "@/components/experience/JobItem";
+
 const JOBS = [
   {
     role: "CTO",
@@ -208,8 +210,6 @@ const JOBS = [
     skills: ["HTML", "CSS", "JavaScript", "PHP"],
   },
 ];
-
-import { JobItem } from "@/components/experience/JobItem";
 
 export function Experience() {
   return (
