@@ -15,10 +15,10 @@ export function Hero() {
       </p>
       <div className="flex flex-wrap gap-4 justify-center">
         <a
-          href="#about"
+          href="#experience"
           className="px-6 py-3 bg-accent text-surface-base font-semibold rounded-lg hover:opacity-90 transition-opacity"
         >
-          View Projects
+          View Experience
         </a>
         <a
           href="/cv.pdf"
