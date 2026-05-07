@@ -1,7 +1,7 @@
 const STACK = [
   {
     category: "Languages / Architectures",
-    items: ["Python", "Typescript", "DDD", "Hexagonal Architecture", "Microservices"],
+    items: ["Python", "TypeScript", "DDD", "Hexagonal Architecture", "Microservices"],
   },
   {
     category: "AI / ML",
