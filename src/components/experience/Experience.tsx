@@ -4,11 +4,11 @@ const JOBS = [
     company: "Heligráfics",
     companyContext: "AI & geospatial imaging company",
     location: "Valencia",
-    period: "Jan 2026 – Present",
+    period: "Jan 2026 - Present",
     summary:
       "Leading all technical strategy and engineering execution across the company. Responsible for teams, architecture, processes, tooling, and compliance — the sole technical foundation behind every product and project.",
     highlights: [
-      "Lead and mentor 5 engineering teams (3–5 engineers each, 20–40 engineers total) across AI research, data engineering, and infrastructure.",
+      "Lead and mentor 5 engineering teams (3-5 engineers each, 20-40 engineers total) across AI research, data engineering, and infrastructure.",
       "Oversee all technical development across the company — sole technical base and delivery arm for every product and project.",
       "Redesigning platform architecture towards Domain-Driven Design (DDD) and Hexagonal Architecture.",
       "Structuring the system around infrastructure domains (auth, observability, storage) and business-line data products.",
@@ -37,13 +37,13 @@ const JOBS = [
     role: "Project Manager & Staff AI Engineer",
     company: "Heligráfics",
     location: "Valencia",
-    period: "Feb 2024 – Dec 2025",
+    period: "Feb 2024 - Dec 2025",
     summary:
       "Owned end-to-end delivery of AI products for precision forestry, managing 5 simultaneous projects across cross-functional teams. Drove the company's ISO 42001 certification and modernized the entire engineering workflow.",
     highlights: [
       "Led ISO 42001 certification (AI Management Systems) — one of the first companies in Spain to obtain it — by formalizing existing data governance and ML practices, requiring minimal new implementation.",
       "Led delivery of AI products for precision forestry: automated detection of plants, weeds, bare zones, and planting rows from TBs of airborne multispectral imagery.",
-      "Managed 5 simultaneous projects with cross-functional teams of 3–5 engineers across engineering, QA, and product.",
+      "Managed 5 simultaneous projects with cross-functional teams of 3-5 engineers across engineering, QA, and product.",
       "Designed a hybrid on-premise/cloud architecture to control data transfer costs: image validation, mosaic generation, and geomatics processing on a local PC cluster + NAS; GPU-intensive training and inference on GCP Vertex AI.",
       "Built geomatics pipelines to georeference airborne imagery and accurately align mosaics to their geographic footprint.",
       "Led company-wide migration from GitLab to GitHub Enterprise, including repository management, permissions, and project structure; introduced GitHub Copilot and built CI/CD pipelines with GitHub Actions, rolling them out across all teams.",
@@ -68,7 +68,7 @@ const JOBS = [
     role: "Senior AI Engineer",
     company: "Heligráfics",
     location: "Valencia",
-    period: "Sep 2023 – Feb 2024",
+    period: "Sep 2023 - Feb 2024",
     summary:
       "Built the technical and AI foundations that underpinned the company's subsequent product delivery: MLOps platform, key product PoCs, cross-team architecture advisory, and several standalone applications. Promoted to Staff AI Engineer within 5 months.",
     highlights: [
@@ -97,7 +97,7 @@ const JOBS = [
     company: "New Work",
     companyContext: "German-listed professional network (XING) · ~1,500 employees",
     location: "Valencia",
-    period: "Sep 2022 – Sep 2023",
+    period: "Sep 2022 - Sep 2023",
     summary:
       "Built distributed event-driven data pipelines and AI-powered content analysis at scale in a Scala-first engineering team, while leading architecture decisions for all Python and AI/LLM initiatives.",
     highlights: [
@@ -127,7 +127,7 @@ const JOBS = [
     role: "AI Scientist",
     company: "Heligráfics",
     location: "Valencia",
-    period: "Jul 2021 – Sep 2022",
+    period: "Jul 2021 - Sep 2022",
     summary:
       "Developed computer vision systems for aerial imagery analysis across two domains — wildfire damage assessment and electrical infrastructure inspection — implementing state-of-the-art architectures directly from research papers.",
     highlights: [
@@ -151,9 +151,10 @@ const JOBS = [
     role: "Full-Stack Developer",
     company: "Dekalabs",
     location: "Valencia",
-    period: "Mar 2020 – Jul 2021",
+    period: "Mar 2020 - Jul 2021",
+    defaultCollapsed: true,
     summary:
-      "Delivered web applications across multiple industries and explored early generative AI research, prototyping a pipeline to create personalized NFTs from user images.",
+      "Delivered web applications across multiple industries and explored early generative AI research, prototyping a pipeline to create personalized images from user images.",
     highlights: [
       "Developed client web applications across hospitality, real estate, crypto, and sports sectors using Python and Vue.js.",
       "Implemented CI/CD pipelines (Docker, Jenkins, GitHub).",
@@ -165,7 +166,8 @@ const JOBS = [
     role: "Software Engineer",
     company: "Praxya",
     location: "Valencia",
-    period: "Oct 2019 – Mar 2020",
+    period: "Oct 2019 - Mar 2020",
+    defaultCollapsed: true,
     summary:
       "Built ERP integrations and data migrations for client projects using Python and Odoo, owning the full lifecycle from requirements to deployment.",
     highlights: [
@@ -179,7 +181,8 @@ const JOBS = [
     role: "Junior Software Engineer",
     company: "Visiion-Solutec",
     location: "Valencia",
-    period: "Aug 2017 – Jun 2019",
+    period: "Aug 2017 - Jun 2019",
+    defaultCollapsed: true,
     summary:
       "Started career building ERP solutions and AI-powered distribution algorithms, progressively taking on full project ownership including client communication and delivery.",
     highlights: [
@@ -193,7 +196,8 @@ const JOBS = [
     role: "Independent Developer",
     company: "Personal & Client Projects",
     location: "Valencia",
-    period: "2015 – Aug 2017",
+    period: "2015 - Aug 2017",
+    defaultCollapsed: true,
     summary:
       "First steps in software development — building websites and small applications for private clients, learning the full cycle from requirements to delivery.",
     highlights: [
@@ -213,19 +217,32 @@ export function Experience() {
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl font-bold text-ink-primary mb-12 text-center">Experience</h2>
         <div className="relative border-l border-border pl-8 space-y-12">
-          {JOBS.map(({ role, company, companyContext, location, period, summary, highlights, skills }) => (
-            <JobItem
-              key={`${role}-${company}-${period}`}
-              role={role}
-              company={company}
-              location={location}
-              period={period}
-              companyContext={companyContext}
-              summary={summary}
-              highlights={highlights}
-              skills={skills}
-            />
-          ))}
+          {JOBS.map(
+            ({
+              role,
+              company,
+              companyContext,
+              location,
+              period,
+              summary,
+              highlights,
+              skills,
+              defaultCollapsed,
+            }) => (
+              <JobItem
+                key={`${role}-${company}-${period}`}
+                role={role}
+                company={company}
+                location={location}
+                period={period}
+                companyContext={companyContext}
+                summary={summary}
+                highlights={highlights}
+                skills={skills}
+                defaultCollapsed={defaultCollapsed}
+              />
+            ),
+          )}
         </div>
       </div>
     </section>
