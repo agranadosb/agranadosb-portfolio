@@ -19,6 +19,10 @@
   color-scheme: dark;
 }
 
+html {
+  scroll-padding-top: 3.5rem; /* offset fixed navbar (h-14) for anchor navigation */
+}
+
 html,
 body,
 #root {
