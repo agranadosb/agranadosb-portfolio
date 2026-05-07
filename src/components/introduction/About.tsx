@@ -4,7 +4,7 @@ interface AvatarProps {
 
 function Avatar({ src }: AvatarProps) {
   return (
-    <div className="w-40 h-40 rounded-full overflow-hidden bg-surface-overlay border-2 border-border flex items-center justify-center flex-shrink-0">
+    <div className="w-40 h-40 rounded-full overflow-hidden bg-surface-overlay border-2 border-border flex items-center justify-center shrink-0">
       {src ? (
         <img src={src} alt="Alejandro Granados" className="w-full h-full object-cover" />
       ) : (
