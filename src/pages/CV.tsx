@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { type ReactNode, useEffect } from "react";
 import { EDUCATION, HONORS, JOBS, PROFILE, STACK } from "@/data/profile";
 
 const SUMMARY =
@@ -98,45 +98,47 @@ export function CVPage() {
         <section className="mb-3">
           <SectionHeading>Work Experience</SectionHeading>
           <div className="space-y-3">
-            {JOBS.map(({ role, company, companyContext, location, period, summary, highlights }, i) => {
-              const maxHighlights = HIGHLIGHTS_BY_INDEX[i] ?? 0;
-              const visibleHighlights = highlights.slice(0, maxHighlights);
-              const showSummary = i < 5;
+            {JOBS.map(
+              ({ role, company, companyContext, location, period, summary, highlights }, i) => {
+                const maxHighlights = HIGHLIGHTS_BY_INDEX[i] ?? 0;
+                const visibleHighlights = highlights.slice(0, maxHighlights);
+                const showSummary = i < 5;
 
-              return (
-                <div key={`${role}-${company}-${period}`} className="break-inside-avoid">
-                  <div className="flex justify-between items-baseline">
-                    <div className="leading-snug">
-                      <span className="font-semibold text-gray-900 text-xs">{role}</span>
-                      <span className="text-gray-500 text-xs"> — {company}</span>
-                      {companyContext && (
-                        <span className="text-gray-400 text-xs"> ({companyContext})</span>
-                      )}
-                      <span className="text-gray-400 text-xs"> · {location}</span>
+                return (
+                  <div key={`${role}-${company}-${period}`} className="break-inside-avoid">
+                    <div className="flex justify-between items-baseline">
+                      <div className="leading-snug">
+                        <span className="font-semibold text-gray-900 text-xs">{role}</span>
+                        <span className="text-gray-500 text-xs"> — {company}</span>
+                        {companyContext && (
+                          <span className="text-gray-400 text-xs"> ({companyContext})</span>
+                        )}
+                        <span className="text-gray-400 text-xs"> · {location}</span>
+                      </div>
+                      <span className="text-[10px] text-gray-400 shrink-0 ml-3 tabular-nums">
+                        {period}
+                      </span>
                     </div>
-                    <span className="text-[10px] text-gray-400 shrink-0 ml-3 tabular-nums">
-                      {period}
-                    </span>
+                    {showSummary && (
+                      <p className="text-[11px] text-gray-600 mt-0.5 leading-relaxed">{summary}</p>
+                    )}
+                    {visibleHighlights.length > 0 && (
+                      <ul className="mt-1 space-y-0.5">
+                        {visibleHighlights.map((h) => (
+                          <li
+                            key={h}
+                            className="flex gap-1.5 text-[11px] text-gray-600 leading-relaxed"
+                          >
+                            <span className="shrink-0 mt-px">–</span>
+                            <span>{h}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
-                  {showSummary && (
-                    <p className="text-[11px] text-gray-600 mt-0.5 leading-relaxed">{summary}</p>
-                  )}
-                  {visibleHighlights.length > 0 && (
-                    <ul className="mt-1 space-y-0.5">
-                      {visibleHighlights.map((h) => (
-                        <li
-                          key={h}
-                          className="flex gap-1.5 text-[11px] text-gray-600 leading-relaxed"
-                        >
-                          <span className="shrink-0 mt-px">–</span>
-                          <span>{h}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              );
-            })}
+                );
+              },
+            )}
           </div>
         </section>
 
@@ -172,7 +174,7 @@ export function CVPage() {
   );
 }
 
-function SectionHeading({ children }: { children: React.ReactNode }) {
+function SectionHeading({ children }: { children: ReactNode }) {
   return (
     <h2 className="text-[10px] font-bold uppercase tracking-widest text-blue-600 mb-1.5 pb-0.5 border-b border-gray-200">
       {children}
