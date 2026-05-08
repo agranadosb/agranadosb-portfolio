@@ -28,7 +28,7 @@ export function Hero() {
           View Experience
         </a>
         <a
-          href="/cv?print=auto"
+          href="/cv.html?print=auto"
           target="_blank"
           rel="noopener noreferrer"
           className="px-6 py-3 border border-border text-ink-primary font-semibold rounded-lg hover:bg-surface-raised transition-colors"
