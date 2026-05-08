@@ -1,21 +1,44 @@
+import { useEffect, useRef } from "react";
 import { PROFILE } from "@/data/profile";
+import { FocusTrap } from "@/utils/FocusTrap";
 
 interface ContactModalProps {
   onClose: () => void;
 }
 
 export function ContactModal({ onClose }: ContactModalProps) {
+  const dialogComponent = useRef<HTMLDivElement>(null);
+  const closeButtonComponent = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!dialogComponent.current) return;
+    const focusTrap = new FocusTrap(dialogComponent.current, {
+      initialFocus: closeButtonComponent.current,
+      onEscape: onClose,
+    });
+    focusTrap.activate();
+    return () => focusTrap.deactivate();
+  }, [onClose]);
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
       <button
         type="button"
+        tabIndex={-1}
         className="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-default"
         onClick={onClose}
         aria-label="Close modal"
       />
 
-      <div className="relative z-10 w-full max-w-sm bg-surface-raised border border-border rounded-2xl p-8 shadow-2xl">
+      <div
+        ref={dialogComponent}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="contact-modal-title"
+        className="relative z-10 w-full max-w-sm bg-surface-raised border border-border rounded-2xl p-8 shadow-2xl"
+      >
         <button
+          ref={closeButtonComponent}
           type="button"
           onClick={onClose}
           className="absolute top-4 right-4 text-ink-muted hover:text-ink-primary transition-colors cursor-pointer"
@@ -24,7 +47,9 @@ export function ContactModal({ onClose }: ContactModalProps) {
           <CloseIcon />
         </button>
 
-        <h2 className="text-xl font-bold text-ink-primary mb-1">Get in touch</h2>
+        <h2 id="contact-modal-title" className="text-xl font-bold text-ink-primary mb-1">
+          Get in touch
+        </h2>
         <p className="text-ink-secondary text-sm mb-6">
           Feel free to reach out — I'll get back to you as soon as I can.
         </p>
