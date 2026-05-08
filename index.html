@@ -1,13 +1,27 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>agranadosb · Portfolio</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>agranadosb · Portfolio</title>
+  <script>
+    function applyStoredTheme() {
+      try {
+        const theme = localStorage.getItem("theme-mode");
+        const isValidTheme = theme === "light" || theme === "dark";
+        if (isValidTheme) document.documentElement.classList.add(theme);
+      } catch { console.warn("Unable to access localStorage, theme preference will not be applied."); }
+    }
+
+    applyStoredTheme();
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>
