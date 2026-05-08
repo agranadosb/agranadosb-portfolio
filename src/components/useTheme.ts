@@ -10,8 +10,8 @@ const themeUseCase = new ThemeUseCase(
 
 export function useTheme() {
   const [mode, setMode] = useState<ThemeMode>(() => themeUseCase.getInitialMode());
-  const [systemTheme, setSystemTheme] = useState<"light" | "dark">(
-    () => themeUseCase.getSystemTheme(),
+  const [systemTheme, setSystemTheme] = useState<"light" | "dark">(() =>
+    themeUseCase.getSystemTheme(),
   );
 
   useEffect(() => {
