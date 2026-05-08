@@ -1,24 +1,32 @@
 import { useEffect, useState } from "react";
+import { LocalStorageThemeRepository } from "@/repositories/LocalStorageThemeRepository";
+import { BrowserThemeListener } from "@/repositories/ThemeListener";
+import { type ThemeMode, ThemeUseCase } from "@/usecases/ThemeUseCase";
 
-type Theme = "light" | "dark";
-
-function getInitialTheme(): Theme {
-  const stored = localStorage.getItem("theme-mode") as Theme | null;
-  if (stored === "light" || stored === "dark") return stored;
-  return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-}
+const themeUseCase = new ThemeUseCase(
+  new BrowserThemeListener(),
+  new LocalStorageThemeRepository(),
+);
 
 export function useTheme() {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const [mode, setMode] = useState<ThemeMode>(() => themeUseCase.getInitialMode());
+  const [systemTheme, setSystemTheme] = useState<"light" | "dark">(
+    () => themeUseCase.getSystemTheme(),
+  );
 
   useEffect(() => {
-    const root = document.documentElement;
-    root.classList.toggle("light", theme === "light");
-    root.classList.toggle("dark", theme === "dark");
-    localStorage.setItem("theme-mode", theme);
-  }, [theme]);
+    document.documentElement.classList.remove("light", "dark");
+    if (mode !== "system") document.documentElement.classList.add(mode);
+    themeUseCase.persistMode(mode);
+  }, [mode]);
 
-  const toggle = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
+  useEffect(() => {
+    return themeUseCase.subscribeToSystemChanges(setSystemTheme);
+  }, []);
 
-  return { theme, toggle };
+  const effectiveTheme = mode === "system" ? systemTheme : mode;
+
+  const toggle = () => setMode((current) => themeUseCase.getNextMode(current));
+
+  return { theme: effectiveTheme, toggle };
 }
