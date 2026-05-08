@@ -1,4 +1,10 @@
+import { useState } from "react";
+import { ContactModal } from "@/components/ContactModal";
+import { GitHubLink, LinkedInLink } from "@/components/SocialLinks";
+
 export function Hero() {
+  const [contactOpen, setContactOpen] = useState(false);
+
   return (
     <section
       id="hero"
@@ -21,19 +27,28 @@ export function Hero() {
           View Experience
         </a>
         <a
-          href="/cv.pdf"
-          download
+          href="/cv?print=auto"
+          target="_blank"
+          rel="noopener noreferrer"
           className="px-6 py-3 border border-border text-ink-primary font-semibold rounded-lg hover:bg-surface-raised transition-colors"
         >
           Download CV
         </a>
-        <a
-          href="mailto:agranadosb55199@outlook.com"
-          className="px-6 py-3 border border-border text-ink-primary font-semibold rounded-lg hover:bg-surface-raised transition-colors"
+        <button
+          type="button"
+          onClick={() => setContactOpen(true)}
+          className="px-6 py-3 border border-border text-ink-primary font-semibold rounded-lg hover:bg-surface-raised transition-colors cursor-pointer"
         >
           Contact
-        </a>
+        </button>
       </div>
+      <div className="flex gap-5 mt-4">
+        <LinkedInLink />
+        <GitHubLink />
+      </div>
+
+      {contactOpen && <ContactModal onClose={() => setContactOpen(false)} />}
     </section>
   );
 }
+
