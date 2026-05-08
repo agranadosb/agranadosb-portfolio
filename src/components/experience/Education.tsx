@@ -11,7 +11,9 @@ export function Education() {
               key={degree}
               className="p-5 rounded-lg bg-surface-raised border border-border space-y-1"
             >
-              <p className="text-accent text-xs font-semibold uppercase tracking-widest">{degree}</p>
+              <p className="text-accent text-xs font-semibold uppercase tracking-widest">
+                {degree}
+              </p>
               <p className="text-ink-primary font-medium leading-snug">{field}</p>
               <p className="text-ink-muted text-sm">{institution}</p>
             </div>

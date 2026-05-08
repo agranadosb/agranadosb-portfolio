@@ -14,9 +14,7 @@ export function Hero() {
       <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-ink-primary mb-3">
         {PROFILE.name}
       </h1>
-      <p className="text-xl md:text-2xl text-ink-secondary font-medium mb-6">
-        {PROFILE.title}
-      </p>
+      <p className="text-xl md:text-2xl text-ink-secondary font-medium mb-6">{PROFILE.title}</p>
       <p className="text-ink-secondary max-w-lg mx-auto mb-10 text-lg leading-relaxed">
         {PROFILE.tagline}
       </p>
@@ -52,4 +50,3 @@ export function Hero() {
     </section>
   );
 }
-
