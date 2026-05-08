@@ -1,4 +1,4 @@
-const EDUCATION = [
+export const EDUCATION = [
   {
     degree: "MSc",
     field: "AI, Pattern Recognition & Digital Imaging",

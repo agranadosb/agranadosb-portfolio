@@ -1,6 +1,6 @@
 import { JobItem } from "@/components/experience/JobItem";
 
-const JOBS = [
+export const JOBS = [
   {
     role: "CTO",
     company: "Heligráfics",

@@ -1,4 +1,4 @@
-const STACK = [
+export const STACK = [
   {
     category: "Languages / Architectures",
     items: ["Python", "TypeScript", "DDD", "Hexagonal Architecture", "Microservices"],
