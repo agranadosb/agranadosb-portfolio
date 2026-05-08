@@ -1,19 +1,5 @@
 import { useEffect } from "react";
-import { EDUCATION } from "@/components/experience/Education";
-import { JOBS } from "@/components/experience/Experience";
-import { HONORS } from "@/components/experience/Honors";
-import { STACK } from "@/components/introduction/Skills";
-
-const CONTACT = {
-  name: "Alejandro Granados",
-  title: "CTO · Staff AI Engineer · Software Architect",
-  location: "Valencia, Spain",
-  email: "agranadosb55199@outlook.com",
-  linkedin: "linkedin.com/in/alejandro-granados-bañuls-011010148",
-  linkedinUrl: "https://www.linkedin.com/in/alejandro-granados-ba%C3%B1uls-011010148/",
-  github: "github.com/agranadosb",
-  githubUrl: "https://github.com/agranadosb",
-};
+import { EDUCATION, HONORS, JOBS, PROFILE, STACK } from "@/data/profile";
 
 const SUMMARY =
   "Engineering leader and hands-on AI practitioner with 10+ years delivering production software systems. Currently CTO at Heligráfics, leading 20–40 engineers across AI research, data engineering, and infrastructure. Core expertise in machine learning (PyTorch, computer vision, LLMs), distributed data pipelines (Kafka, Spark), cloud infrastructure (GCP, Kubernetes), and ISO 42001 / ISO 27001 compliance.";
@@ -44,38 +30,38 @@ export function CVPage() {
         </button>
       </div>
 
-      {/* CV body — max-w-[800px] on screen, zero padding override on print via @page margins */}
-      <div className="print:pt-0 pt-14 max-w-[800px] mx-auto px-10 py-8 print:px-0 print:py-0">
+      {/* CV body — max-w-200 on screen, zero padding override on print via @page margins */}
+      <div className="print:pt-0 pt-14 max-w-200 mx-auto px-10 py-8 print:px-0 print:py-0">
         {/* ── Header ── */}
         <header className="mb-4 pb-3 border-b-2 border-gray-800 flex items-center justify-between gap-6">
           <div>
             <h1 className="text-[26px] font-bold tracking-tight text-gray-900 leading-tight">
-              {CONTACT.name}
+              {PROFILE.name}
             </h1>
-            <p className="text-sm text-gray-600 font-medium mt-0.5 mb-2">{CONTACT.title}</p>
+            <p className="text-sm text-gray-600 font-medium mt-0.5 mb-2">{PROFILE.title}</p>
             <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-gray-500">
-              <span>{CONTACT.location}</span>
+              <span>{PROFILE.location}</span>
               <span>·</span>
-              <a href={`mailto:${CONTACT.email}`} className="hover:text-blue-600">
-                {CONTACT.email}
+              <a href={`mailto:${PROFILE.email}`} className="hover:text-blue-600">
+                {PROFILE.email}
               </a>
               <span>·</span>
               <a
-                href={CONTACT.linkedinUrl}
+                href={PROFILE.linkedin.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-blue-600"
               >
-                {CONTACT.linkedin}
+                {PROFILE.linkedin.display}
               </a>
               <span>·</span>
               <a
-                href={CONTACT.githubUrl}
+                href={PROFILE.github.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-blue-600"
               >
-                {CONTACT.github}
+                {PROFILE.github.display}
               </a>
             </div>
           </div>

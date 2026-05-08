@@ -1,15 +1,4 @@
-export const EDUCATION = [
-  {
-    degree: "MSc",
-    field: "AI, Pattern Recognition & Digital Imaging",
-    institution: "Polytechnic University of Valencia",
-  },
-  {
-    degree: "BSc",
-    field: "Computer Science",
-    institution: "Polytechnic University of Valencia",
-  },
-];
+import { EDUCATION } from "@/data/profile";
 
 export function Education() {
   return (

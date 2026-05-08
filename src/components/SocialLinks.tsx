@@ -1,7 +1,9 @@
+import { PROFILE } from "@/data/profile";
+
 export function LinkedInLink() {
   return (
     <a
-      href="https://www.linkedin.com/in/alejandro-granados-ba%C3%B1uls-011010148/"
+      href={PROFILE.linkedin.url}
       target="_blank"
       rel="noopener noreferrer"
       className="text-ink-muted hover:text-ink-primary transition-colors"
@@ -24,7 +26,7 @@ export function LinkedInLink() {
 export function GitHubLink() {
   return (
     <a
-      href="https://github.com/agranadosb"
+      href={PROFILE.github.url}
       target="_blank"
       rel="noopener noreferrer"
       className="text-ink-muted hover:text-ink-primary transition-colors"

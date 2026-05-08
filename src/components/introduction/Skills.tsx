@@ -1,29 +1,4 @@
-export const STACK = [
-  {
-    category: "Languages / Architectures",
-    items: ["Python", "TypeScript", "DDD", "Hexagonal Architecture", "Microservices"],
-  },
-  {
-    category: "AI / ML",
-    items: ["PyTorch", "Transformers", "Vertex AI", "LLM", "ONNX"],
-  },
-  {
-    category: "Compliance",
-    items: ["ISO 42001", "GDPR", "Data Privacy", "ISO 27001", "EU AI Act"],
-  },
-  {
-    category: "Data Engineering",
-    items: ["Kafka", "Apache Spark", "Kubeflow"],
-  },
-  {
-    category: "Infrastructure",
-    items: ["GCP", "Kubernetes", "Docker", "Pulumi", "On-premise"],
-  },
-  {
-    category: "Backend",
-    items: ["FastAPI", "Django", "PostgreSQL"],
-  },
-];
+import { STACK } from "@/data/profile";
 
 export function MainSkills() {
   return (

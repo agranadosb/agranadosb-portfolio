@@ -1,3 +1,5 @@
+import { PROFILE } from "@/data/profile";
+
 interface ContactModalProps {
   onClose: () => void;
 }
@@ -28,11 +30,11 @@ export function ContactModal({ onClose }: ContactModalProps) {
         </p>
 
         <a
-          href="mailto:agranadosb55199@outlook.com"
+          href={`mailto:${PROFILE.email}`}
           className="flex items-center gap-3 w-full px-4 py-3 rounded-lg bg-surface-overlay border border-border hover:border-accent hover:text-accent text-ink-secondary transition-colors"
         >
           <MailIcon />
-          <span className="text-sm font-medium">agranadosb55199@outlook.com</span>
+          <span className="text-sm font-medium">{PROFILE.email}</span>
         </a>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ContactModal } from "@/components/ContactModal";
 import { GitHubLink, LinkedInLink } from "@/components/SocialLinks";
+import { PROFILE } from "@/data/profile";
 
 export function Hero() {
   const [contactOpen, setContactOpen] = useState(false);
@@ -11,13 +12,13 @@ export function Hero() {
       className="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-surface-base"
     >
       <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-ink-primary mb-3">
-        Alejandro Granados
+        {PROFILE.name}
       </h1>
       <p className="text-xl md:text-2xl text-ink-secondary font-medium mb-6">
-        CTO · Staff AI Engineer · Software Architect
+        {PROFILE.title}
       </p>
       <p className="text-ink-secondary max-w-lg mx-auto mb-10 text-lg leading-relaxed">
-        Building AI systems that work in the real world — from research to production.
+        {PROFILE.tagline}
       </p>
       <div className="flex flex-wrap gap-4 justify-center">
         <a

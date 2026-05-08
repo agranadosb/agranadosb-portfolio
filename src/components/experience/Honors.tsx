@@ -1,9 +1,4 @@
-export const HONORS = [
-  "Honors in Machine Learning, Data Structures & Algorithms, Software Engineering, Databases, and Mathematical Analysis — Polytechnic University of Valencia.",
-  "Final thesis: Machine Learning applied to genetic mutations.",
-  "ISO 42001 certification lead — one of the first companies in Spain to achieve it.",
-  "ISO 27001 certification process lead (in progress) towards ENS compliance.",
-];
+import { HONORS } from "@/data/profile";
 
 export function Honors() {
   return (
