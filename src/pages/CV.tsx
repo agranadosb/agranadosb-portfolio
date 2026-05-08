@@ -1,0 +1,195 @@
+import { useEffect } from "react";
+import { EDUCATION } from "@/components/experience/Education";
+import { JOBS } from "@/components/experience/Experience";
+import { HONORS } from "@/components/experience/Honors";
+import { STACK } from "@/components/introduction/Skills";
+
+const CONTACT = {
+  name: "Alejandro Granados",
+  title: "CTO · Staff AI Engineer · Software Architect",
+  location: "Valencia, Spain",
+  email: "agranadosb55199@outlook.com",
+  linkedin: "linkedin.com/in/alejandro-granados-bañuls-011010148",
+  linkedinUrl: "https://www.linkedin.com/in/alejandro-granados-ba%C3%B1uls-011010148/",
+  github: "github.com/agranadosb",
+  githubUrl: "https://github.com/agranadosb",
+};
+
+const SUMMARY =
+  "Engineering leader and hands-on AI practitioner with 10+ years delivering production software systems. Currently CTO at Heligráfics, leading 20–40 engineers across AI research, data engineering, and infrastructure. Core expertise in machine learning (PyTorch, computer vision, LLMs), distributed data pipelines (Kafka, Spark), cloud infrastructure (GCP, Kubernetes), and ISO 42001 / ISO 27001 compliance.";
+
+// How many highlights to show per job in the CV (by index, oldest jobs get fewer/none)
+const HIGHLIGHTS_BY_INDEX = [4, 3, 2, 2, 1, 0, 0, 0, 0];
+
+export function CVPage() {
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("print") === "auto") {
+      window.print();
+    }
+  }, []);
+
+  return (
+    <div style={{ colorScheme: "light" }} className="min-h-screen bg-white text-gray-900 font-sans">
+      {/* Toolbar — hidden when printing */}
+      <div className="print:hidden fixed top-0 left-0 right-0 z-10 flex items-center justify-between bg-gray-50 border-b border-gray-200 px-6 py-3">
+        <a href="/" className="text-sm text-blue-600 hover:underline">
+          ← Back to portfolio
+        </a>
+        <button
+          type="button"
+          onClick={() => window.print()}
+          className="px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded hover:bg-blue-700 transition-colors cursor-pointer"
+        >
+          Download as PDF
+        </button>
+      </div>
+
+      {/* CV body — max-w-[800px] on screen, zero padding override on print via @page margins */}
+      <div className="print:pt-0 pt-14 max-w-[800px] mx-auto px-10 py-8 print:px-0 print:py-0">
+        {/* ── Header ── */}
+        <header className="mb-4 pb-3 border-b-2 border-gray-800 flex items-center justify-between gap-6">
+          <div>
+            <h1 className="text-[26px] font-bold tracking-tight text-gray-900 leading-tight">
+              {CONTACT.name}
+            </h1>
+            <p className="text-sm text-gray-600 font-medium mt-0.5 mb-2">{CONTACT.title}</p>
+            <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-gray-500">
+              <span>{CONTACT.location}</span>
+              <span>·</span>
+              <a href={`mailto:${CONTACT.email}`} className="hover:text-blue-600">
+                {CONTACT.email}
+              </a>
+              <span>·</span>
+              <a
+                href={CONTACT.linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-blue-600"
+              >
+                {CONTACT.linkedin}
+              </a>
+              <span>·</span>
+              <a
+                href={CONTACT.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-blue-600"
+              >
+                {CONTACT.github}
+              </a>
+            </div>
+          </div>
+          <img
+            src="/me.webp"
+            alt="Alejandro Granados"
+            width={80}
+            height={80}
+            decoding="async"
+            className="rounded-full shrink-0 object-cover border border-gray-200"
+          />
+        </header>
+
+        {/* ── Professional Summary ── */}
+        <section className="mb-3">
+          <SectionHeading>Professional Summary</SectionHeading>
+          <p className="text-xs text-gray-700 leading-relaxed">{SUMMARY}</p>
+        </section>
+
+        {/* ── Technical Skills ── */}
+        <section className="mb-3">
+          <SectionHeading>Technical Skills</SectionHeading>
+          <div className="space-y-0.5">
+            {STACK.map(({ category, items }) => (
+              <div key={category} className="flex gap-2 text-xs leading-relaxed">
+                <span className="font-semibold text-gray-500 w-44 shrink-0">{category}</span>
+                <span className="text-gray-700">{items.join(" · ")}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── Work Experience ── */}
+        <section className="mb-3">
+          <SectionHeading>Work Experience</SectionHeading>
+          <div className="space-y-3">
+            {JOBS.map(({ role, company, companyContext, location, period, summary, highlights }, i) => {
+              const maxHighlights = HIGHLIGHTS_BY_INDEX[i] ?? 0;
+              const visibleHighlights = highlights.slice(0, maxHighlights);
+              const showSummary = i < 5;
+
+              return (
+                <div key={`${role}-${company}-${period}`} className="break-inside-avoid">
+                  <div className="flex justify-between items-baseline">
+                    <div className="leading-snug">
+                      <span className="font-semibold text-gray-900 text-xs">{role}</span>
+                      <span className="text-gray-500 text-xs"> — {company}</span>
+                      {companyContext && (
+                        <span className="text-gray-400 text-xs"> ({companyContext})</span>
+                      )}
+                      <span className="text-gray-400 text-xs"> · {location}</span>
+                    </div>
+                    <span className="text-[10px] text-gray-400 shrink-0 ml-3 tabular-nums">
+                      {period}
+                    </span>
+                  </div>
+                  {showSummary && (
+                    <p className="text-[11px] text-gray-600 mt-0.5 leading-relaxed">{summary}</p>
+                  )}
+                  {visibleHighlights.length > 0 && (
+                    <ul className="mt-1 space-y-0.5">
+                      {visibleHighlights.map((h) => (
+                        <li
+                          key={h}
+                          className="flex gap-1.5 text-[11px] text-gray-600 leading-relaxed"
+                        >
+                          <span className="shrink-0 mt-px">–</span>
+                          <span>{h}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* ── Education ── */}
+        <section className="mb-3 break-inside-avoid">
+          <SectionHeading>Education</SectionHeading>
+          <div className="space-y-1">
+            {EDUCATION.map(({ degree, field, institution }) => (
+              <div key={degree} className="text-xs">
+                <span className="font-semibold text-gray-900">
+                  {degree} in {field}
+                </span>
+                <span className="text-gray-500"> · {institution}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── Certifications & Achievements ── */}
+        <section className="break-inside-avoid">
+          <SectionHeading>Certifications & Achievements</SectionHeading>
+          <ul className="space-y-0.5">
+            {HONORS.map((h) => (
+              <li key={h} className="flex gap-1.5 text-[11px] text-gray-600 leading-relaxed">
+                <span className="shrink-0 mt-px">–</span>
+                <span>{h}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+    </div>
+  );
+}
+
+function SectionHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="text-[10px] font-bold uppercase tracking-widest text-blue-600 mb-1.5 pb-0.5 border-b border-gray-200">
+      {children}
+    </h2>
+  );
+}
