@@ -2,7 +2,9 @@ import { DesktopNavLinks } from "@/components/DesktopNavLinks";
 import { MobileMenuPanel } from "@/components/MobileMenuPanel";
 import { MobileMenuToggle } from "@/components/MobileMenuToggle";
 import { GitHubLink, LinkedInLink } from "@/components/SocialLinks";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { useMobileMenu } from "@/components/useMobileMenu";
+import { useTheme } from "@/components/useTheme";
 
 const NAV_LINKS = [
   { label: "About", href: "#about" },
@@ -14,6 +16,7 @@ const NAV_LINKS = [
 
 export function Nav() {
   const { open, menuId, toggle, close } = useMobileMenu();
+  const { theme, toggle: toggleTheme } = useTheme();
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 bg-surface-base/80 backdrop-blur border-b border-border">
@@ -30,9 +33,13 @@ export function Nav() {
         <div className="hidden md:flex items-center gap-3 ml-4">
           <LinkedInLink />
           <GitHubLink />
+          <ThemeToggle theme={theme} onToggle={toggleTheme} />
         </div>
 
-        <MobileMenuToggle open={open} controls={menuId} onToggle={toggle} />
+        <div className="md:hidden flex items-center gap-1">
+          <ThemeToggle theme={theme} onToggle={toggleTheme} />
+          <MobileMenuToggle open={open} controls={menuId} onToggle={toggle} />
+        </div>
       </nav>
 
       <MobileMenuPanel id={menuId} open={open} links={NAV_LINKS} onNavigate={close} />
