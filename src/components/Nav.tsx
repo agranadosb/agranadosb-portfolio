@@ -1,6 +1,7 @@
 import { DesktopNavLinks } from "@/components/DesktopNavLinks";
 import { MobileMenuPanel } from "@/components/MobileMenuPanel";
 import { MobileMenuToggle } from "@/components/MobileMenuToggle";
+import { GitHubLink, LinkedInLink } from "@/components/SocialLinks";
 import { useMobileMenu } from "@/components/useMobileMenu";
 
 const NAV_LINKS = [
@@ -25,6 +26,11 @@ export function Nav() {
         </a>
 
         <DesktopNavLinks links={NAV_LINKS} />
+
+        <div className="hidden md:flex items-center gap-3 ml-4">
+          <LinkedInLink />
+          <GitHubLink />
+        </div>
 
         <MobileMenuToggle open={open} controls={menuId} onToggle={toggle} />
       </nav>
