@@ -1,15 +1,4 @@
-const EDUCATION = [
-  {
-    degree: "MSc",
-    field: "AI, Pattern Recognition & Digital Imaging",
-    institution: "Polytechnic University of Valencia",
-  },
-  {
-    degree: "BSc",
-    field: "Computer Science",
-    institution: "Polytechnic University of Valencia",
-  },
-];
+import { EDUCATION } from "@/data/profile";
 
 export function Education() {
   return (
@@ -22,7 +11,9 @@ export function Education() {
               key={degree}
               className="p-5 rounded-lg bg-surface-raised border border-border space-y-1"
             >
-              <p className="text-accent text-xs font-semibold uppercase tracking-widest">{degree}</p>
+              <p className="text-accent text-xs font-semibold uppercase tracking-widest">
+                {degree}
+              </p>
               <p className="text-ink-primary font-medium leading-snug">{field}</p>
               <p className="text-ink-muted text-sm">{institution}</p>
             </div>

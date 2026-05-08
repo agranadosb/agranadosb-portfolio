@@ -6,7 +6,7 @@ export function Introduction() {
   return (
     <>
       <Hero />
-      <About />
+      <About photoSrc="/me.webp" />
       <MainSkills />
     </>
   );
