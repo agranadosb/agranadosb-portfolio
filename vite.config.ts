@@ -11,6 +11,14 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  build: {
+    rollupOptions: {
+      input: {
+        main: fileURLToPath(new URL("./index.html", import.meta.url)),
+        cv: fileURLToPath(new URL("./cv.html", import.meta.url)),
+      },
+    },
+  },
   server: {
     host: "0.0.0.0",
     port: 5173,
