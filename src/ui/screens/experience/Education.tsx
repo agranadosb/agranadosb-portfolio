@@ -1,4 +1,4 @@
-import { useEducationPresenter } from "@/ui/presenters/useEducationPresenter";
+import { useEducationPresenter } from "@/ui/hooks/useEducationPresenter";
 
 export function Education() {
   const education = useEducationPresenter();

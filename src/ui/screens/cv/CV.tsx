@@ -1,9 +1,9 @@
 import { type ReactNode, useEffect } from "react";
-import { useEducationPresenter } from "@/ui/presenters/useEducationPresenter";
-import { useHonorsPresenter } from "@/ui/presenters/useHonorsPresenter";
-import { useJobsPresenter } from "@/ui/presenters/useJobsPresenter";
-import { useProfilePresenter } from "@/ui/presenters/useProfilePresenter";
-import { useSkillsPresenter } from "@/ui/presenters/useSkillsPresenter";
+import { useEducationPresenter } from "@/ui/hooks/useEducationPresenter";
+import { useHonorsPresenter } from "@/ui/hooks/useHonorsPresenter";
+import { useJobsPresenter } from "@/ui/hooks/useJobsPresenter";
+import { useProfilePresenter } from "@/ui/hooks/useProfilePresenter";
+import { useSkillsPresenter } from "@/ui/hooks/useSkillsPresenter";
 
 const SUMMARY =
   "Engineering leader and hands-on AI practitioner with 10+ years delivering production software systems. Currently CTO at Heligráfics, leading 20–40 engineers across AI research, data engineering, and infrastructure. Core expertise in machine learning (PyTorch, computer vision, LLMs), distributed data pipelines (Kafka, Spark), cloud infrastructure (GCP, Kubernetes), and ISO 42001 / ISO 27001 compliance.";

@@ -6,11 +6,9 @@ export function useMobileMenuPresenter() {
 
   useEffect(() => {
     const desktopQuery = window.matchMedia("(min-width: 768px)");
-
     const handle = (event: MediaQueryListEvent) => {
       if (event.matches) setOpen(false);
     };
-
     desktopQuery.addEventListener("change", handle);
     return () => desktopQuery.removeEventListener("change", handle);
   }, []);

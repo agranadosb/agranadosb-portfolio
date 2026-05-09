@@ -3,9 +3,9 @@ import { MobileMenuPanel } from "@/ui/components/nav/MobileMenuPanel";
 import { MobileMenuToggle } from "@/ui/components/nav/MobileMenuToggle";
 import { GitHubLink, LinkedInLink } from "@/ui/components/nav/SocialLinks";
 import { ThemeToggle } from "@/ui/components/theme/ThemeToggle";
-import { useMobileMenuPresenter } from "@/ui/presenters/useMobileMenuPresenter";
-import { useProfilePresenter } from "@/ui/presenters/useProfilePresenter";
-import { useThemePresenter } from "@/ui/presenters/useThemePresenter";
+import { useMobileMenuPresenter } from "@/ui/hooks/useMobileMenuPresenter";
+import { useProfilePresenter } from "@/ui/hooks/useProfilePresenter";
+import { useThemePresenter } from "@/ui/hooks/useThemePresenter";
 
 const NAV_LINKS = [
   { label: "About", href: "#about" },
