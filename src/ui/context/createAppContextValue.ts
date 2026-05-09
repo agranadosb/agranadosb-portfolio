@@ -25,6 +25,14 @@ import { SkillsPresenter } from "@/ui/presenters/SkillsPresenter";
 import { ThemePresenter } from "@/ui/presenters/ThemePresenter";
 import { UIStringsPresenter } from "@/ui/presenters/UIStringsPresenter";
 
+export function detectInitialLanguage(): Language {
+  const useCase = new LanguageUseCase(
+    new LocalStorageLanguageRepository(),
+    detectBrowserLanguage(),
+  );
+  return useCase.getInitialLanguage();
+}
+
 export function createAppContextValue(
   language: Language,
   onLanguageChange: (language: Language) => void,

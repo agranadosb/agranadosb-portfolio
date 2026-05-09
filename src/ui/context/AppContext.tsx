@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { createContext, useContext, useMemo, useState } from "react";
 import type { Language } from "@/domain/language/Language";
-import { createAppContextValue } from "@/ui/context/createAppContextValue";
+import { createAppContextValue, detectInitialLanguage } from "@/ui/context/createAppContextValue";
 import type { AboutPresenter } from "@/ui/presenters/AboutPresenter";
 import type { EducationPresenter } from "@/ui/presenters/EducationPresenter";
 import type { HonorsPresenter } from "@/ui/presenters/HonorsPresenter";
@@ -28,20 +28,7 @@ export interface AppContextValue {
 const AppContext = createContext<AppContextValue | null>(null);
 
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>(() => {
-    try {
-      const stored = localStorage.getItem("language");
-      if (stored === "en" || stored === "es") return stored;
-    } catch {
-      console.warn("Could not access localStorage to get language");
-    }
-    try {
-      return navigator.language.toLowerCase().startsWith("es") ? "es" : "en";
-    } catch {
-      console.warn("Could not access navigator to get language");
-      return "en";
-    }
-  });
+  const [language, setLanguage] = useState<Language>(detectInitialLanguage);
 
   const contextValue = useMemo(() => createAppContextValue(language, setLanguage), [language]);
 
