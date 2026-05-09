@@ -10,7 +10,7 @@ const PROFILE: Profile = {
   title: "CTO · Staff AI Engineer · Software Architect",
   tagline: "Building AI systems that work in the real world — from research to production.",
   location: "Valencia, Spain",
-  email: "agranadosb55199@outlook.com",
+  email: "alejandro@agranadosb.com",
   linkedin: {
     display: "linkedin.com/in/alejandro-granados-bañuls-011010148",
     url: "https://www.linkedin.com/in/alejandro-granados-ba%C3%B1uls-011010148/",
