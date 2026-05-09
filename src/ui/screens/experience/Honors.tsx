@@ -1,4 +1,4 @@
-import { useHonorsPresenter } from "@/ui/presenters/useHonorsPresenter";
+import { useHonorsPresenter } from "@/ui/hooks/useHonorsPresenter";
 
 export function Honors() {
   const honors = useHonorsPresenter();

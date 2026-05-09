@@ -1,7 +1,5 @@
-import { useEffect, useRef, useState } from "react";
 import type { ThemeUseCase } from "@/application/usecases/ThemeUseCase";
 import type { ThemeMode } from "@/domain/theme/Theme";
-import { useAppContext } from "@/ui/context/AppContext";
 
 export class ThemePresenter {
   private readonly useCase: ThemeUseCase;
@@ -35,24 +33,4 @@ export class ThemePresenter {
   resolveNextMode(current: ThemeMode): ThemeMode {
     return this.useCase.getNextMode(current);
   }
-}
-
-export function useThemePresenter() {
-  const { themeUseCase } = useAppContext();
-  const presenterRef = useRef<ThemePresenter | null>(null);
-  if (presenterRef.current === null) presenterRef.current = new ThemePresenter(themeUseCase);
-  const presenter = presenterRef.current;
-
-  const [mode, setMode] = useState<ThemeMode>(() => presenter.resolveInitialMode());
-  const [systemTheme, setSystemTheme] = useState<"light" | "dark">(() =>
-    presenter.resolveInitialSystemTheme(),
-  );
-
-  useEffect(() => presenter.applyModeToDocument(mode), [mode, presenter]);
-  useEffect(() => presenter.subscribeToSystemThemeChanges(setSystemTheme), [presenter]);
-
-  return {
-    theme: presenter.resolveEffectiveTheme(mode, systemTheme),
-    toggle: () => setMode((current) => presenter.resolveNextMode(current)),
-  };
 }

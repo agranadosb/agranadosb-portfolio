@@ -11,16 +11,25 @@ import { BrowserThemeListener } from "@/infrastructure/theme/BrowserThemeListene
 import { LocalStorageThemeRepository } from "@/infrastructure/theme/LocalStorageThemeRepository";
 import { App } from "@/ui/App";
 import { AppProvider } from "@/ui/context/AppContext";
+import { EducationPresenter } from "@/ui/presenters/EducationPresenter";
+import { HonorsPresenter } from "@/ui/presenters/HonorsPresenter";
+import { JobsPresenter } from "@/ui/presenters/JobsPresenter";
+import { ProfilePresenter } from "@/ui/presenters/ProfilePresenter";
+import { SkillsPresenter } from "@/ui/presenters/SkillsPresenter";
+import { ThemePresenter } from "@/ui/presenters/ThemePresenter";
 import "@/index.css";
 
 const profileRepository = new StaticProfileRepository();
-const useCases = {
-  getProfileUseCase: new GetProfileUseCase(profileRepository),
-  getJobsUseCase: new GetJobsUseCase(profileRepository),
-  getEducationUseCase: new GetEducationUseCase(profileRepository),
-  getSkillsUseCase: new GetSkillsUseCase(profileRepository),
-  getHonorsUseCase: new GetHonorsUseCase(profileRepository),
-  themeUseCase: new ThemeUseCase(new BrowserThemeListener(), new LocalStorageThemeRepository()),
+
+const presenters = {
+  profilePresenter: new ProfilePresenter(new GetProfileUseCase(profileRepository)),
+  jobsPresenter: new JobsPresenter(new GetJobsUseCase(profileRepository)),
+  educationPresenter: new EducationPresenter(new GetEducationUseCase(profileRepository)),
+  skillsPresenter: new SkillsPresenter(new GetSkillsUseCase(profileRepository)),
+  honorsPresenter: new HonorsPresenter(new GetHonorsUseCase(profileRepository)),
+  themePresenter: new ThemePresenter(
+    new ThemeUseCase(new BrowserThemeListener(), new LocalStorageThemeRepository()),
+  ),
 };
 
 const rootElement = document.getElementById("root");
@@ -28,7 +37,7 @@ if (!rootElement) throw new Error("Root element not found");
 
 createRoot(rootElement).render(
   <StrictMode>
-    <AppProvider value={useCases}>
+    <AppProvider value={presenters}>
       <App />
     </AppProvider>
   </StrictMode>,

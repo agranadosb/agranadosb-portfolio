@@ -1,19 +1,19 @@
 import type { ReactNode } from "react";
 import { createContext, useContext } from "react";
-import type { GetEducationUseCase } from "@/application/usecases/GetEducationUseCase";
-import type { GetHonorsUseCase } from "@/application/usecases/GetHonorsUseCase";
-import type { GetJobsUseCase } from "@/application/usecases/GetJobsUseCase";
-import type { GetProfileUseCase } from "@/application/usecases/GetProfileUseCase";
-import type { GetSkillsUseCase } from "@/application/usecases/GetSkillsUseCase";
-import type { ThemeUseCase } from "@/application/usecases/ThemeUseCase";
+import type { EducationPresenter } from "@/ui/presenters/EducationPresenter";
+import type { HonorsPresenter } from "@/ui/presenters/HonorsPresenter";
+import type { JobsPresenter } from "@/ui/presenters/JobsPresenter";
+import type { ProfilePresenter } from "@/ui/presenters/ProfilePresenter";
+import type { SkillsPresenter } from "@/ui/presenters/SkillsPresenter";
+import type { ThemePresenter } from "@/ui/presenters/ThemePresenter";
 
 export interface AppContextValue {
-  getProfileUseCase: GetProfileUseCase;
-  getJobsUseCase: GetJobsUseCase;
-  getEducationUseCase: GetEducationUseCase;
-  getSkillsUseCase: GetSkillsUseCase;
-  getHonorsUseCase: GetHonorsUseCase;
-  themeUseCase: ThemeUseCase;
+  profilePresenter: ProfilePresenter;
+  jobsPresenter: JobsPresenter;
+  educationPresenter: EducationPresenter;
+  skillsPresenter: SkillsPresenter;
+  honorsPresenter: HonorsPresenter;
+  themePresenter: ThemePresenter;
 }
 
 const AppContext = createContext<AppContextValue | null>(null);

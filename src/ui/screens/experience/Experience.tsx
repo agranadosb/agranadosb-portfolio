@@ -1,5 +1,5 @@
 import { JobItem } from "@/ui/components/job/JobItem";
-import { useJobsPresenter } from "@/ui/presenters/useJobsPresenter";
+import { useJobsPresenter } from "@/ui/hooks/useJobsPresenter";
 
 export function Experience() {
   const jobs = useJobsPresenter();
