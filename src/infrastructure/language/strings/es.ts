@@ -3,7 +3,7 @@ import type { UIStrings } from "@/domain/language/UIStrings";
 export const STRINGS: UIStrings = {
   nav: {
     about: "Sobre mí",
-    skills: "Skills",
+    skills: "Habilidades",
     experience: "Experiencia",
     education: "Formación",
     honors: "Logros",
@@ -15,7 +15,7 @@ export const STRINGS: UIStrings = {
   },
   sections: {
     about: "Sobre mí",
-    skills: "Principales Skills",
+    skills: "Principales Habilidades",
     experience: "Experiencia",
     education: "Formación",
     honors: "Logros y Reconocimientos",
