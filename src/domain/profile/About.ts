@@ -6,4 +6,5 @@ export interface Stat {
 export interface About {
   bio: string[];
   stats: Stat[];
+  cvSummary: string;
 }

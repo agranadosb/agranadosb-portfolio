@@ -1,24 +1,29 @@
+import { LanguageToggle } from "@/ui/components/language/LanguageToggle";
 import { DesktopNavLinks } from "@/ui/components/nav/DesktopNavLinks";
 import { MobileMenuPanel } from "@/ui/components/nav/MobileMenuPanel";
 import { MobileMenuToggle } from "@/ui/components/nav/MobileMenuToggle";
 import { GitHubLink, LinkedInLink } from "@/ui/components/nav/SocialLinks";
 import { ThemeToggle } from "@/ui/components/theme/ThemeToggle";
+import { useLanguagePresenter } from "@/ui/hooks/useLanguagePresenter";
 import { useMobileMenuPresenter } from "@/ui/hooks/useMobileMenuPresenter";
 import { useProfilePresenter } from "@/ui/hooks/useProfilePresenter";
 import { useThemePresenter } from "@/ui/hooks/useThemePresenter";
-
-const NAV_LINKS = [
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#stack" },
-  { label: "Experience", href: "#experience" },
-  { label: "Education", href: "#education" },
-  { label: "Honors", href: "#honors" },
-];
+import { useUIStringsPresenter } from "@/ui/hooks/useUIStringsPresenter";
 
 export function Nav() {
   const { open, menuId, toggle, close } = useMobileMenuPresenter();
   const { theme, toggle: toggleTheme } = useThemePresenter();
+  const { language, toggle: toggleLanguage } = useLanguagePresenter();
   const profile = useProfilePresenter();
+  const ui = useUIStringsPresenter();
+
+  const navLinks = [
+    { label: ui.nav.about, href: "#about" },
+    { label: ui.nav.skills, href: "#stack" },
+    { label: ui.nav.experience, href: "#experience" },
+    { label: ui.nav.education, href: "#education" },
+    { label: ui.nav.honors, href: "#honors" },
+  ];
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 bg-surface-base/80 backdrop-blur border-b border-border">
@@ -33,21 +38,31 @@ export function Nav() {
           </span>
         </a>
 
-        <DesktopNavLinks links={NAV_LINKS} />
+        <DesktopNavLinks links={navLinks} />
 
         <div className="hidden md:flex items-center gap-3 ml-4">
           <LinkedInLink url={profile.linkedin.url} />
           <GitHubLink url={profile.github.url} />
+          <LanguageToggle
+            language={language}
+            ariaLabel={ui.language.ariaLabel}
+            onToggle={toggleLanguage}
+          />
           <ThemeToggle theme={theme} onToggle={toggleTheme} />
         </div>
 
         <div className="md:hidden flex items-center gap-1">
+          <LanguageToggle
+            language={language}
+            ariaLabel={ui.language.ariaLabel}
+            onToggle={toggleLanguage}
+          />
           <ThemeToggle theme={theme} onToggle={toggleTheme} />
           <MobileMenuToggle open={open} controls={menuId} onToggle={toggle} />
         </div>
       </nav>
 
-      <MobileMenuPanel id={menuId} open={open} links={NAV_LINKS} onNavigate={close} />
+      <MobileMenuPanel id={menuId} open={open} links={navLinks} onNavigate={close} />
     </header>
   );
 }

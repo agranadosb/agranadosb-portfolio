@@ -1,13 +1,15 @@
 import { useState } from "react";
+import type { UIStrings } from "@/domain/language/UIStrings";
 import type { Profile } from "@/domain/profile/Profile";
 import { ContactModal } from "@/ui/components/contact/ContactModal";
 import { GitHubLink, LinkedInLink } from "@/ui/components/nav/SocialLinks";
 
 interface HeroProps {
   profile: Profile;
+  ui: UIStrings;
 }
 
-export function Hero({ profile }: HeroProps) {
+export function Hero({ profile, ui }: HeroProps) {
   const [contactOpen, setContactOpen] = useState(false);
 
   return (
@@ -27,7 +29,7 @@ export function Hero({ profile }: HeroProps) {
           href="#experience"
           className="px-6 py-3 bg-accent text-surface-base font-semibold rounded-lg hover:opacity-90 transition-opacity"
         >
-          View Experience
+          {ui.hero.viewExperience}
         </a>
         <a
           href="/cv.html?print=auto"
@@ -35,14 +37,14 @@ export function Hero({ profile }: HeroProps) {
           rel="noopener noreferrer"
           className="px-6 py-3 border border-border text-ink-primary font-semibold rounded-lg hover:bg-surface-raised transition-colors"
         >
-          Download CV
+          {ui.hero.downloadCV}
         </a>
         <button
           type="button"
           onClick={() => setContactOpen(true)}
           className="px-6 py-3 border border-border text-ink-primary font-semibold rounded-lg hover:bg-surface-raised transition-colors cursor-pointer"
         >
-          Contact
+          {ui.hero.contact}
         </button>
       </div>
       <div className="flex gap-5 mt-4">
@@ -50,7 +52,15 @@ export function Hero({ profile }: HeroProps) {
         <GitHubLink url={profile.github.url} />
       </div>
 
-      {contactOpen && <ContactModal email={profile.email} onClose={() => setContactOpen(false)} />}
+      {contactOpen && (
+        <ContactModal
+          email={profile.email}
+          title={ui.contact.title}
+          subtitle={ui.contact.subtitle}
+          closeLabel={ui.contact.closeLabel}
+          onClose={() => setContactOpen(false)}
+        />
+      )}
     </section>
   );
 }

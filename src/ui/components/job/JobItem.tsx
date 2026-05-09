@@ -12,6 +12,8 @@ export interface JobItemProps {
   highlights: string[];
   skills?: string[];
   defaultCollapsed?: boolean;
+  showDetailsLabel: string;
+  hideDetailsLabel: string;
 }
 
 export function JobItem({
@@ -24,6 +26,8 @@ export function JobItem({
   highlights,
   skills,
   defaultCollapsed = false,
+  showDetailsLabel,
+  hideDetailsLabel,
 }: JobItemProps) {
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
   const detailsId = useId();
@@ -67,7 +71,7 @@ export function JobItem({
         onClick={() => setCollapsed((c) => !c)}
         className="text-xs text-ink-primary hover:text-accent transition-colors cursor-pointer"
       >
-        {collapsed ? "▸ Show details" : "▾ Hide details"}
+        {collapsed ? showDetailsLabel : hideDetailsLabel}
       </button>
     </div>
   );
