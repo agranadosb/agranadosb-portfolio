@@ -1,9 +1,7 @@
-import { GetEducationUseCase } from "@/application/usecases/GetEducationUseCase";
 import type { Education } from "@/domain/profile/Education";
-import { StaticProfileRepository } from "@/infrastructure/profile/StaticProfileRepository";
-
-const getEducationUseCase = new GetEducationUseCase(new StaticProfileRepository());
+import { useAppContext } from "@/ui/context/AppContext";
 
 export function useEducationPresenter(): Education[] {
+  const { getEducationUseCase } = useAppContext();
   return getEducationUseCase.execute();
 }

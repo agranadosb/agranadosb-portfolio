@@ -1,32 +1,58 @@
-import { useEffect, useState } from "react";
-import { ThemeUseCase } from "@/application/usecases/ThemeUseCase";
+import { useEffect, useRef, useState } from "react";
+import type { ThemeUseCase } from "@/application/usecases/ThemeUseCase";
 import type { ThemeMode } from "@/domain/theme/Theme";
-import { BrowserThemeListener } from "@/infrastructure/theme/BrowserThemeListener";
-import { LocalStorageThemeRepository } from "@/infrastructure/theme/LocalStorageThemeRepository";
+import { useAppContext } from "@/ui/context/AppContext";
 
-const themeUseCase = new ThemeUseCase(
-  new BrowserThemeListener(),
-  new LocalStorageThemeRepository(),
-);
+export class ThemePresenter {
+  private readonly useCase: ThemeUseCase;
 
-export function useThemePresenter() {
-  const [mode, setMode] = useState<ThemeMode>(() => themeUseCase.getInitialMode());
-  const [systemTheme, setSystemTheme] = useState<"light" | "dark">(() =>
-    themeUseCase.getSystemTheme(),
-  );
+  constructor(useCase: ThemeUseCase) {
+    this.useCase = useCase;
+  }
 
-  useEffect(() => {
+  resolveInitialMode(): ThemeMode {
+    return this.useCase.getInitialMode();
+  }
+
+  resolveInitialSystemTheme(): "light" | "dark" {
+    return this.useCase.getSystemTheme();
+  }
+
+  applyModeToDocument(mode: ThemeMode): void {
     document.documentElement.classList.remove("light", "dark");
     if (mode !== "system") document.documentElement.classList.add(mode);
-    themeUseCase.persistMode(mode);
-  }, [mode]);
+    this.useCase.persistMode(mode);
+  }
 
-  useEffect(() => {
-    return themeUseCase.subscribeToSystemChanges(setSystemTheme);
-  }, []);
+  subscribeToSystemThemeChanges(handler: (theme: "light" | "dark") => void): () => void {
+    return this.useCase.subscribeToSystemChanges(handler);
+  }
 
-  const effectiveTheme = mode === "system" ? systemTheme : mode;
-  const toggle = () => setMode((current) => themeUseCase.getNextMode(current));
+  resolveEffectiveTheme(mode: ThemeMode, systemTheme: "light" | "dark"): "light" | "dark" {
+    return mode === "system" ? systemTheme : mode;
+  }
 
-  return { theme: effectiveTheme, toggle };
+  resolveNextMode(current: ThemeMode): ThemeMode {
+    return this.useCase.getNextMode(current);
+  }
+}
+
+export function useThemePresenter() {
+  const { themeUseCase } = useAppContext();
+  const presenterRef = useRef<ThemePresenter | null>(null);
+  if (presenterRef.current === null) presenterRef.current = new ThemePresenter(themeUseCase);
+  const presenter = presenterRef.current;
+
+  const [mode, setMode] = useState<ThemeMode>(() => presenter.resolveInitialMode());
+  const [systemTheme, setSystemTheme] = useState<"light" | "dark">(() =>
+    presenter.resolveInitialSystemTheme(),
+  );
+
+  useEffect(() => presenter.applyModeToDocument(mode), [mode, presenter]);
+  useEffect(() => presenter.subscribeToSystemThemeChanges(setSystemTheme), [presenter]);
+
+  return {
+    theme: presenter.resolveEffectiveTheme(mode, systemTheme),
+    toggle: () => setMode((current) => presenter.resolveNextMode(current)),
+  };
 }

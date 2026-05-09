@@ -1,8 +1,6 @@
-import { GetHonorsUseCase } from "@/application/usecases/GetHonorsUseCase";
-import { StaticProfileRepository } from "@/infrastructure/profile/StaticProfileRepository";
-
-const getHonorsUseCase = new GetHonorsUseCase(new StaticProfileRepository());
+import { useAppContext } from "@/ui/context/AppContext";
 
 export function useHonorsPresenter(): string[] {
+  const { getHonorsUseCase } = useAppContext();
   return getHonorsUseCase.execute();
 }
