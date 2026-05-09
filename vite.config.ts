@@ -12,10 +12,16 @@ export default defineConfig({
     },
   },
   build: {
+    target: "esnext",
     rollupOptions: {
       input: {
         main: fileURLToPath(new URL("./index.html", import.meta.url)),
         cv: fileURLToPath(new URL("./cv.html", import.meta.url)),
+      },
+      output: {
+        manualChunks: {
+          vendor: ["react", "react-dom"],
+        },
       },
     },
   },
