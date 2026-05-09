@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { CVPage } from "@/pages/CV";
+import { CVPage } from "@/ui/screens/cv/CV";
 import "@/index.css";
 
 const rootElement = document.getElementById("root");
