@@ -13,7 +13,7 @@ import { useUIStringsPresenter } from "@/ui/hooks/useUIStringsPresenter";
 export function Nav() {
   const { open, menuId, toggle, close } = useMobileMenuPresenter();
   const { theme, toggle: toggleTheme } = useThemePresenter();
-  const { language, toggle: toggleLanguage } = useLanguagePresenter();
+  const { toggle: toggleLanguage } = useLanguagePresenter();
   const profile = useProfilePresenter();
   const ui = useUIStringsPresenter();
 
@@ -44,7 +44,7 @@ export function Nav() {
           <LinkedInLink url={profile.linkedin.url} />
           <GitHubLink url={profile.github.url} />
           <LanguageToggle
-            language={language}
+            switchTo={ui.language.switchTo}
             ariaLabel={ui.language.ariaLabel}
             onToggle={toggleLanguage}
           />
@@ -53,7 +53,7 @@ export function Nav() {
 
         <div className="md:hidden flex items-center gap-1">
           <LanguageToggle
-            language={language}
+            switchTo={ui.language.switchTo}
             ariaLabel={ui.language.ariaLabel}
             onToggle={toggleLanguage}
           />

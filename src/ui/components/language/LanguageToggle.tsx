@@ -1,12 +1,10 @@
-import type { Language } from "@/domain/language/Language";
-
 interface LanguageToggleProps {
-  language: Language;
+  switchTo: string;
   ariaLabel: string;
   onToggle: () => void;
 }
 
-export function LanguageToggle({ language, ariaLabel, onToggle }: LanguageToggleProps) {
+export function LanguageToggle({ switchTo, ariaLabel, onToggle }: LanguageToggleProps) {
   return (
     <button
       type="button"
@@ -30,8 +28,8 @@ export function LanguageToggle({ language, ariaLabel, onToggle }: LanguageToggle
           <line x1="2" y1="12" x2="22" y2="12" />
           <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
         </svg>
-        <span className="absolute bottom-[-3px] right-[-4px] text-[8px] font-bold leading-none bg-surface-base text-accent px-[2px] rounded-sm">
-          {language === "en" ? "ES" : "EN"}
+        <span className="absolute -bottom-0.75 -right-1 text-[8px] font-bold leading-none bg-surface-base text-accent px-0.5 rounded-sm">
+          {switchTo}
         </span>
       </span>
     </button>
