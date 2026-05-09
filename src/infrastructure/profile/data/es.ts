@@ -3,7 +3,7 @@ import type { Education } from "@/domain/profile/Education";
 import type { Job } from "@/domain/profile/Job";
 import type { Profile } from "@/domain/profile/Profile";
 import type { SkillCategory } from "@/domain/profile/SkillCategory";
-import { PROFILE as PROFILE_EN } from "@/infrastructure/profile/data/en";
+import { PROFILE_EN } from "@/infrastructure/profile/data/en";
 
 export const PROFILE: Profile = {
   ...PROFILE_EN,

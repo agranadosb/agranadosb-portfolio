@@ -4,7 +4,7 @@ import type { Job } from "@/domain/profile/Job";
 import type { Profile } from "@/domain/profile/Profile";
 import type { SkillCategory } from "@/domain/profile/SkillCategory";
 
-export const PROFILE: Profile = {
+export const PROFILE_EN: Profile = {
   name: "Alejandro Granados",
   title: "CTO · Staff AI Engineer · Software Architect",
   tagline: "Building AI systems that work in the real world — from research to production.",
@@ -19,6 +19,8 @@ export const PROFILE: Profile = {
     url: "https://github.com/agranadosb",
   },
 };
+
+export { PROFILE_EN as PROFILE };
 
 export const ABOUT: About = {
   bio: [
