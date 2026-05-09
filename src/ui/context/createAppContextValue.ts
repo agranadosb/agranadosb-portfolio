@@ -1,3 +1,4 @@
+import { GetAboutUseCase } from "@/application/usecases/GetAboutUseCase";
 import { GetEducationUseCase } from "@/application/usecases/GetEducationUseCase";
 import { GetHonorsUseCase } from "@/application/usecases/GetHonorsUseCase";
 import { GetJobsUseCase } from "@/application/usecases/GetJobsUseCase";
@@ -12,6 +13,7 @@ import { EducationPresenter } from "@/ui/presenters/EducationPresenter";
 import { HonorsPresenter } from "@/ui/presenters/HonorsPresenter";
 import { JobsPresenter } from "@/ui/presenters/JobsPresenter";
 import { ProfilePresenter } from "@/ui/presenters/ProfilePresenter";
+import { AboutPresenter } from "@/ui/presenters/AboutPresenter";
 import { SkillsPresenter } from "@/ui/presenters/SkillsPresenter";
 import { ThemePresenter } from "@/ui/presenters/ThemePresenter";
 
@@ -19,6 +21,7 @@ export function createAppContextValue(): AppContextValue {
   const profileRepository = new StaticProfileRepository();
 
   return {
+    aboutPresenter: new AboutPresenter(new GetAboutUseCase(profileRepository)),
     profilePresenter: new ProfilePresenter(new GetProfileUseCase(profileRepository)),
     jobsPresenter: new JobsPresenter(new GetJobsUseCase(profileRepository)),
     educationPresenter: new EducationPresenter(new GetEducationUseCase(profileRepository)),

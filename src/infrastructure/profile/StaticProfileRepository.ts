@@ -1,4 +1,5 @@
 import type { ProfileRepository } from "@/application/ports/ProfileRepository";
+import type { About } from "@/domain/profile/About";
 import type { Education } from "@/domain/profile/Education";
 import type { Job } from "@/domain/profile/Job";
 import type { Profile } from "@/domain/profile/Profile";
@@ -251,6 +252,19 @@ const HONORS: string[] = [
   "ISO 27001 certification process lead (in progress) towards ENS compliance.",
 ];
 
+const ABOUT: About = {
+  bio: [
+    "AI engineer and engineering leader with 10+ years building software systems in production. My work spans the full stack: geospatial computer vision, large-scale data pipelines, cloud infrastructure, and the teams that deliver them.",
+    "Currently CTO at Heligráfics in Valencia, leading technical strategy and AI product development across multiple engineering teams.",
+  ],
+  stats: [
+    { label: "Experience", value: "10+ years" },
+    { label: "Current Role", value: "CTO · Heligráfics" },
+    { label: "Expertise", value: "Software Engineering · AI" },
+    { label: "Education", value: "MSc · BSc" },
+  ],
+};
+
 const STACK: SkillCategory[] = [
   {
     category: "Languages / Architectures",
@@ -281,6 +295,10 @@ const STACK: SkillCategory[] = [
 export class StaticProfileRepository implements ProfileRepository {
   getProfile(): Profile {
     return PROFILE;
+  }
+
+  getAbout(): About {
+    return ABOUT;
   }
 
   getJobs(): Job[] {
