@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { createContext, useContext } from "react";
+import type { AboutPresenter } from "@/ui/presenters/AboutPresenter";
 import type { EducationPresenter } from "@/ui/presenters/EducationPresenter";
 import type { HonorsPresenter } from "@/ui/presenters/HonorsPresenter";
 import type { JobsPresenter } from "@/ui/presenters/JobsPresenter";
@@ -9,6 +10,7 @@ import type { ThemePresenter } from "@/ui/presenters/ThemePresenter";
 
 export interface AppContextValue {
   profilePresenter: ProfilePresenter;
+  aboutPresenter: AboutPresenter;
   jobsPresenter: JobsPresenter;
   educationPresenter: EducationPresenter;
   skillsPresenter: SkillsPresenter;

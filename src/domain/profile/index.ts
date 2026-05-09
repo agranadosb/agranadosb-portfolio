@@ -1,3 +1,4 @@
+export type { About, Stat } from "@/domain/profile/About";
 export type { Education } from "@/domain/profile/Education";
 export type { Job } from "@/domain/profile/Job";
 export type { Profile } from "@/domain/profile/Profile";
