@@ -1,45 +1,52 @@
-# agranadosb-portfolio
+# agranadosb · Portfolio
 
-Personal portfolio built with **React + TypeScript + Vite + Tailwind CSS**, running inside a VS Code devcontainer.
+Personal portfolio and CV for Alejandro Granados — CTO, Staff AI Engineer, and Software Architect based in Valencia, Spain.
 
-## Requirements
+Built with **React 19 · TypeScript · Tailwind v4 · Vite + SWC · Biome**, following hexagonal architecture and SOLID principles.
 
-- [Docker](https://www.docker.com/)
-- [VS Code](https://code.visualstudio.com/) with the **Dev Containers** extension
+## Pages
+
+- `/` — Portfolio (hero, about, skills, experience, education, honors, contact)
+- `/cv` — Print-optimized CV (A4, downloadable as PDF)
 
 ## Getting started
 
-1. Open this folder in VS Code.
-2. Run the command **Dev Containers: Reopen in Container**.
-3. The first build installs Node 20 and runs `npm ci` automatically.
-4. Once attached, start the dev server:
+Requires [Docker](https://www.docker.com/) and [VS Code](https://code.visualstudio.com/) with the **Dev Containers** extension.
 
-   \`\`\`bash
+1. Open the folder in VS Code and run **Dev Containers: Reopen in Container**.
+2. Once attached, start the dev server:
+
+   ```bash
    npm run dev
-   \`\`\`
+   ```
 
-   The app will be available at http://localhost:5173.
+   Available at http://localhost:5173.
 
 ## Scripts
 
-| Command            | Description                          |
-| ------------------ | ------------------------------------ |
-| `npm run dev`      | Start the Vite dev server            |
-| `npm run build`    | Type-check and build for production  |
-| `npm run preview`  | Preview the production build         |
-| `npm run lint`     | Run Biome linter                     |
-| `npm run lint:fix` | Run Biome linter with auto-fix       |
-| `npm run format`   | Format the codebase with Biome       |
-| `npm run check`    | Run Biome lint + format check        |
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the Vite dev server |
+| `npm run build` | Type-check and build for production |
+| `npm run preview` | Preview the production build |
+| `npm run lint` | Run Biome linter |
+| `npm run lint:fix` | Run Biome linter with auto-fix |
+| `npm run format` | Format with Biome |
+| `npm run check` | Biome lint + format check |
 
-## Stack
+## Architecture
 
-- React 19
-- TypeScript 5.8
-- Vite 7
-- Tailwind CSS 4
-- Biome (lint + format)
-- React Router DOM
+Hexagonal architecture (Ports & Adapters) with strict layer separation:
+
+```
+src/
+  domain/         # Pure types
+  application/    # Use cases + port interfaces
+  infrastructure/ # Port implementations (StaticProfileRepository, theme adapters)
+  ui/             # Presenters, hooks, components, screens
+```
+
+All portfolio content lives in `src/infrastructure/profile/StaticProfileRepository.ts`.
 
 ## License
 
