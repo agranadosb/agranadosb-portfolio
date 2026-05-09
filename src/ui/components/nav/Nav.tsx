@@ -25,9 +25,12 @@ export function Nav() {
       <nav className="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
         <a
           href="#hero"
-          className="text-ink-primary font-semibold text-sm tracking-tight hover:text-accent transition-colors"
+          className="flex items-center gap-2 hover:opacity-80 transition-opacity"
         >
-          {profile.name}
+          <img src="/icon.webp" alt={profile.name} className="w-6 h-6 rounded-full" />
+          <span className="text-ink-primary font-semibold text-sm tracking-tight">
+            {profile.name}
+          </span>
         </a>
 
         <DesktopNavLinks links={NAV_LINKS} />
