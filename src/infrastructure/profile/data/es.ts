@@ -34,16 +34,16 @@ export const JOBS: Job[] = [
     location: "Valencia",
     period: "Jan 2026 - Present",
     summary:
-      "Liderando toda la estrategia técnica y la ejecución de ingeniería de la empresa. Responsable de los equipos, la arquitectura, los procesos, las herramientas y el cumplimiento normativo — el único pilar técnico detrás de cada producto y proyecto.",
+      "Liderando toda la estrategia técnica y la ejecución de ingeniería de la empresa. Responsable de los equipos, la arquitectura, los procesos, las herramientas y el cumplimiento normativo.",
     highlights: [
-      "Dirijo y mentoneo 5 equipos de ingeniería (3-5 ingenieros cada uno, 20-40 en total) en investigación de IA, ingeniería de datos e infraestructura.",
-      "Superviso todo el desarrollo técnico de la empresa — única base técnica y brazo de entrega de cada producto y proyecto.",
+      "Dirijo y formo a 5 equipos de ingeniería (3-5 ingenieros cada uno, 20-40 en total) en investigación de IA, ingeniería de datos e infraestructura.",
+      "Superviso todo el desarrollo técnico de la empresa.",
       "Rediseñando la arquitectura de plataforma hacia Domain-Driven Design (DDD) y Arquitectura Hexagonal.",
       "Estructurando el sistema en torno a dominios de infraestructura (auth, observabilidad, almacenamiento) y productos de datos por línea de negocio.",
       "Impulsando un enfoque data-first para acelerar el desarrollo de UIs orientadas al cliente basadas en modelos de dominio y lógica de negocio bien definidos.",
       "Promoviendo el desarrollo asistido por IA (GitHub Copilot, Claude) para que la ingeniería se centre en la especificación de lógica de negocio y el diseño arquitectónico.",
       "Definición de estándares de ingeniería a nivel de empresa: estrategia de branching, políticas de revisión de PR, Definition of Done, ceremonias de sprint, workflows de CI/CD, gestión de infraestructura y procedimientos de onboarding.",
-      "Desarrollé un dashboard de rendimiento de empleados con IA integrando datos de ERP y GitHub, para visibilidad rápida del progreso de sprints, estado de tareas y entrega por proyecto.",
+      "Desarrollé un dashboard de rendimiento de empleados con IA integrando datos de ERP y GitHub, para tener visibilidad rápida del progreso de sprints, estado de tareas y entrega por proyecto.",
       "Realización de auditorías de cumplimiento internas contra procedimientos de empresa y requisitos regulatorios ISO.",
       "Liderando personalmente el proceso de certificación ISO 27001 hacia el cumplimiento del ENS (Esquema Nacional de Seguridad).",
     ],
@@ -69,8 +69,8 @@ export const JOBS: Job[] = [
     summary:
       "Responsable de la entrega end-to-end de productos de IA para silvicultura de precisión, gestionando 5 proyectos simultáneos con equipos multifuncionales. Lideré la certificación ISO 42001 de la empresa y modernicé el flujo de trabajo de ingeniería.",
     highlights: [
-      "Lideré la certificación ISO 42001 (Sistemas de Gestión de IA) — una de las primeras empresas en España en obtenerla — formalizando las prácticas existentes de gobernanza de datos y ML, requiriendo mínima implementación nueva.",
-      "Lideré la entrega de productos de IA para silvicultura de precisión: detección automatizada de plantas, malas hierbas, zonas desnudas y filas de plantación a partir de TBs de imágenes multiespectrales aéreas.",
+      "Lideré la certificación ISO 42001 (Sistemas de Gestión de IA) — una de las primeras empresas en España en obtenerla — formalizando las prácticas existentes de gobernanza de datos y ML, con escasa implementación adicional.",
+      "Lideré la entrega de productos de IA para silvicultura de precisión: detección automatizada de plantas, malas hierbas, zonas sin vegetación y filas de plantación a partir de TBs de imágenes multiespectrales aéreas.",
       "Gestioné 5 proyectos simultáneos con equipos multifuncionales de 3-5 ingenieros en ingeniería, QA y producto.",
       "Diseñé una arquitectura híbrida on-premise/cloud para controlar los costes de transferencia de datos: validación de imágenes, generación de mosaicos y procesamiento geomático en un clúster local + NAS; entrenamiento e inferencia GPU en GCP Vertex AI.",
       "Construí pipelines geomáticos para georreferenciar imágenes aéreas y alinear con precisión los mosaicos a su huella geográfica.",
@@ -106,7 +106,7 @@ export const JOBS: Job[] = [
       "Establecí las prácticas de ingeniería de datos y gobernanza de IA que se convirtieron en el pilar técnico para la entrega posterior de productos de IA.",
       "Asesoré a todos los equipos técnicos en arquitectura de software y patrones de diseño.",
       "Construí una aplicación de sincronización de activos entre aeronaves y su centro de coordinación, gestionando conectividad intermitente: transferencia fiable de datos operativos y streaming de vídeo bajo condiciones de internet inestables.",
-      "Promoción a Staff AI Engineer en 5 meses, en reconocimiento de los cimientos de IA e ingeniería de datos construidos en este rol.",
+      "Ascendido a Staff AI Engineer en 5 meses, en reconocimiento de los cimientos de IA e ingeniería de datos construidos en este rol.",
     ],
     skills: [
       "Python",
@@ -132,7 +132,7 @@ export const JOBS: Job[] = [
       "Construí pipelines Kafka que procesaban flujos de eventos de usuarios (actualizaciones de perfil, nuevas publicaciones, eliminaciones de cuenta) con eliminación en cascada conforme al RGPD en almacenes distribuidos MySQL y Cassandra.",
       "Desarrollé servicios REST para exponer datos de eventos procesados a microservicios internos.",
       "Diseñé pipelines de CI/CD con Kubernetes, AWS, Jenkins y GitHub Actions.",
-      "Construí un clasificador de sentimiento difuso basado en BERT para detectar señales positivas/negativas en mensajes de usuarios (PyTorch, Transformers).",
+      "Construí un clasificador de sentimientos basado en BERT para detectar señales positivas/negativas en mensajes de usuarios (PyTorch, Transformers).",
       "Actué como consultor interno de Python, liderando decisiones de arquitectura y herramientas para iniciativas de IA/LLM en una codebase predominantemente Scala.",
     ],
     skills: [
@@ -230,7 +230,7 @@ export const JOBS: Job[] = [
       "Primeros pasos en el desarrollo de software — construyendo sitios web y pequeñas aplicaciones para clientes privados, aprendiendo el ciclo completo desde requisitos hasta entrega.",
     highlights: [
       "Construí sitios web y aplicaciones para clientes privados como desarrollador independiente.",
-      "Entregué proyectos end-to-end cubriendo captación de requisitos, desarrollo y despliegue.",
+      "Entregué proyectos end-to-end cubriendo toma de requisitos, desarrollo y despliegue.",
       "Primera experiencia gestionando relaciones con clientes y entregando software de forma independiente.",
     ],
     skills: ["HTML", "CSS", "JavaScript", "PHP"],

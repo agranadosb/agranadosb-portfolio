@@ -9,7 +9,7 @@ export const STRINGS: UIStrings = {
     honors: "Logros",
   },
   hero: {
-    viewExperience: "Ver Experiencia",
+    viewExperience: "Ver experiencia",
     downloadCV: "Descargar CV",
     contact: "Contacto",
   },
