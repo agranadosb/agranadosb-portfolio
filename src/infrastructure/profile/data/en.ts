@@ -24,8 +24,9 @@ export { PROFILE_EN as PROFILE };
 
 export const ABOUT: About = {
   bio: [
-    "AI engineer and engineering leader with 10+ years building software systems in production. My work spans the full stack: geospatial computer vision, large-scale data pipelines, cloud infrastructure, and the teams that deliver them.",
-    "Currently CTO at Heligráfics in Valencia, leading technical strategy and AI product development across multiple engineering teams.",
+    "AI engineer, software architect, and engineering leader with 10+ years turning technology into software that creates real value for users and the business.",
+    "My work spans the full stack: computer vision and NLP, geospatial big data, large-scale data pipelines, architecture, cloud infrastructure, and leading the teams that deliver them.",
+    "Currently CTO at Heligráfics in Valencia, leading technical strategy and software product development across multiple engineering teams.",
   ],
   stats: [
     { label: "Experience", value: "10+ years" },
@@ -34,24 +35,21 @@ export const ABOUT: About = {
     { label: "Education", value: "MSc · BSc" },
   ],
   cvSummary:
-    "Engineering leader and hands-on AI practitioner with 10+ years delivering production software systems. Currently CTO at Heligráfics, leading 20–40 engineers across AI research, data engineering, and infrastructure. Core expertise in machine learning (PyTorch, computer vision, LLMs), distributed data pipelines (Kafka, Spark), cloud infrastructure (GCP, Kubernetes), and ISO 42001 / ISO 27001 compliance.",
+    "Engineering leader, software architect, and hands-on AI practitioner with 10+ years turning technology into software that creates real value for users and the business. Currently CTO at Heligráfics, leading 20–40 engineers across AI research, data engineering, and infrastructure. Core expertise in machine learning (PyTorch, computer vision, LLMs), distributed data pipelines (Kafka, Spark), cloud infrastructure (GCP, Kubernetes), and ISO 42001 / ISO 27001 compliance.",
 };
 
 export const JOBS: Job[] = [
   {
     role: "CTO",
     company: "Heligráfics",
-    companyContext: "AI & geospatial imaging company",
     location: "Valencia",
     period: "Jan 2026 - Present",
     summary:
-      "Leading all technical strategy and engineering execution across the company. Responsible for teams, architecture, processes, tooling, and compliance — the sole technical foundation behind every product and project.",
+      "Leading all technical strategy and engineering execution across the company. Responsible for teams, architecture, processes, tooling, and compliance.",
     highlights: [
-      "Lead and mentor 5 engineering teams (3-5 engineers each, 20-40 engineers total) across AI research, data engineering, and infrastructure.",
-      "Oversee all technical development across the company — sole technical base and delivery arm for every product and project.",
-      "Redesigning platform architecture towards Domain-Driven Design (DDD) and Hexagonal Architecture.",
-      "Structuring the system around infrastructure domains (auth, observability, storage) and business-line data products.",
-      "Driving a data-first approach to enable rapid development of client-facing UIs grounded in well-defined domain models and business logic.",
+      "Lead and mentor between 20 and 40 engineers across AI research, data engineering, and infrastructure teams.",
+      "Oversee all technical development across the company.",
+      "Redesigning the platform architecture using Domain-Driven Design (DDD) and Hexagonal Architecture, establishing clear domain boundaries across infrastructure capabilities and business-line data products.",
       "Championing AI-assisted development (GitHub Copilot, Claude) to shift engineering focus from implementation to business logic specification and architectural design.",
       "Defined company-wide engineering standards: branching strategy, PR review policies, Definition of Done, sprint ceremonies, CI/CD workflows, infrastructure management, and project onboarding procedures.",
       "Built an AI-powered employee performance dashboard integrating ERP and GitHub data, enabling quick visibility into sprint progress, task status, and per-project delivery state.",
@@ -81,7 +79,7 @@ export const JOBS: Job[] = [
       "Owned end-to-end delivery of AI products for precision forestry, managing 5 simultaneous projects across cross-functional teams. Drove the company's ISO 42001 certification and modernized the entire engineering workflow.",
     highlights: [
       "Led ISO 42001 certification (AI Management Systems) — one of the first companies in Spain to obtain it — by formalizing existing data governance and ML practices, requiring minimal new implementation.",
-      "Led delivery of AI products for precision forestry: automated detection of plants, weeds, bare zones, and planting rows from TBs of airborne multispectral imagery.",
+      "Led delivery of AI products for precision forestry: automated detection of plants, weeds, bare zones, and planting rows from TBs of airborne imagery.",
       "Managed 5 simultaneous projects with cross-functional teams of 3-5 engineers across engineering, QA, and product.",
       "Designed a hybrid on-premise/cloud architecture to control data transfer costs: image validation, mosaic generation, and geomatics processing on a local PC cluster + NAS; GPU-intensive training and inference on GCP Vertex AI.",
       "Built geomatics pipelines to georeference airborne imagery and accurately align mosaics to their geographic footprint.",
@@ -134,7 +132,6 @@ export const JOBS: Job[] = [
   {
     role: "Data Engineer",
     company: "New Work",
-    companyContext: "German-listed professional network (XING) · ~1,500 employees",
     location: "Valencia",
     period: "Sep 2022 - Sep 2023",
     summary:
