@@ -2,13 +2,14 @@ import type { SkillCategory } from "@/domain/profile/SkillCategory";
 
 interface MainSkillsProps {
   stack: SkillCategory[];
+  title: string;
 }
 
-export function MainSkills({ stack }: MainSkillsProps) {
+export function MainSkills({ stack, title }: MainSkillsProps) {
   return (
     <section id="stack" className="py-24 px-6 bg-surface-base">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold text-ink-primary mb-12 text-center">Main Skills</h2>
+        <h2 className="text-3xl font-bold text-ink-primary mb-12 text-center">{title}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {stack.map(({ category, items }) => (
             <div key={category}>

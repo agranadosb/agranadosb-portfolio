@@ -1,21 +1,23 @@
-import { type ReactNode, useEffect } from "react";
+import type { ReactNode } from "react";
+import { useEffect } from "react";
+import { useAboutPresenter } from "@/ui/hooks/useAboutPresenter";
 import { useEducationPresenter } from "@/ui/hooks/useEducationPresenter";
 import { useHonorsPresenter } from "@/ui/hooks/useHonorsPresenter";
 import { useJobsPresenter } from "@/ui/hooks/useJobsPresenter";
 import { useProfilePresenter } from "@/ui/hooks/useProfilePresenter";
 import { useSkillsPresenter } from "@/ui/hooks/useSkillsPresenter";
-
-const SUMMARY =
-  "Engineering leader and hands-on AI practitioner with 10+ years delivering production software systems. Currently CTO at Heligráfics, leading 20–40 engineers across AI research, data engineering, and infrastructure. Core expertise in machine learning (PyTorch, computer vision, LLMs), distributed data pipelines (Kafka, Spark), cloud infrastructure (GCP, Kubernetes), and ISO 42001 / ISO 27001 compliance.";
+import { useUIStringsPresenter } from "@/ui/hooks/useUIStringsPresenter";
 
 const HIGHLIGHTS_BY_INDEX = [4, 3, 2, 2, 1, 0, 0, 0, 0];
 
 export function CVPage() {
   const profile = useProfilePresenter();
+  const about = useAboutPresenter();
   const jobs = useJobsPresenter();
   const education = useEducationPresenter();
   const honors = useHonorsPresenter();
   const stack = useSkillsPresenter();
+  const ui = useUIStringsPresenter();
 
   useEffect(() => {
     if (new URLSearchParams(window.location.search).get("print") === "auto") {
@@ -27,14 +29,14 @@ export function CVPage() {
     <div style={{ colorScheme: "light" }} className="min-h-screen bg-white text-gray-900 font-sans">
       <div className="print:hidden fixed top-0 left-0 right-0 z-10 flex items-center justify-between bg-gray-50 border-b border-gray-200 px-6 py-3">
         <a href="/" className="text-sm text-blue-600 hover:underline">
-          ← Back to portfolio
+          {ui.cv.backToPortfolio}
         </a>
         <button
           type="button"
           onClick={() => window.print()}
           className="px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded hover:bg-blue-700 transition-colors cursor-pointer"
         >
-          Download as PDF
+          {ui.cv.downloadAsPDF}
         </button>
       </div>
 
@@ -82,12 +84,12 @@ export function CVPage() {
         </header>
 
         <section className="mb-3">
-          <SectionHeading>Professional Summary</SectionHeading>
-          <p className="text-xs text-gray-700 leading-relaxed">{SUMMARY}</p>
+          <SectionHeading>{ui.cv.professionalSummary}</SectionHeading>
+          <p className="text-xs text-gray-700 leading-relaxed">{about.cvSummary}</p>
         </section>
 
         <section className="mb-3">
-          <SectionHeading>Technical Skills</SectionHeading>
+          <SectionHeading>{ui.cv.technicalSkills}</SectionHeading>
           <div className="space-y-0.5">
             {stack.map(({ category, items }) => (
               <div key={category} className="flex gap-2 text-xs leading-relaxed">
@@ -99,7 +101,7 @@ export function CVPage() {
         </section>
 
         <section className="mb-3">
-          <SectionHeading>Work Experience</SectionHeading>
+          <SectionHeading>{ui.cv.workExperience}</SectionHeading>
           <div className="space-y-3">
             {jobs.map(
               ({ role, company, companyContext, location, period, summary, highlights }, i) => {
@@ -146,12 +148,12 @@ export function CVPage() {
         </section>
 
         <section className="mb-3 break-inside-avoid">
-          <SectionHeading>Education</SectionHeading>
+          <SectionHeading>{ui.cv.education}</SectionHeading>
           <div className="space-y-1">
             {education.map(({ degree, field, institution }) => (
               <div key={degree} className="text-xs">
                 <span className="font-semibold text-gray-900">
-                  {degree} in {field}
+                  {degree} {ui.cv.inField} {field}
                 </span>
                 <span className="text-gray-500"> · {institution}</span>
               </div>
@@ -160,7 +162,7 @@ export function CVPage() {
         </section>
 
         <section className="break-inside-avoid">
-          <SectionHeading>Certifications & Achievements</SectionHeading>
+          <SectionHeading>{ui.cv.certificationsAchievements}</SectionHeading>
           <ul className="space-y-0.5">
             {honors.map((h) => (
               <li key={h} className="flex gap-1.5 text-[11px] text-gray-600 leading-relaxed">

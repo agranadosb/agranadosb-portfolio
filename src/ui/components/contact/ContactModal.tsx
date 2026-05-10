@@ -3,10 +3,13 @@ import { FocusTrap } from "@/utils/FocusTrap";
 
 interface ContactModalProps {
   email: string;
+  title: string;
+  subtitle: string;
+  closeLabel: string;
   onClose: () => void;
 }
 
-export function ContactModal({ email, onClose }: ContactModalProps) {
+export function ContactModal({ email, title, subtitle, closeLabel, onClose }: ContactModalProps) {
   const dialogComponent = useRef<HTMLDivElement>(null);
   const closeButtonComponent = useRef<HTMLButtonElement>(null);
 
@@ -27,7 +30,7 @@ export function ContactModal({ email, onClose }: ContactModalProps) {
         tabIndex={-1}
         className="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-default"
         onClick={onClose}
-        aria-label="Close modal"
+        aria-label={closeLabel}
       />
 
       <div
@@ -42,17 +45,15 @@ export function ContactModal({ email, onClose }: ContactModalProps) {
           type="button"
           onClick={onClose}
           className="absolute top-4 right-4 text-ink-muted hover:text-ink-primary transition-colors cursor-pointer"
-          aria-label="Close"
+          aria-label={closeLabel}
         >
           <CloseIcon />
         </button>
 
         <h2 id="contact-modal-title" className="text-xl font-bold text-ink-primary mb-1">
-          Get in touch
+          {title}
         </h2>
-        <p className="text-ink-secondary text-sm mb-6">
-          Feel free to reach out — I'll get back to you as soon as I can.
-        </p>
+        <p className="text-ink-secondary text-sm mb-6">{subtitle}</p>
 
         <a
           href={`mailto:${email}`}
