@@ -21,8 +21,8 @@ export const STRINGS: UIStrings = {
     honors: "Honors & Achievements",
   },
   job: {
-    showDetails: "▸ Show details",
-    hideDetails: "▾ Hide details",
+    showDetails: "Show details",
+    hideDetails: "Hide details",
   },
   contact: {
     title: "Get in touch",
