@@ -1,3 +1,4 @@
+import { SectionTitle } from "@/ui/components/SectionTitle";
 import { useHonorsPresenter } from "@/ui/hooks/useHonorsPresenter";
 import { useUIStringsPresenter } from "@/ui/hooks/useUIStringsPresenter";
 
@@ -8,17 +9,18 @@ export function Honors() {
   return (
     <section id="honors" className="py-24 px-6 bg-surface-raised">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold text-ink-primary mb-12 text-center">
-          {ui.sections.honors}
-        </h2>
-        <ul className="space-y-4">
+        <SectionTitle>{ui.sections.honors}</SectionTitle>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {honors.map((h) => (
-            <li key={h} className="flex gap-3 text-ink-secondary text-sm leading-relaxed">
-              <span className="text-accent mt-0.5 shrink-0">✦</span>
-              <span>{h}</span>
-            </li>
+            <div
+              key={h}
+              className="flex gap-3 p-4 rounded-lg border border-border bg-surface-overlay hover:border-accent/40 transition-colors"
+            >
+              <span className="text-accent shrink-0 mt-0.5 text-base leading-relaxed">✦</span>
+              <span className="text-ink-secondary text-sm leading-relaxed">{h}</span>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   );

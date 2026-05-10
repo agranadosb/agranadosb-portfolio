@@ -1,4 +1,5 @@
 import { JobItem } from "@/ui/components/job/JobItem";
+import { SectionTitle } from "@/ui/components/SectionTitle";
 import { useJobsPresenter } from "@/ui/hooks/useJobsPresenter";
 import { useUIStringsPresenter } from "@/ui/hooks/useUIStringsPresenter";
 
@@ -9,9 +10,7 @@ export function Experience() {
   return (
     <section id="experience" className="py-24 px-6 bg-surface-raised">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold text-ink-primary mb-12 text-center">
-          {ui.sections.experience}
-        </h2>
+        <SectionTitle>{ui.sections.experience}</SectionTitle>
         <div className="relative border-l border-border pl-8 space-y-12">
           {jobs.map(
             ({

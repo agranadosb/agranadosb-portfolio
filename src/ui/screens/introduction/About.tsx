@@ -2,6 +2,7 @@ import type { About as AboutData } from "@/domain/profile/About";
 import { Avatar } from "@/ui/components/about/Avatar";
 import { Bio } from "@/ui/components/about/Bio";
 import { Stat } from "@/ui/components/about/Stat";
+import { SectionTitle } from "@/ui/components/SectionTitle";
 
 interface AboutProps extends Omit<AboutData, "cvSummary"> {
   photoSrc?: string;
@@ -12,8 +13,8 @@ export function About({ photoSrc, bio, stats, title }: AboutProps) {
   return (
     <section id="about" className="py-24 px-6 bg-surface-raised">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold text-ink-primary mb-12 text-center">{title}</h2>
-        <div className="flex flex-col md:flex-row items-center gap-12 mb-12">
+        <SectionTitle>{title}</SectionTitle>
+        <div className="flex flex-col md:flex-row items-center gap-12 mb-14">
           <Avatar src={photoSrc} />
           <Bio paragraphs={bio} />
         </div>
