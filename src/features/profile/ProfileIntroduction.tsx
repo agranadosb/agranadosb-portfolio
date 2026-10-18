@@ -1,4 +1,4 @@
-import { GitHubLink, LinkedInLink } from "@/components/SocialLinks";
+import { SocialLink } from "@/components/SocialLink";
 import { useProfileIntroduction } from "@/features/profile/useProfileIntroduction";
 
 interface ProfileIntroductionProps {
@@ -59,8 +59,8 @@ export function ProfileIntroduction({ onContact }: ProfileIntroductionProps) {
         </div>
 
         <div className="flex gap-5">
-          <LinkedInLink url={profile.linkedin.url} />
-          <GitHubLink url={profile.github.url} />
+          <SocialLink network="linkedin" url={profile.linkedin.url} />
+          <SocialLink network="github" url={profile.github.url} />
         </div>
       </div>
     </section>

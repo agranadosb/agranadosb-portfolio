@@ -1,7 +1,7 @@
 import type { About } from "@/api/profile/About";
 import type { Education } from "@/api/profile/Education";
-import { PROFILE_EN } from "@/api/profile/en";
-import type { Job } from "@/api/profile/Job";
+import { PROFILE as PROFILE_EN } from "@/api/profile/en";
+import type { JobDetails, JobId } from "@/api/profile/jobs";
 import type { Profile } from "@/api/profile/Profile";
 import type { SkillCategory } from "@/api/profile/SkillCategory";
 
@@ -26,12 +26,8 @@ export const ABOUT: About = {
     "Líder técnico, arquitecto de software e ingeniero de IA con más de 10 años desarrollando software con impacto real para usuarios y negocio. Actualmente CTO en Heligráfics, donde lidero equipos de investigación de IA, ingeniería de datos e infraestructura. Experiencia principal en machine learning con PyTorch, visión por computador, LLMs, pipelines de datos distribuidos con Kafka y Spark, infraestructura cloud en GCP y Kubernetes, y cumplimiento ISO 42001 / ISO 27001.",
 };
 
-export const JOBS: Job[] = [
-  {
-    role: "CTO",
-    company: "Heligráfics",
-    location: "Valencia",
-    period: "Jan 2026 - Present",
+export const JOB_DETAILS: Record<JobId, JobDetails> = {
+  "heligrafics-cto": {
     summary:
       "Responsable de la estrategia técnica, la arquitectura y la ejecución de los proyectos de ingeniería de la empresa, incluyendo equipos, procesos, herramientas internas y cumplimiento normativo.",
     highlights: [
@@ -58,11 +54,7 @@ export const JOBS: Job[] = [
       "ENS",
     ],
   },
-  {
-    role: "Project Manager & Staff AI Engineer",
-    company: "Heligráfics",
-    location: "Valencia",
-    period: "Feb 2024 - Dec 2025",
+  "heligrafics-staff": {
     summary:
       "Responsable de llevar a producción productos de IA para gestión forestal de precisión, gestionando 5 proyectos simultáneos con equipos multifuncionales. Lideré la certificación ISO 42001 de la empresa y modernicé el flujo de trabajo de ingeniería.",
     highlights: [
@@ -89,11 +81,7 @@ export const JOBS: Job[] = [
       "ISO 42001",
     ],
   },
-  {
-    role: "Senior AI Engineer",
-    company: "Heligráfics",
-    location: "Valencia",
-    period: "Sep 2023 - Feb 2024",
+  "heligrafics-senior": {
     summary:
       "Construí la base técnica y de IA que permitió convertir PoCs en productos de producción: plataforma MLOps, PoCs clave, asesoramiento arquitectónico y varias aplicaciones independientes. Ascendido a Staff AI Engineer en 5 meses.",
     highlights: [
@@ -117,11 +105,7 @@ export const JOBS: Job[] = [
       "Geomática",
     ],
   },
-  {
-    role: "Data Engineer",
-    company: "New Work",
-    location: "Valencia",
-    period: "Sep 2022 - Sep 2023",
+  "new-work": {
     summary:
       "Construí pipelines de datos distribuidos basados en eventos y sistemas de análisis de contenido con IA a escala, en un equipo con Scala como lenguaje principal. Lideré las decisiones de arquitectura para las iniciativas basadas en Python, IA y LLMs.",
     highlights: [
@@ -147,11 +131,7 @@ export const JOBS: Job[] = [
       "GDPR / RGPD",
     ],
   },
-  {
-    role: "AI Scientist",
-    company: "Heligráfics",
-    location: "Valencia",
-    period: "Jul 2021 - Sep 2022",
+  "heligrafics-scientist": {
     summary:
       "Desarrollé sistemas de visión por computador para análisis de imágenes aéreas en dos dominios — evaluación de daños por incendios forestales e inspección de infraestructura eléctrica — implementando arquitecturas de vanguardia a partir de artículos de investigación.",
     highlights: [
@@ -171,12 +151,7 @@ export const JOBS: Job[] = [
       "Geomática",
     ],
   },
-  {
-    role: "Full-Stack Developer",
-    company: "Dekalabs",
-    location: "Valencia",
-    period: "Mar 2020 - Jul 2021",
-    defaultCollapsed: true,
+  dekalabs: {
     summary:
       "Desarrollé aplicaciones web en múltiples sectores y prototipé soluciones tempranas de generación de imágenes con VAE y GANs, incluyendo un pipeline para crear imágenes personalizadas a partir de fotos de usuarios.",
     highlights: [
@@ -186,12 +161,7 @@ export const JOBS: Job[] = [
     ],
     skills: ["Python", "Vue.js", "Docker", "Jenkins", "GitHub", "VAE", "GANs"],
   },
-  {
-    role: "Software Engineer",
-    company: "Praxya",
-    location: "Valencia",
-    period: "Oct 2019 - Mar 2020",
-    defaultCollapsed: true,
+  praxya: {
     summary:
       "Construí integraciones ERP y migraciones de datos para proyectos de clientes usando Python y Odoo, gestionando el ciclo completo del proyecto, desde la toma de requisitos hasta el despliegue.",
     highlights: [
@@ -201,12 +171,7 @@ export const JOBS: Job[] = [
     ],
     skills: ["Python", "Odoo", "ETL", "PostgreSQL"],
   },
-  {
-    role: "Junior Software Engineer",
-    company: "Visiion-Solutec",
-    location: "Valencia",
-    period: "Aug 2017 - Jun 2019",
-    defaultCollapsed: true,
+  "visiion-solutec": {
     summary:
       "Inicié mi carrera construyendo soluciones ERP y algoritmos de distribución con IA, asumiendo progresivamente la responsabilidad total de los proyectos, incluyendo la comunicación con clientes.",
     highlights: [
@@ -216,12 +181,7 @@ export const JOBS: Job[] = [
     ],
     skills: ["Python", "Odoo", "ETL"],
   },
-  {
-    role: "Independent Developer",
-    company: "Personal & Client Projects",
-    location: "Valencia",
-    period: "2015 - Aug 2017",
-    defaultCollapsed: true,
+  independent: {
     summary:
       "Etapa inicial como desarrollador independiente, creando sitios web y pequeñas aplicaciones para clientes privados y cubriendo el ciclo completo desde requisitos hasta entrega.",
     highlights: [
@@ -231,7 +191,7 @@ export const JOBS: Job[] = [
     ],
     skills: ["HTML", "CSS", "JavaScript", "PHP"],
   },
-];
+};
 
 export const EDUCATION: Education[] = [
   {

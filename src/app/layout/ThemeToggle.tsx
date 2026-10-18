@@ -1,5 +1,7 @@
+import type { Theme } from "@/lib/theme/useTheme";
+
 interface ThemeToggleProps {
-  theme: "light" | "dark";
+  theme: Theme;
   onToggle: () => void;
 }
 

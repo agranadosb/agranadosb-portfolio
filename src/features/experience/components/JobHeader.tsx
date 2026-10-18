@@ -1,12 +1,8 @@
-export interface JobHeaderProps {
-  role: string;
-  company: string;
-  location: string;
-  period: string;
-  companyContext?: string;
-}
+import type { Job } from "@/api/profile";
 
-export function JobHeader({ role, company, location, period, companyContext }: JobHeaderProps) {
+export function JobHeader({ job }: { job: Job }) {
+  const { role, company, location, period } = job;
+
   return (
     <div className="mb-3">
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1.5 mb-1">
@@ -19,9 +15,6 @@ export function JobHeader({ role, company, location, period, companyContext }: J
         {company}
         <span className="text-ink-muted font-normal"> · {location}</span>
       </p>
-      {companyContext && (
-        <p className="text-ink-muted text-xs mt-0.5">{companyContext}</p>
-      )}
     </div>
   );
 }

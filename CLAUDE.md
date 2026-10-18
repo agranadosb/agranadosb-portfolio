@@ -50,7 +50,7 @@ Biome enforces the import rules (`overrides` in `biome.json` with `noRestrictedI
 
 ## Content and text
 
-- Portfolio content (profile, bio, jobs, skills, education, honors) lives in `src/api/profile/en.ts` and `es.ts`. Both export the same names and must stay in sync.
+- Portfolio content (profile, bio, jobs, skills, education, honors) lives in `src/api/profile/`. What doesn't depend on language is written once: each job's role, company, location and period live in `jobs.ts`. The translated text lives in `en.ts` and `es.ts`, which export the same names; job texts are keyed by the job's `id`, so `tsc` fails if a job is missing a translation.
 - UI text lives in the hook of the component that shows it, as a `Record<Language, {...}>` constant, so `tsc` fails if a language is missing.
 - No content or text hardcoded in components; asset paths are the only literals.
 

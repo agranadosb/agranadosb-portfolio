@@ -1,4 +1,4 @@
-import { getProfile } from "@/api/profile";
+import { getProfileContent } from "@/api/profile";
 import type { Language } from "@/lib/i18n/Language";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
@@ -39,7 +39,7 @@ export function useNav() {
   const strings = STRINGS[language];
 
   return {
-    profile: getProfile(language),
+    profile: getProfileContent(language).profile,
     links: [
       { label: strings.about, href: "#about" },
       { label: strings.skills, href: "#stack" },

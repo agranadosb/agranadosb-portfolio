@@ -1,4 +1,4 @@
-import { getProfile } from "@/api/profile";
+import { getProfileContent } from "@/api/profile";
 import type { Language } from "@/lib/i18n/Language";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
@@ -17,5 +17,5 @@ const STRINGS: Record<Language, { title: string; subtitle: string; closeLabel: s
 
 export function useContactModal() {
   const { language } = useLanguage();
-  return { email: getProfile(language).email, strings: STRINGS[language] };
+  return { email: getProfileContent(language).profile.email, strings: STRINGS[language] };
 }

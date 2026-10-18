@@ -47,7 +47,7 @@ src/
   lib/         # Shared capabilities: i18n, theme, focus-trap
 ```
 
-Biome enforces the import boundaries, and CI runs build and lint on pull requests ready for review (not on drafts). All portfolio content lives in `src/api/profile/en.ts` and `es.ts`.
+Biome enforces the import boundaries, and CI runs build and lint on pull requests ready for review (not on drafts). All portfolio content lives in `src/api/profile/`: language-independent job facts in `jobs.ts`, translated text in `en.ts` and `es.ts`.
 
 ## License
 

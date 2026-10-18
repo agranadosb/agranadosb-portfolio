@@ -8,20 +8,17 @@ export function CVExperience({ jobs, title }: { jobs: Job[]; title: string }) {
     <section className="mb-3">
       <CVSectionHeading>{title}</CVSectionHeading>
       <div className="space-y-3">
-        {jobs.map(({ role, company, companyContext, location, period, summary, highlights }, i) => {
+        {jobs.map(({ id, role, company, location, period, summary, highlights }, i) => {
           const maxHighlights = HIGHLIGHTS_BY_INDEX[i] ?? 0;
           const visibleHighlights = highlights.slice(0, maxHighlights);
           const showSummary = i < 5;
 
           return (
-            <div key={`${role}-${company}-${period}`} className="break-inside-avoid">
+            <div key={id} className="break-inside-avoid">
               <div className="flex justify-between items-baseline">
                 <div className="leading-snug">
                   <span className="font-semibold text-gray-900 text-xs">{role}</span>
                   <span className="text-gray-500 text-xs"> — {company}</span>
-                  {companyContext && (
-                    <span className="text-gray-400 text-xs"> ({companyContext})</span>
-                  )}
                   <span className="text-gray-400 text-xs"> · {location}</span>
                 </div>
                 <span className="text-[10px] text-gray-400 shrink-0 ml-3 tabular-nums">

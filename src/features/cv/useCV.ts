@@ -1,4 +1,4 @@
-import { getAbout, getEducation, getHonors, getJobs, getProfile, getSkills } from "@/api/profile";
+import { getProfileContent } from "@/api/profile";
 import type { Language } from "@/lib/i18n/Language";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
@@ -33,13 +33,14 @@ const STRINGS: Record<
 
 export function useCV() {
   const { language } = useLanguage();
+  const { profile, about, skills, jobs, education, honors } = getProfileContent(language);
   return {
-    profile: getProfile(language),
-    summary: getAbout(language).cvSummary,
-    skills: getSkills(language),
-    jobs: getJobs(language),
-    education: getEducation(language),
-    honors: getHonors(language),
+    profile,
+    summary: about.cvSummary,
+    skills,
+    jobs,
+    education,
+    honors,
     strings: STRINGS[language],
   };
 }

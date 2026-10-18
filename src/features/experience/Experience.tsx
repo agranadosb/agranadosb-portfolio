@@ -10,34 +10,14 @@ export function Experience() {
       <div className="max-w-4xl mx-auto">
         <SectionTitle>{strings.title}</SectionTitle>
         <div className="relative border-l border-border pl-8 space-y-12">
-          {jobs.map(
-            ({
-              role,
-              company,
-              companyContext,
-              location,
-              period,
-              summary,
-              highlights,
-              skills,
-              defaultCollapsed,
-            }) => (
-              <JobItem
-                key={`${role}-${company}-${period}`}
-                role={role}
-                company={company}
-                location={location}
-                period={period}
-                companyContext={companyContext}
-                summary={summary}
-                highlights={highlights}
-                skills={skills}
-                defaultCollapsed={defaultCollapsed}
-                showDetailsLabel={strings.showDetails}
-                hideDetailsLabel={strings.hideDetails}
-              />
-            ),
-          )}
+          {jobs.map((job) => (
+            <JobItem
+              key={job.id}
+              job={job}
+              showDetailsLabel={strings.showDetails}
+              hideDetailsLabel={strings.hideDetails}
+            />
+          ))}
         </div>
       </div>
     </section>

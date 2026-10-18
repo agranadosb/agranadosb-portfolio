@@ -1,10 +1,10 @@
 import type { About } from "@/api/profile/About";
 import type { Education } from "@/api/profile/Education";
-import type { Job } from "@/api/profile/Job";
+import type { JobDetails, JobId } from "@/api/profile/jobs";
 import type { Profile } from "@/api/profile/Profile";
 import type { SkillCategory } from "@/api/profile/SkillCategory";
 
-export const PROFILE_EN: Profile = {
+export const PROFILE: Profile = {
   name: "Alejandro Granados",
   title: "CTO · Staff AI Engineer · Software Architect",
   tagline: "Building AI systems that work in the real world — from research to production.",
@@ -19,8 +19,6 @@ export const PROFILE_EN: Profile = {
     url: "https://github.com/agranadosb",
   },
 };
-
-export { PROFILE_EN as PROFILE };
 
 export const ABOUT: About = {
   bio: [
@@ -38,12 +36,8 @@ export const ABOUT: About = {
     "Engineering leader, software architect, and hands-on AI practitioner with 10+ years turning technology into software that creates real value for users and the business. Currently CTO at Heligráfics, leading 20–40 engineers across AI research, data engineering, and infrastructure. Core expertise in machine learning (PyTorch, computer vision, LLMs), distributed data pipelines (Kafka, Spark), cloud infrastructure (GCP, Kubernetes), and ISO 42001 / ISO 27001 compliance.",
 };
 
-export const JOBS: Job[] = [
-  {
-    role: "CTO",
-    company: "Heligráfics",
-    location: "Valencia",
-    period: "Jan 2026 - Present",
+export const JOB_DETAILS: Record<JobId, JobDetails> = {
+  "heligrafics-cto": {
     summary:
       "Leading all technical strategy and engineering execution across the company. Responsible for teams, architecture, processes, tooling, and compliance.",
     highlights: [
@@ -70,11 +64,7 @@ export const JOBS: Job[] = [
       "ENS",
     ],
   },
-  {
-    role: "Project Manager & Staff AI Engineer",
-    company: "Heligráfics",
-    location: "Valencia",
-    period: "Feb 2024 - Dec 2025",
+  "heligrafics-staff": {
     summary:
       "Owned end-to-end delivery of AI products for precision forestry, managing 5 simultaneous projects across cross-functional teams. Drove the company's ISO 42001 certification and modernized the entire engineering workflow.",
     highlights: [
@@ -101,11 +91,7 @@ export const JOBS: Job[] = [
       "ISO 42001",
     ],
   },
-  {
-    role: "Senior AI Engineer",
-    company: "Heligráfics",
-    location: "Valencia",
-    period: "Sep 2023 - Feb 2024",
+  "heligrafics-senior": {
     summary:
       "Built the technical and AI foundations that underpinned the company's subsequent product delivery: MLOps platform, key product PoCs, cross-team architecture advisory, and several standalone applications. Promoted to Staff AI Engineer within 5 months.",
     highlights: [
@@ -129,11 +115,7 @@ export const JOBS: Job[] = [
       "Geomatics",
     ],
   },
-  {
-    role: "Data Engineer",
-    company: "New Work",
-    location: "Valencia",
-    period: "Sep 2022 - Sep 2023",
+  "new-work": {
     summary:
       "Built distributed event-driven data pipelines and AI-powered content analysis at scale in a Scala-first engineering team, while leading architecture decisions for all Python and AI/LLM initiatives.",
     highlights: [
@@ -159,11 +141,7 @@ export const JOBS: Job[] = [
       "GDPR",
     ],
   },
-  {
-    role: "AI Scientist",
-    company: "Heligráfics",
-    location: "Valencia",
-    period: "Jul 2021 - Sep 2022",
+  "heligrafics-scientist": {
     summary:
       "Developed computer vision systems for aerial imagery analysis across two domains — wildfire damage assessment and electrical infrastructure inspection — implementing state-of-the-art architectures directly from research papers.",
     highlights: [
@@ -183,12 +161,7 @@ export const JOBS: Job[] = [
       "Geomatics",
     ],
   },
-  {
-    role: "Full-Stack Developer",
-    company: "Dekalabs",
-    location: "Valencia",
-    period: "Mar 2020 - Jul 2021",
-    defaultCollapsed: true,
+  dekalabs: {
     summary:
       "Delivered web applications across multiple industries and explored early generative AI research, prototyping a pipeline to create personalized images from user images.",
     highlights: [
@@ -198,12 +171,7 @@ export const JOBS: Job[] = [
     ],
     skills: ["Python", "Vue.js", "Docker", "Jenkins", "GitHub", "VAE", "GANs"],
   },
-  {
-    role: "Software Engineer",
-    company: "Praxya",
-    location: "Valencia",
-    period: "Oct 2019 - Mar 2020",
-    defaultCollapsed: true,
+  praxya: {
     summary:
       "Built ERP integrations and data migrations for client projects using Python and Odoo, owning the full lifecycle from requirements to deployment.",
     highlights: [
@@ -213,12 +181,7 @@ export const JOBS: Job[] = [
     ],
     skills: ["Python", "Odoo", "ETL", "PostgreSQL"],
   },
-  {
-    role: "Junior Software Engineer",
-    company: "Visiion-Solutec",
-    location: "Valencia",
-    period: "Aug 2017 - Jun 2019",
-    defaultCollapsed: true,
+  "visiion-solutec": {
     summary:
       "Started career building ERP solutions and AI-powered distribution algorithms, progressively taking on full project ownership including client communication and delivery.",
     highlights: [
@@ -228,12 +191,7 @@ export const JOBS: Job[] = [
     ],
     skills: ["Python", "Odoo", "ETL"],
   },
-  {
-    role: "Independent Developer",
-    company: "Personal & Client Projects",
-    location: "Valencia",
-    period: "2015 - Aug 2017",
-    defaultCollapsed: true,
+  independent: {
     summary:
       "First steps in software development — building websites and small applications for private clients, learning the full cycle from requirements to delivery.",
     highlights: [
@@ -243,7 +201,7 @@ export const JOBS: Job[] = [
     ],
     skills: ["HTML", "CSS", "JavaScript", "PHP"],
   },
-];
+};
 
 export const EDUCATION: Education[] = [
   {

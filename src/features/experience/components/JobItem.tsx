@@ -1,47 +1,23 @@
 import { useId, useState } from "react";
+import type { Job } from "@/api/profile";
 import { JobHeader } from "@/features/experience/components/JobHeader";
 import { SkillBadge } from "@/features/experience/components/SkillBadge";
 
-export interface JobItemProps {
-  role: string;
-  company: string;
-  location: string;
-  period: string;
-  companyContext?: string;
-  summary?: string;
-  highlights: string[];
-  skills?: string[];
-  defaultCollapsed?: boolean;
+interface JobItemProps {
+  job: Job;
   showDetailsLabel: string;
   hideDetailsLabel: string;
 }
 
-export function JobItem({
-  role,
-  company,
-  location,
-  period,
-  companyContext,
-  summary,
-  highlights,
-  skills,
-  defaultCollapsed = false,
-  showDetailsLabel,
-  hideDetailsLabel,
-}: JobItemProps) {
+export function JobItem({ job, showDetailsLabel, hideDetailsLabel }: JobItemProps) {
+  const { summary, highlights, skills, defaultCollapsed = false } = job;
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
   const detailsId = useId();
 
   return (
     <div className="relative">
       <div className="absolute -left-8.25 top-2 w-3.5 h-3.5 rounded-full bg-accent border-2 border-surface-raised" />
-      <JobHeader
-        role={role}
-        company={company}
-        location={location}
-        period={period}
-        companyContext={companyContext}
-      />
+      <JobHeader job={job} />
       {summary && (
         <p className="text-ink-secondary text-sm leading-relaxed mb-3 italic">{summary}</p>
       )}
@@ -91,7 +67,10 @@ function ChevronIcon({ collapsed }: { collapsed: boolean }) {
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
-      style={{ transform: collapsed ? "rotate(-90deg)" : "rotate(0deg)", transition: "transform 0.2s" }}
+      style={{
+        transform: collapsed ? "rotate(-90deg)" : "rotate(0deg)",
+        transition: "transform 0.2s",
+      }}
     >
       <path d="M6 9l6 6 6-6" />
     </svg>

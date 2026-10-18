@@ -5,7 +5,7 @@ import { MobileMenuToggle } from "@/app/layout/MobileMenuToggle";
 import { ThemeToggle } from "@/app/layout/ThemeToggle";
 import { useMobileMenu } from "@/app/layout/useMobileMenu";
 import { useNav } from "@/app/layout/useNav";
-import { GitHubLink, LinkedInLink } from "@/components/SocialLinks";
+import { SocialLink } from "@/components/SocialLink";
 import { useTheme } from "@/lib/theme/useTheme";
 
 export function Nav() {
@@ -26,8 +26,8 @@ export function Nav() {
         <DesktopNavLinks links={links} />
 
         <div className="hidden md:flex items-center gap-3 ml-4">
-          <LinkedInLink url={profile.linkedin.url} />
-          <GitHubLink url={profile.github.url} />
+          <SocialLink network="linkedin" url={profile.linkedin.url} />
+          <SocialLink network="github" url={profile.github.url} />
           <LanguageToggle
             switchTo={strings.switchLanguageTo}
             ariaLabel={strings.switchLanguageLabel}

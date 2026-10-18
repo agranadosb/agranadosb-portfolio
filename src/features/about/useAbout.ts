@@ -1,4 +1,4 @@
-import { getAbout } from "@/api/profile";
+import { getProfileContent } from "@/api/profile";
 import type { Language } from "@/lib/i18n/Language";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
@@ -9,6 +9,6 @@ const STRINGS: Record<Language, { title: string }> = {
 
 export function useAbout() {
   const { language } = useLanguage();
-  const { bio, stats } = getAbout(language);
-  return { bio, stats, strings: STRINGS[language] };
+  const { profile, about } = getProfileContent(language);
+  return { name: profile.name, bio: about.bio, stats: about.stats, strings: STRINGS[language] };
 }
