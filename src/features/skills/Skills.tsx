@@ -1,5 +1,5 @@
 import { SectionTitle } from "@/components/SectionTitle";
-import { useSkills } from "@/features/skills/components/useSkills";
+import { useSkills } from "@/features/skills/useSkills";
 
 export function Skills() {
   const { skills, strings } = useSkills();

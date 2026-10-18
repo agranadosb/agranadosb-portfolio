@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useContactModal } from "@/features/contact/components/useContactModal";
+import { useContactModal } from "@/features/contact/useContactModal";
 import { FocusTrap } from "@/lib/focus-trap/FocusTrap";
 
 interface ContactModalProps {

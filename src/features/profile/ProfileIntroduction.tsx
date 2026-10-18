@@ -1,5 +1,5 @@
 import { GitHubLink, LinkedInLink } from "@/components/SocialLinks";
-import { useProfileIntroduction } from "@/features/profile/components/useProfileIntroduction";
+import { useProfileIntroduction } from "@/features/profile/useProfileIntroduction";
 
 interface ProfileIntroductionProps {
   onContact: () => void;

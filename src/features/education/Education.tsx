@@ -1,5 +1,5 @@
 import { SectionTitle } from "@/components/SectionTitle";
-import { useEducation } from "@/features/education/components/useEducation";
+import { useEducation } from "@/features/education/useEducation";
 
 export function Education() {
   const { education, strings } = useEducation();

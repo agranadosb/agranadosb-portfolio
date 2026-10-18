@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { CV } from "@/features/cv/components/CV";
+import { CV } from "@/features/cv/CV";
 import type { Language } from "@/lib/i18n/Language";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 

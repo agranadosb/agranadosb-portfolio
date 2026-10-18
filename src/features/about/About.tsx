@@ -2,7 +2,7 @@ import { SectionTitle } from "@/components/SectionTitle";
 import { Avatar } from "@/features/about/components/Avatar";
 import { Bio } from "@/features/about/components/Bio";
 import { Stat } from "@/features/about/components/Stat";
-import { useAbout } from "@/features/about/components/useAbout";
+import { useAbout } from "@/features/about/useAbout";
 
 export function About() {
   const { bio, stats, strings } = useAbout();

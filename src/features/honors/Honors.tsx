@@ -1,5 +1,5 @@
 import { SectionTitle } from "@/components/SectionTitle";
-import { useHonors } from "@/features/honors/components/useHonors";
+import { useHonors } from "@/features/honors/useHonors";
 
 export function Honors() {
   const { honors, strings } = useHonors();

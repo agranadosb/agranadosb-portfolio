@@ -1,7 +1,7 @@
 import { CVExperience } from "@/features/cv/components/CVExperience";
 import { CVHeader } from "@/features/cv/components/CVHeader";
 import { CVSectionHeading } from "@/features/cv/components/CVSectionHeading";
-import { useCV } from "@/features/cv/components/useCV";
+import { useCV } from "@/features/cv/useCV";
 
 export function CV() {
   const { profile, summary, skills, jobs, education, honors, strings } = useCV();

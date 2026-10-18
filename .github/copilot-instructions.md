@@ -36,19 +36,20 @@ Every folder has a closed definition. If something doesn't fit the sentence, it 
 | Folder | What goes in |
 |---|---|
 | `src/app/` | The shell: entry points, global providers, the layout (navigation) and the pages in `routes/`. The only place that composes features. |
-| `src/features/<concept>/` | One user-facing concept with one objective, named in the product's words (`experience`, `cv`). Its UI lives in `components/`, and each component's hook sits next to it. |
+| `src/features/<concept>/` | One user-facing concept with one objective, named in the product's words (`experience`, `cv`). Its public contract is the component at its root, named after it (`features/education/Education.tsx`), with its hook next to it. Everything else is internal and lives in `components/`, each component's hook next to it. |
 | `src/api/` | The only data source, one module per domain. `api/profile` exposes the content and its types; the day there is a backend, only this module changes. |
 | `src/components/` | UI that knows no business concept (`SectionTitle`, `SocialLinks`). |
 | `src/lib/` | One shared capability per module, named after it (`i18n`, `theme`, `focus-trap`). |
 
 Rules:
 - Imports flow shared code (`api`, `components`, `lib`) → features → `app`. A feature imports only its own folder and shared code: never another feature, never `app`.
+- `app` imports a feature only through its contract (`import { Education } from "@/features/education/Education"`), never its `components/` or its hooks, so a feature can reorganize itself without touching anyone else.
 - When one feature must trigger another, the page wires them with a callback: `profile` exposes `onContact`, and `HomePage` opens `contact`.
 - Code starts inside its feature. It moves to `components/` or `lib/` only when a second consumer needs it and it knows no business concept.
 - No generic names (`utils`, `helpers`, `common`, `misc`, `types`) for folders or files.
 - Absolute imports with `@/` everywhere: relative imports are rejected, so the import rules stay checkable.
 
-Biome enforces the import rules (`overrides` in `biome.json` with `noRestrictedImports`), and they fail `npm run lint`. **A new feature needs its own override**: copy an existing block and change the folder name in `includes` and in the `!@/features/<name>/**` exception. Without it, nothing checks the new feature.
+Biome enforces the import rules (`overrides` in `biome.json` with `noRestrictedImports`), and they fail `npm run lint`. The `src/app/**` override rejects anything below a feature's root (`@/features/*/*/**`) and its root hooks (`@/features/*/use*`). **A new feature needs its own override**: copy an existing block and change the folder name in `includes` and in the `!@/features/<name>/**` exception. Without it, nothing checks the new feature.
 
 ## Content and text
 

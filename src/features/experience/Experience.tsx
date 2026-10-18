@@ -1,6 +1,6 @@
 import { SectionTitle } from "@/components/SectionTitle";
 import { JobItem } from "@/features/experience/components/JobItem";
-import { useExperience } from "@/features/experience/components/useExperience";
+import { useExperience } from "@/features/experience/useExperience";
 
 export function Experience() {
   const { jobs, strings } = useExperience();
