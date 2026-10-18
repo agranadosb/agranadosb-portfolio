@@ -23,7 +23,7 @@ npm run deploy                # build + wrangler deploy (Cloudflare)
 npm run sync-ai-instructions  # regenerate AGENTS.md and .github/copilot-instructions.md from this file
 ```
 
-Node only exists inside the devcontainer (`.devcontainer/`): run every command there. Always run `npm run build` and `npm run lint` after any change; CI runs both on every PR.
+Node only exists inside the devcontainer (`.devcontainer/`): run every command there. Always run `npm run build` and `npm run lint` after any change. CI runs both only on PRs ready for review: drafts skip it, and marking a PR ready triggers it.
 
 `AGENTS.md` and `.github/copilot-instructions.md` are generated from this file — never edit them by hand. After editing this file, run `npm run sync-ai-instructions`.
 
