@@ -20,12 +20,9 @@ npm run check                 # biome lint + format check
 npm run format                # biome format --write
 npm run preview               # build + wrangler dev (local Workers runtime)
 npm run deploy                # build + wrangler deploy (Cloudflare)
-npm run sync-ai-instructions  # regenerate AGENTS.md from this file
 ```
 
 Node only exists inside the devcontainer (`.devcontainer/`): run every command there. Always run `npm run build` and `npm run lint` after any change. CI runs both only on PRs ready for review: drafts skip it, and marking a PR ready triggers it.
-
-`AGENTS.md` is generated from this file — never edit it by hand. After editing this file, run `npm run sync-ai-instructions`.
 
 ## Architecture
 
