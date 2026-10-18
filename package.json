@@ -13,7 +13,6 @@
     "check": "biome check",
     "check-format": "biome format",
     "audit": "npm audit --audit-level=high",
-    "sync-ai-instructions": "sed 's/# Portfolio — Claude working guide/# Portfolio — Copilot instructions/' CLAUDE.md > .github/copilot-instructions.md && sed 's/# Portfolio — Claude working guide/# Portfolio — Agent instructions/' CLAUDE.md > AGENTS.md",
     "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {

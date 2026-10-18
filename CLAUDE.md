@@ -4,177 +4,80 @@
 
 Personal portfolio and CV for Alejandro Granados — CTO, Staff AI Engineer, and Software Architect based in Valencia, Spain.
 
-Two pages:
-- **`/`** — Portfolio: hero, about, skills, experience, education, honors, contact
-- **`/cv`** — Print-optimized CV (A4, always light mode, downloadable as PDF)
+Two pages, both in English and Spanish:
+- **`/`** — Portfolio: profile, about, skills, experience, education, honors, contact
+- **`/cv`** (`cv.html`) — Print-optimized CV (A4, always light mode, downloadable as PDF)
 
-Stack: React 19 · TypeScript · Tailwind v4 · Vite + SWC · Biome. No backend — all content is static data in `StaticProfileRepository`.
+Stack: React 19 · TypeScript · Tailwind v4 · Vite + SWC · Biome. No backend: content is static and the site is deployed as static assets to Cloudflare Workers.
 
 ## Commands
 
 ```bash
-npm run dev          # dev server (localhost:5173)
-npm run build        # tsc -b && vite build
-npm run lint         # biome lint (read-only)
-npm run lint:fix     # biome check --write (auto-fix)
-npm run format       # biome format --write
+npm run dev                   # dev server (localhost:5173)
+npm run build                 # tsc -b && vite build
+npm run lint                  # biome lint, including the import rules
+npm run check                 # biome lint + format check
+npm run format                # biome format --write
+npm run preview               # build + wrangler dev (local Workers runtime)
+npm run deploy                # build + wrangler deploy (Cloudflare)
 ```
 
-Always run `npm run build` and `npm run lint` after any change.
+Node only exists inside the devcontainer (`.devcontainer/`): run every command there. Always run `npm run build` and `npm run lint` after any change. CI runs both only on PRs ready for review: drafts skip it, and marking a PR ready triggers it.
 
 ## Architecture
 
-Hexagonal architecture (Ports & Adapters) with strict layer separation.
+The [Heligrafics frontend standard](https://github.com/heligrafics/docs/blob/main/engineering/frontend/README.md): features, not hexagonal layers. Business rules live in backends; this front presents information and collects actions.
 
-```
-src/
-  domain/           # Pure types. No imports from other layers.
-  application/
-    ports/          # Interfaces (ProfileRepository, ThemeListener, ThemeRepository)
-    usecases/       # One class per use case. Depends only on ports.
-  infrastructure/   # Implements ports. Only place with side effects / external deps.
-    profile/        # StaticProfileRepository — all content lives here
-    theme/          # BrowserThemeListener, LocalStorageThemeRepository
-  ui/
-    context/        # AppContext (React Context) + createAppContextValue (composition root)
-    presenters/     # Stateless classes wrapping use cases with explicit method names
-    hooks/          # One hook per presenter. Thin React coordinators.
-    components/     # Dumb UI components grouped by feature (about/, nav/, job/, ...)
-    screens/        # Page-level compositions
-```
+Every folder has a closed definition. If something doesn't fit the sentence, it doesn't go there.
 
-### Dependency rule
+| Folder | What goes in |
+|---|---|
+| `src/app/` | The shell: entry points, global providers, the layout (navigation) and the pages in `routes/`. The only place that composes features. |
+| `src/features/<concept>/` | One user-facing concept with one objective, named in the product's words (`experience`, `cv`). Its public contract is the component at its root, named after it (`features/education/Education.tsx`), with its hook next to it. Everything else is internal and lives in `components/`, each component's hook next to it. |
+| `src/api/` | The only data source, one module per domain. `api/profile` exposes the content and its types; the day there is a backend, only this module changes. |
+| `src/components/` | UI that knows no business concept (`SectionTitle`, `SocialLinks`). |
+| `src/lib/` | One shared capability per module, named after it (`i18n`, `theme`, `focus-trap`). |
 
-`domain` ← `application` ← `infrastructure`
-`domain` ← `application` ← `ui`
+Rules:
+- Imports flow shared code (`api`, `components`, `lib`) → features → `app`. A feature imports only its own folder and shared code: never another feature, never `app`.
+- `app` imports a feature only through its contract (`import { Education } from "@/features/education/Education"`), never its `components/` or its hooks, so a feature can reorganize itself without touching anyone else.
+- When one feature must trigger another, the page wires them with a callback: `profile` exposes `onContact`, and `HomePage` opens `contact`.
+- Code starts inside its feature. It moves to `components/` or `lib/` only when a second consumer needs it and it knows no business concept.
+- No generic names (`utils`, `helpers`, `common`, `misc`, `types`) for folders or files.
+- Absolute imports with `@/` everywhere: relative imports are rejected, so the import rules stay checkable.
 
-Infrastructure and UI never import from each other.
+Biome enforces the import rules (`overrides` in `biome.json` with `noRestrictedImports`), and they fail `npm run lint`. The `src/app/**` override rejects anything below a feature's root (`@/features/*/*/**`) and its root hooks (`@/features/*/use*`). **A new feature needs its own override**: copy an existing block and change the folder name in `includes` and in the `!@/features/<name>/**` exception. Without it, nothing checks the new feature.
 
-## SOLID
+## Content and text
 
-**S — Single Responsibility.** Each class has exactly one reason to change. Use cases execute one operation. Presenters wrap one use case. Repositories own one data source.
+- Portfolio content (profile, bio, jobs, skills, education, honors) lives in `src/api/profile/`. What doesn't depend on language is written once: each job's role, company, location and period live in `jobs.ts`. The translated text lives in `en.ts` and `es.ts`, which export the same names; job texts are keyed by the job's `id`, so `tsc` fails if a job is missing a translation.
+- UI text lives in the hook of the component that shows it, as a `Record<Language, {...}>` constant, so `tsc` fails if a language is missing.
+- No content or text hardcoded in components; asset paths are the only literals.
 
-**O — Open/Closed.** Add features by creating new files (use case + presenter + hook), never by modifying existing ones. `ProfileRepository` is extended with new methods, not replaced.
+## Language and theme
 
-**L — Liskov Substitution.** Any implementation of a port must be a valid substitute. `StaticProfileRepository` is interchangeable with a future `ApiProfileRepository` as long as it satisfies the interface.
-
-**I — Interface Segregation.** Ports are narrow and focused: `ThemeListener`, `ThemeRepository`, and `ProfileRepository` are three separate interfaces — no class is forced to implement methods it doesn't need.
-
-**D — Dependency Inversion.** Use cases depend on port interfaces, never on concrete implementations. Infrastructure implements ports; it is never imported by application or domain. Composition root (`createAppContextValue`) is the only place where abstractions are bound to implementations.
-
-## Adding a new data feature — checklist
-
-Follow this exact sequence every time:
-
-1. **Domain** — add type to `src/domain/profile/` and export from `index.ts`
-2. **Port** — add method to `src/application/ports/ProfileRepository.ts`
-3. **Use case** — new file in `src/application/usecases/Get<Feature>UseCase.ts`
-4. **Repository** — implement the method in `StaticProfileRepository.ts` (content goes here)
-5. **Presenter** — new file in `src/ui/presenters/<Feature>Presenter.ts`
-6. **Hook** — new file in `src/ui/hooks/use<Feature>Presenter.ts`
-7. **Wire** — add to `AppContextValue` in `AppContext.tsx` and instantiate in `createAppContextValue.ts`
-8. **UI** — consume via hook in the screen; pass data as props to dumb components
-
-## Class conventions
-
-`erasableSyntaxOnly: true` is set in tsconfig — parameter properties are forbidden.
-
-```ts
-// WRONG
-class Foo {
-  constructor(private readonly bar: Bar) {}
-}
-
-// CORRECT
-class Foo {
-  private readonly bar: Bar;
-  constructor(bar: Bar) {
-    this.bar = bar;
-  }
-}
-```
-
-No enums with runtime values (use string unions or `as const` objects instead).
-
-## Presenter pattern
-
-- Stateless classes — no `useState`, no side effects
-- Method names are explicit and describe intent (`resolveInitialMode`, `getAbout`, ...)
-- One presenter per feature domain
-- Presenters are singletons: instantiated once in `createAppContextValue`, never inside hooks or components
-
-```ts
-// ui/presenters/AboutPresenter.ts
-export class AboutPresenter {
-  private readonly useCase: GetAboutUseCase;
-  constructor(useCase: GetAboutUseCase) {
-    this.useCase = useCase;
-  }
-  getAbout(): About {
-    return this.useCase.execute();
-  }
-}
-```
-
-## Hook pattern
-
-Hooks only coordinate React state/effects with a presenter from context. No `useMemo`/`useRef` needed — presenters are stable singletons.
-
-```ts
-// ui/hooks/useAboutPresenter.ts
-export function useAboutPresenter(): About {
-  const { aboutPresenter } = useAppContext();
-  return aboutPresenter.getAbout();
-}
-```
-
-## Component conventions
-
-- Dumb components live in `src/ui/components/<feature>/` — one file per component
-- Screens live in `src/ui/screens/<section>/` — compose hooks + components
-- Screens call hooks; components receive plain props
-- No hardcoded content in components or screens — all text/data comes from the domain through the presenter stack
-
-## Content
-
-All portfolio content (bio, jobs, skills, education, honors, profile) lives exclusively in:
-
-```
-src/infrastructure/profile/StaticProfileRepository.ts
-```
-
-Never hardcode content in UI files.
+- Language: stored preference (`language` in localStorage), else `navigator.language`. `LanguageProvider` holds it; features read it with `useLanguage()`.
+- Theme: `light`, `dark` or `system` (the default). The inline script in `index.html` applies a stored theme before React loads, to avoid a flash. The toggle always sets an explicit theme; nothing in the UI goes back to `system`.
+- In `src/index.css`, no class follows the system through `prefers-color-scheme`, and `:root.light` / `:root.dark` override it.
 
 ## Styling
 
-- Tailwind v4 via `@tailwindcss/vite`
-- Custom semantic tokens defined in `src/index.css` under `@theme`:
-  `surface-base`, `surface-raised`, `surface-overlay`, `ink-primary`, `ink-secondary`, `ink-muted`, `accent`, `border`
-- Use custom tokens for all portfolio UI. Raw Tailwind palette colors (gray-*, blue-*) are reserved for the CV page only (always light mode, print-optimized)
-- Biome requires `"css": { "parser": { "tailwindDirectives": true } }` in `biome.json` for `@theme` to parse correctly
+- Semantic tokens in `src/index.css` under `@theme` (`surface-*`, `ink-*`, `accent`, `border`) for all portfolio UI.
+- Raw Tailwind palette colors (`gray-*`, `blue-*`) only on the CV, which is always light and print-optimized.
+- `HIGHLIGHTS_BY_INDEX` in the CV caps how many highlights each job shows, so the CV fits its print length. `?print=auto` opens the print dialog on load.
 
-## Theme
+## TypeScript
 
-Two-mode system: `light` | `dark` | `system`.
+`erasableSyntaxOnly: true` is set: no parameter properties (assign fields in the constructor body) and no enums with runtime values (use string unions or `as const`).
 
-- System preference detected via `BrowserThemeListener` (media query)
-- User override persisted in `LocalStorageThemeRepository` (key: `theme-mode`)
-- Applied before React hydration via inline `<script>` in `index.html` to avoid flash
-- CSS variables swap via `:root.light` / `:root.dark` classes; default (no class) = dark
+## What the tools impose
 
-## Build
+- Biome does not merge `noRestrictedImports` options across overrides: the last matching override wins. That is why every feature override repeats the relative-import patterns.
+- Biome needs `"css": { "parser": { "tailwindDirectives": true } }` for `@theme` to parse.
+- The `node_modules` in the repo folder is installed from the devcontainer (Linux binaries); it does not run on macOS.
 
-- Two entry points: `index.html` (portfolio) and `cv.html` (CV/print)
-- Vendor chunk (`react`, `react-dom`) split manually for better caching
-- `target: "esnext"` for modern output
-- Assets in `public/`: `favicon.png` (32×32, for `<link rel="icon">`), `icon.webp` (256×256, for nav logo), `me.webp` (avatar photo)
-- Images converted to WebP for size. Raw source assets live in `static/` (not served)
+## How we work
 
-## Toolchain
-
-| Tool | Version | Config |
-|---|---|---|
-| TypeScript | ~5.8 | `tsconfig.app.json` — strict, erasableSyntaxOnly |
-| Vite + SWC | ~7 | `vite.config.ts` |
-| Tailwind | v4 | via `@tailwindcss/vite` plugin, config in `src/index.css` |
-| Biome | ~2 | `biome.json` — 2 spaces, double quotes, trailing commas, 100 col |
+- One issue per task, with Objetivo, Criterio de entrega and Notas de diseño. A branch per task and a PR that closes it (`Closes #N`).
+- Conventional Commits.
+- What Claude writes on GitHub ends with the Claude Code attribution line.

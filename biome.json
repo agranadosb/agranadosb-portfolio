@@ -28,5 +28,263 @@
   "assist": {
     "enabled": true,
     "actions": { "source": { "organizeImports": "on" } }
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["src/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": ["./**", "../**"],
+                    "message": "Use absolute imports with @/ so the import rules can check them."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/app/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": ["@/features/*/*/**", "@/features/*/use*", "./**", "../**"],
+                    "message": "Import a feature only through its public component at the feature root: @/features/<name>/<Component>."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/api/**", "src/components/**", "src/lib/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": ["@/features/**", "@/app/**", "./**", "../**"],
+                    "message": "Shared code (api, components, lib) cannot import features or app."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/features/about/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": ["@/features/**", "!@/features/about/**", "@/app/**", "./**", "../**"],
+                    "message": "A feature imports only its own folder and shared code (api, components, lib)."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/features/contact/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": [
+                      "@/features/**",
+                      "!@/features/contact/**",
+                      "@/app/**",
+                      "./**",
+                      "../**"
+                    ],
+                    "message": "A feature imports only its own folder and shared code (api, components, lib)."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/features/cv/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": ["@/features/**", "!@/features/cv/**", "@/app/**", "./**", "../**"],
+                    "message": "A feature imports only its own folder and shared code (api, components, lib)."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/features/education/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": [
+                      "@/features/**",
+                      "!@/features/education/**",
+                      "@/app/**",
+                      "./**",
+                      "../**"
+                    ],
+                    "message": "A feature imports only its own folder and shared code (api, components, lib)."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/features/experience/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": [
+                      "@/features/**",
+                      "!@/features/experience/**",
+                      "@/app/**",
+                      "./**",
+                      "../**"
+                    ],
+                    "message": "A feature imports only its own folder and shared code (api, components, lib)."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/features/honors/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": [
+                      "@/features/**",
+                      "!@/features/honors/**",
+                      "@/app/**",
+                      "./**",
+                      "../**"
+                    ],
+                    "message": "A feature imports only its own folder and shared code (api, components, lib)."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/features/profile/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": [
+                      "@/features/**",
+                      "!@/features/profile/**",
+                      "@/app/**",
+                      "./**",
+                      "../**"
+                    ],
+                    "message": "A feature imports only its own folder and shared code (api, components, lib)."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/features/skills/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": [
+                      "@/features/**",
+                      "!@/features/skills/**",
+                      "@/app/**",
+                      "./**",
+                      "../**"
+                    ],
+                    "message": "A feature imports only its own folder and shared code (api, components, lib)."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
 }
