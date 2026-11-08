@@ -136,6 +136,21 @@ test("the hidden rail leaves buttons to show it and to change the theme", async 
   await expect(page.getByRole("navigation", { name: "Secciones" })).toBeVisible();
 });
 
+test("on a phone the hidden rail leaves its buttons at the bottom", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+
+  await page.getByRole("button", { name: "Ocultar menú" }).click();
+
+  for (const button of [
+    page.getByRole("button", { name: "Mostrar menú" }),
+    page.getByRole("button", { name: /^Cambiar a tema/ }),
+  ]) {
+    const box = await button.boundingBox();
+    expect(box?.y).toBeGreaterThan(844 - 80);
+  }
+});
+
 test("with reduced motion the background does not move on scroll", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");

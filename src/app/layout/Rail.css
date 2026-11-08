@@ -171,4 +171,19 @@
   .tip {
     display: none;
   }
+
+  /* The bar hides downwards and leaves its two buttons where it was, at the bottom right. */
+  .rail-end svg {
+    transform: rotate(90deg);
+  }
+
+  .rail-show {
+    top: auto;
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .theme-float {
+    right: 64px;
+  }
 }
