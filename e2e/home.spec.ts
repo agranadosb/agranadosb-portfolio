@@ -114,6 +114,17 @@ test("with reduced motion the background does not move on scroll", async ({ page
   expect(offset).toBe("");
 });
 
+test("LinkedIn and GitHub links open in a new tab", async ({ page }) => {
+  await page.goto("/");
+
+  const external = page.locator('a[href*="linkedin.com"], a[href*="github.com"]');
+  await expect(external).toHaveCount(4);
+  for (const link of await external.all()) {
+    await expect(link).toHaveAttribute("target", "_blank");
+    await expect(link).toHaveAttribute("rel", "noopener noreferrer");
+  }
+});
+
 test("old CV links redirect to the home", async ({ request }) => {
   for (const path of ["/cv.html", "/cv"]) {
     const response = await request.get(path, { maxRedirects: 0 });

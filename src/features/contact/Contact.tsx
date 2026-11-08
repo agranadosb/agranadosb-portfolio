@@ -17,14 +17,24 @@ export function Contact() {
       />
       <div className="contact">
         <EmailCard email={profile.email} label={strings.email} pendingText={strings.emailPending} />
-        <a href={profile.linkedin} className="contact__card">
+        <a
+          href={profile.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="contact__card"
+        >
           <span className="contact__label">{strings.professionalNetwork}</span>
           <span className="contact__link">
             <NetworkIcon network="linkedin" size={30} />
             {strings.linkedin} ↗
           </span>
         </a>
-        <a href={profile.github} className="contact__card">
+        <a
+          href={profile.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="contact__card"
+        >
           <span className="contact__label">{strings.code}</span>
           <span className="contact__link">
             <NetworkIcon network="github" size={30} />

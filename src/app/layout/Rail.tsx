@@ -71,11 +71,23 @@ export function Rail({ open, onToggle }: RailProps) {
         <span className="tip">{strings.contact}</span>
       </a>
       <span className="rail-sep rail-ext" aria-hidden="true" />
-      <a className="rail-ext" href={profile.linkedin} aria-label={strings.linkedin}>
+      <a
+        className="rail-ext"
+        href={profile.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={strings.linkedin}
+      >
         <NetworkIcon network="linkedin" size={22} />
         <span className="tip">{strings.linkedin} ↗</span>
       </a>
-      <a className="rail-ext" href={profile.github} aria-label={strings.github}>
+      <a
+        className="rail-ext"
+        href={profile.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={strings.github}
+      >
         <NetworkIcon network="github" size={22} />
         <span className="tip">{strings.github} ↗</span>
       </a>
