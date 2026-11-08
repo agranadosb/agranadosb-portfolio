@@ -35,6 +35,21 @@ const STRINGS: Record<
     toDarkTheme: "Cambiar a tema oscuro",
     changeTheme: "Cambiar tema",
   },
+  en: {
+    navigation: "Sections",
+    home: "Home",
+    methodology: "Methodology",
+    experience: "Experience",
+    education: "Education",
+    contact: "Contact",
+    linkedin: "LinkedIn",
+    github: "GitHub",
+    hideMenu: "Hide menu",
+    showMenu: "Show menu",
+    toLightTheme: "Switch to light theme",
+    toDarkTheme: "Switch to dark theme",
+    changeTheme: "Change theme",
+  },
 };
 
 export function useRail() {

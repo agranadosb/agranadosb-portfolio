@@ -1,3 +1,4 @@
+import * as en from "@/api/profile/en";
 import * as es from "@/api/profile/es";
 import type { ProfileContent } from "@/api/profile/ProfileContent";
 import type { Language } from "@/lib/i18n/Language";
@@ -19,6 +20,7 @@ export type { StackRow } from "@/api/profile/StackRow";
 
 const CONTENT: Record<Language, ProfileContent> = {
   es: es.CONTENT,
+  en: en.CONTENT,
 };
 
 export function getProfileContent(language: Language): ProfileContent {

@@ -12,6 +12,12 @@ const STRINGS: Record<
     touched: "Qué he tocado",
     appliedAI: "IA aplicada",
   },
+  en: {
+    common: "Common to every sector",
+    title: "Sector cards · what I have worked on",
+    touched: "What I have worked on",
+    appliedAI: "Applied AI",
+  },
 };
 
 export function useAreas() {
