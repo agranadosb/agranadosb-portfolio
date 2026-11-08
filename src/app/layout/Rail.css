@@ -1,0 +1,166 @@
+.rail {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  bottom: 16px;
+  width: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 0;
+  border: 1.5px solid var(--ink);
+  background: var(--ground);
+  z-index: 20;
+  box-sizing: border-box;
+}
+
+.rail a,
+.rail button {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.rail a:hover,
+.rail button:hover,
+.rail a:focus-visible,
+.rail button:focus-visible {
+  color: var(--accentText);
+}
+
+.rail__monogram {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: -0.02em;
+  box-sizing: border-box;
+}
+
+.tip {
+  position: absolute;
+  right: 54px;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  padding: 5px 9px;
+  background: var(--ink);
+  color: var(--ground);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms;
+}
+
+.rail a:hover .tip,
+.rail a:focus-visible .tip,
+.rail button:hover .tip,
+.rail button:focus-visible .tip {
+  opacity: 1;
+}
+
+.rail-sep {
+  width: 24px;
+  height: 1px;
+  background: var(--line);
+  margin: 4px 0;
+}
+
+.rail-end {
+  margin-top: auto;
+}
+
+.rail-show {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid var(--ink);
+  background: var(--ground);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  padding: 0;
+}
+
+.rail-show:hover {
+  color: var(--accentText);
+  border-color: var(--accent);
+}
+
+.theme-float {
+  top: 68px;
+}
+
+.theme-icon--sun {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-icon--sun {
+  display: block;
+}
+
+:root[data-theme="dark"] .theme-icon--moon {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-icon--sun {
+    display: block;
+  }
+
+  :root:not([data-theme="light"]) .theme-icon--moon {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .rail {
+    top: auto;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    width: auto;
+    height: 56px;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0 6px;
+  }
+
+  .rail-sep {
+    display: none;
+  }
+
+  .rail-end {
+    margin-top: 0;
+  }
+
+  .rail .rail-ext {
+    display: none;
+  }
+
+  .tip {
+    display: none;
+  }
+}

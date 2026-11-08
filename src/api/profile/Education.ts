@@ -1,5 +1,11 @@
+export interface Degree {
+  level: string;
+  title: string;
+  note?: string;
+}
+
 export interface Education {
-  degree: string;
-  field: string;
   institution: string;
+  degrees: Degree[];
+  honors: string[];
 }

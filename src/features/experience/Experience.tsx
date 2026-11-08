@@ -1,24 +1,30 @@
-import { SectionTitle } from "@/components/SectionTitle";
-import { JobItem } from "@/features/experience/components/JobItem";
+import { SectionHeader } from "@/components/SectionHeader";
+import { EarlyCareerList } from "@/features/experience/components/EarlyCareerList";
+import { OrganizationTimeline } from "@/features/experience/components/OrganizationTimeline";
 import { useExperience } from "@/features/experience/useExperience";
+import "@/features/experience/Experience.css";
 
 export function Experience() {
-  const { jobs, strings } = useExperience();
+  const { experience, strings } = useExperience();
 
   return (
-    <section id="experience" className="py-24 px-6 bg-surface-raised">
-      <div className="max-w-4xl mx-auto">
-        <SectionTitle>{strings.title}</SectionTitle>
-        <div className="relative border-l border-border pl-8 space-y-12">
-          {jobs.map((job) => (
-            <JobItem
-              key={job.id}
-              job={job}
-              showDetailsLabel={strings.showDetails}
-              hideDetailsLabel={strings.hideDetails}
-            />
-          ))}
-        </div>
+    <section id="experiencia" className="section" aria-labelledby="experiencia-title">
+      <SectionHeader
+        code="A-02"
+        eyebrow={strings.eyebrow}
+        title={strings.title}
+        titleId="experiencia-title"
+      />
+      <div className="experience">
+        {experience.organizations.map((organization) => (
+          <OrganizationTimeline
+            key={organization.id}
+            organization={organization}
+            currentRoleLabel={strings.currentRole}
+            progressionLabel={strings.progression}
+          />
+        ))}
+        <EarlyCareerList early={experience.early} />
       </div>
     </section>
   );

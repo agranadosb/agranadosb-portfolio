@@ -21,7 +21,7 @@
     }
   },
   "css": {
-    "parser": { "cssModules": false, "tailwindDirectives": true },
+    "parser": { "cssModules": false },
     "formatter": { "enabled": true },
     "linter": { "enabled": true }
   },
@@ -91,7 +91,7 @@
       }
     },
     {
-      "includes": ["src/features/about/**"],
+      "includes": ["src/features/areas/**"],
       "linter": {
         "rules": {
           "style": {
@@ -100,7 +100,7 @@
               "options": {
                 "patterns": [
                   {
-                    "group": ["@/features/**", "!@/features/about/**", "@/app/**", "./**", "../**"],
+                    "group": ["@/features/**", "!@/features/areas/**", "@/app/**", "./**", "../**"],
                     "message": "A feature imports only its own folder and shared code (api, components, lib)."
                   }
                 ]
@@ -189,7 +189,7 @@
       }
     },
     {
-      "includes": ["src/features/honors/**"],
+      "includes": ["src/features/methodology/**"],
       "linter": {
         "rules": {
           "style": {
@@ -200,7 +200,7 @@
                   {
                     "group": [
                       "@/features/**",
-                      "!@/features/honors/**",
+                      "!@/features/methodology/**",
                       "@/app/**",
                       "./**",
                       "../**"
@@ -241,7 +241,7 @@
       }
     },
     {
-      "includes": ["src/features/skills/**"],
+      "includes": ["src/features/stack/**"],
       "linter": {
         "rules": {
           "style": {
@@ -250,13 +250,7 @@
               "options": {
                 "patterns": [
                   {
-                    "group": [
-                      "@/features/**",
-                      "!@/features/skills/**",
-                      "@/app/**",
-                      "./**",
-                      "../**"
-                    ],
+                    "group": ["@/features/**", "!@/features/stack/**", "@/app/**", "./**", "../**"],
                     "message": "A feature imports only its own folder and shared code (api, components, lib)."
                   }
                 ]

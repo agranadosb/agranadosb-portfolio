@@ -1,30 +1,31 @@
-import { useState } from "react";
-import { Nav } from "@/app/layout/Nav";
-import { About } from "@/features/about/About";
-import { ContactModal } from "@/features/contact/ContactModal";
+import { getProfileContent } from "@/api/profile";
+import { PageShell } from "@/app/layout/PageShell";
+import { Areas } from "@/features/areas/Areas";
+import { Contact } from "@/features/contact/Contact";
 import { Education } from "@/features/education/Education";
 import { Experience } from "@/features/experience/Experience";
-import { Honors } from "@/features/honors/Honors";
+import { Methodology } from "@/features/methodology/Methodology";
 import { ProfileIntroduction } from "@/features/profile/ProfileIntroduction";
-import { Skills } from "@/features/skills/Skills";
+import { Stack } from "@/features/stack/Stack";
 
-export const meta = () => [{ title: "agranadosb · Portfolio" }];
+export const meta = () => {
+  const { meta } = getProfileContent("es");
+  return [{ title: meta.title }, { name: "description", content: meta.description }];
+};
 
 export default function HomePage() {
-  const [contactOpen, setContactOpen] = useState(false);
-
   return (
-    <>
-      <Nav />
-      <main className="pt-14">
-        <ProfileIntroduction onContact={() => setContactOpen(true)} />
-        <About />
-        <Skills />
+    <PageShell>
+      <main className="page-main">
+        <ProfileIntroduction />
+        <Methodology>
+          <Areas />
+          <Stack />
+        </Methodology>
         <Experience />
         <Education />
-        <Honors />
+        <Contact />
       </main>
-      {contactOpen && <ContactModal onClose={() => setContactOpen(false)} />}
-    </>
+    </PageShell>
   );
 }

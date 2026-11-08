@@ -1,10 +1,12 @@
 import { getProfileContent } from "@/api/profile";
 import type { Language } from "@/lib/i18n/Language";
-import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { useLanguage } from "@/lib/i18n/useLanguage";
 
-const STRINGS: Record<Language, { title: string }> = {
-  en: { title: "Education" },
-  es: { title: "Formación" },
+const STRINGS: Record<Language, { title: string; honors: string }> = {
+  es: {
+    title: "Formación",
+    honors: "Matrícula de Honor",
+  },
 };
 
 export function useEducation() {

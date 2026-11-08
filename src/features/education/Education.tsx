@@ -1,26 +1,35 @@
-import { SectionTitle } from "@/components/SectionTitle";
+import { SectionHeader } from "@/components/SectionHeader";
 import { useEducation } from "@/features/education/useEducation";
+import "@/features/education/Education.css";
 
 export function Education() {
   const { education, strings } = useEducation();
 
   return (
-    <section id="education" className="py-24 px-6 bg-surface-base">
-      <div className="max-w-4xl mx-auto">
-        <SectionTitle>{strings.title}</SectionTitle>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
-          {education.map(({ degree, field, institution }) => (
-            <div
-              key={degree}
-              className="p-5 rounded-xl bg-surface-raised border border-border hover:border-accent/50 transition-colors space-y-1"
-            >
-              <p className="text-accent text-xs font-semibold uppercase tracking-widest">
-                {degree}
-              </p>
-              <p className="text-ink-primary font-semibold leading-snug">{field}</p>
-              <p className="text-ink-muted text-sm">{institution}</p>
-            </div>
+    <section id="formacion" className="section" aria-labelledby="formacion-title">
+      <SectionHeader
+        code="A-03"
+        eyebrow={education.institution}
+        title={strings.title}
+        titleId="formacion-title"
+      />
+      <div className="education">
+        <div className="education__degrees">
+          {education.degrees.map((degree) => (
+            <article key={degree.level} className="degree">
+              <p className="degree__level">{degree.level}</p>
+              <h3 className="degree__title">{degree.title}</h3>
+              {degree.note && <p className="degree__note">{degree.note}</p>}
+            </article>
           ))}
+        </div>
+        <div className="education__honors">
+          <h3 className="education__honors-title">{strings.honors}</h3>
+          <ul className="hexlist">
+            {education.honors.map((subject) => (
+              <li key={subject}>{subject}</li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
