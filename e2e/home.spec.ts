@@ -44,6 +44,21 @@ test("the JSON-LD describes Alejandro as a schema.org Person", async ({ page }) 
   ]);
 });
 
+test("shared links show the large Open Graph image", async ({ page, request }) => {
+  await page.goto("/");
+
+  const image = await page.locator('meta[property="og:image"]').getAttribute("content");
+  expect(image).toBe("https://portfolio.agranadosb.com/og.png");
+  await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
+    "content",
+    "summary_large_image",
+  );
+
+  const response = await request.get("/og.png");
+  expect(response.status()).toBe(200);
+  expect(response.headers()["content-type"]).toBe("image/png");
+});
+
 test("the rail and the page can be walked with the keyboard", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("button", { name: /^Cambiar a tema/ })).toBeVisible();

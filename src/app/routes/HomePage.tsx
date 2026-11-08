@@ -13,6 +13,8 @@ import { DEFAULT_LANGUAGE } from "@/lib/i18n/Language";
 export const meta = () => {
   const content = getProfileContent(DEFAULT_LANGUAGE);
   const { title, description } = content.meta;
+  const image = `${SITE_URL}og.png`;
+  const imageAlt = `${content.profile.name} · ${content.profile.role}`;
 
   return [
     { title },
@@ -23,9 +25,15 @@ export const meta = () => {
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:locale", content: "es_ES" },
-    { name: "twitter:card", content: "summary" },
+    { property: "og:image", content: image },
+    { property: "og:image:width", content: "1200" },
+    { property: "og:image:height", content: "630" },
+    { property: "og:image:alt", content: imageAlt },
+    { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
+    { name: "twitter:image", content: image },
+    { name: "twitter:image:alt", content: imageAlt },
     { "script:ld+json": person(content) },
   ];
 };
