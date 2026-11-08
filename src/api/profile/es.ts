@@ -31,7 +31,7 @@ export const CONTENT: ProfileContent = {
         detail: "ISO 42001 · IA sobre terabytes de imagen aérea · De AI Scientist a CTO",
       },
     ],
-    email: null,
+    email: "alejandro@agranadosb.com",
     linkedin: "https://www.linkedin.com/in/alejandro-granados-ba%C3%B1uls-011010148/",
     github: "https://github.com/agranadosb",
   },
