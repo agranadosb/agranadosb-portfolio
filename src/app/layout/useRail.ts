@@ -1,5 +1,5 @@
 import { getProfileContent } from "@/api/profile";
-import type { Language } from "@/lib/i18n/Language";
+import { LANGUAGE_HOME, type Language } from "@/lib/i18n/Language";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 
 const STRINGS: Record<
@@ -18,6 +18,8 @@ const STRINGS: Record<
     toLightTheme: string;
     toDarkTheme: string;
     changeTheme: string;
+    otherLanguage: Language;
+    readInOtherLanguage: string;
   }
 > = {
   es: {
@@ -34,6 +36,8 @@ const STRINGS: Record<
     toLightTheme: "Cambiar a tema claro",
     toDarkTheme: "Cambiar a tema oscuro",
     changeTheme: "Cambiar tema",
+    otherLanguage: "en",
+    readInOtherLanguage: "Read in English",
   },
   en: {
     navigation: "Sections",
@@ -49,12 +53,15 @@ const STRINGS: Record<
     toLightTheme: "Switch to light theme",
     toDarkTheme: "Switch to dark theme",
     changeTheme: "Change theme",
+    otherLanguage: "es",
+    readInOtherLanguage: "Leer en español",
   },
 };
 
 export function useRail() {
   const { language } = useLanguage();
   const { profile } = getProfileContent(language);
+  const strings = STRINGS[language];
 
   return {
     profile,
@@ -62,6 +69,11 @@ export function useRail() {
       .split(" ")
       .map((word) => word[0])
       .join(""),
-    strings: STRINGS[language],
+    strings,
+    otherLanguage: {
+      code: strings.otherLanguage,
+      href: LANGUAGE_HOME[strings.otherLanguage],
+      label: strings.readInOtherLanguage,
+    },
   };
 }
