@@ -128,10 +128,12 @@
   font-weight: 700;
 }
 
-.cover__button:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--onAccent);
+@media (hover: hover) {
+  .cover__button:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--onAccent);
+  }
 }
 
 .summary-box {

@@ -30,18 +30,21 @@
   cursor: pointer;
 }
 
-.rail a:hover,
-.rail button:hover,
 .rail a:focus-visible,
 .rail button:focus-visible {
   color: var(--accentText);
   background: var(--panel);
   box-shadow: inset 0 0 0 1.5px currentColor;
+  outline-offset: -3px;
 }
 
-.rail a:focus-visible,
-.rail button:focus-visible {
-  outline-offset: -3px;
+@media (hover: hover) {
+  .rail a:hover,
+  .rail button:hover {
+    color: var(--accentText);
+    background: var(--panel);
+    box-shadow: inset 0 0 0 1.5px currentColor;
+  }
 }
 
 .rail__monogram {
@@ -83,11 +86,16 @@
   transition: opacity 150ms;
 }
 
-.rail a:hover .tip,
 .rail a:focus-visible .tip,
-.rail button:hover .tip,
 .rail button:focus-visible .tip {
   opacity: 1;
+}
+
+@media (hover: hover) {
+  .rail a:hover .tip,
+  .rail button:hover .tip {
+    opacity: 1;
+  }
 }
 
 .rail-sep {
@@ -118,10 +126,12 @@
   padding: 0;
 }
 
-.rail-show:hover {
-  color: var(--accentText);
-  border-color: currentColor;
-  box-shadow: inset 0 0 0 1.5px currentColor;
+@media (hover: hover) {
+  .rail-show:hover {
+    color: var(--accentText);
+    border-color: currentColor;
+    box-shadow: inset 0 0 0 1.5px currentColor;
+  }
 }
 
 .theme-float {
@@ -177,5 +187,20 @@
 
   .tip {
     display: none;
+  }
+
+  /* The bar hides downwards and leaves its two buttons where it was, at the bottom right. */
+  .rail-end svg {
+    transform: rotate(90deg);
+  }
+
+  .rail-show {
+    top: auto;
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .theme-float {
+    right: 64px;
   }
 }

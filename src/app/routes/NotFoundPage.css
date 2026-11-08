@@ -80,10 +80,12 @@
   font-weight: 700;
 }
 
-.not-found__button:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--onAccent);
+@media (hover: hover) {
+  .not-found__button:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--onAccent);
+  }
 }
 
 .not-found__figure {
