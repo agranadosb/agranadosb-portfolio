@@ -20,7 +20,7 @@ npm run preview               # build + wrangler dev (local Workers runtime)
 npm run deploy                # build + wrangler deploy (Cloudflare)
 ```
 
-Node 22 only exists inside the devcontainer (`.devcontainer/`): run every command there. Always run `npm run build` and `npm run lint` after any change. CI runs both only on PRs ready for review: drafts skip it, and marking a PR ready triggers it. `SCREENSHOTS=1 npx playwright test e2e/screenshots.spec.ts` captures the page at 1440 and 390 px in both themes. `OG_IMAGE=1 npx playwright test e2e/og-image.spec.ts` renders `public/og.png` and `public/og-es.png` (the image shown when each version is shared) from the profile copy: run it again when the name, role or headline change.
+Node 22 only exists inside the devcontainer (`.devcontainer/`): run every command there. Always run `npm run build` and `npm run lint` after any change. CI runs both only on PRs ready for review: drafts skip it, and marking a PR ready triggers it. `SCREENSHOTS=1 npx playwright test e2e/screenshots.spec.ts` captures the page at 1440 and 390 px in both themes. `OG_IMAGE=1 npx playwright test e2e/og-image.spec.ts` renders `public/og.png` and `public/og-es.png` (the image shown when each version is shared) from the profile copy: run it again when the name, role or headline change. `CV_PDF=1 npx playwright test e2e/cv-pdf.spec.ts` renders the CV of each language into `public/`; `e2e/cv.spec.ts` fails when a PDF no longer matches the copy or its template, so run it after changing either. `tsc -b` also type-checks `e2e/` (`tsconfig.e2e.json`).
 
 ## Architecture
 
@@ -50,6 +50,7 @@ Biome enforces the import rules (`overrides` in `biome.json` with `noRestrictedI
 ## Content and text
 
 - The approved copy lives in `src/api/profile/es.ts`, typed by `ProfileContent`; `en.ts` is its English translation. Change both together, and the English follows the Spanish, never the other way around, even though English is the main page. Use the copy as it is: never invent or rewrite content, and never name internal projects or clients. Tools only appear in the stack table, never tied to a project.
+- The CV PDFs (`public/alejandro-granados-cv*.pdf`) come from the same copy through `e2e/cv/document.ts`: never edit them by hand. They are made for text extractors as much as for people: one column, real text, standard headings, roles in reverse chronological order, URLs written out, tagged PDF with bookmarks and metadata, two pages at most.
 - Content still to be confirmed is modelled, not faked: the contact email can be `null`, and the page then shows a visible placeholder.
 - UI text (labels, headings, captions) lives in the hook of the component that shows it, as a `Record<Language, {...}>` constant.
 - English is the default language, at `/`; every other language lives under its code (`/es/`). `LANGUAGE_HOME` in `lib/i18n` gives each language's home, and `useLanguage()` reads the language from the route (`meta` functions read it from `location`), so one page component serves every language and `root.tsx` sets `<html lang>`. Each home declares all versions with `hreflang` (`x-default` is the English one), with its own canonical, `og:locale` and Open Graph image, and the rail links to the other language.
@@ -86,6 +87,8 @@ Biome enforces the import rules (`overrides` in `biome.json` with `noRestrictedI
 - A leftover `.wrangler/deploy/config.json` (from the old Cloudflare Vite plugin) makes wrangler serve `dist/` instead of `build/client`. Delete it.
 - `wrangler dev` breaks (500) if `build/` is rebuilt under it, which `npm run test:e2e` does. Restart it.
 - The `node_modules` in the repo folder is installed from the devcontainer (Linux binaries); it does not run on macOS.
+- Chromium's PDFs carry no space characters: text extractors infer spaces from the gaps between glyphs, and Archivo's narrow space made them merge words ("Datamanagement"). The CV widens `word-spacing` and turns off kerning and ligatures for that. A line that cannot wrap makes Chromium shrink the whole page to fit it, so every `nowrap` item needs a space next to it.
+- pdf-lib keeps `getInfoDict()` private (reach the Info dictionary through `context.trailerInfo.Info`) and joins `setKeywords()` with spaces (pass one comma-separated string).
 
 ## How we work
 
