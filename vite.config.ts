@@ -1,13 +1,10 @@
 import { fileURLToPath } from "node:url";
+import { reactRouter } from "@react-router/dev/vite";
 import tailwindcss from "@tailwindcss/vite";
-import react from "@vitejs/plugin-react-swc";
 import { defineConfig } from "vite";
 
-import { cloudflare } from "@cloudflare/vite-plugin";
-
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss(), cloudflare()],
+  plugins: [tailwindcss(), reactRouter()],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
@@ -15,17 +12,6 @@ export default defineConfig({
   },
   build: {
     target: "esnext",
-    rollupOptions: {
-      input: {
-        main: fileURLToPath(new URL("./index.html", import.meta.url)),
-        cv: fileURLToPath(new URL("./cv.html", import.meta.url)),
-      },
-      output: {
-        manualChunks: {
-          vendor: ["react", "react-dom"],
-        },
-      },
-    },
   },
   server: {
     host: "0.0.0.0",

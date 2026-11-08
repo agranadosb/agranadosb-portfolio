@@ -14,7 +14,9 @@ const STRINGS: Record<Language, { backToPortfolio: string; downloadAsPDF: string
   },
 };
 
-export function CVPage() {
+export const meta = () => [{ title: "CV — Alejandro Granados" }];
+
+export default function CVPage() {
   const { language } = useLanguage();
   const strings = STRINGS[language];
 

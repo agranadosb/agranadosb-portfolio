@@ -8,7 +8,9 @@ import { Honors } from "@/features/honors/Honors";
 import { ProfileIntroduction } from "@/features/profile/ProfileIntroduction";
 import { Skills } from "@/features/skills/Skills";
 
-export function HomePage() {
+export const meta = () => [{ title: "agranadosb · Portfolio" }];
+
+export default function HomePage() {
   const [contactOpen, setContactOpen] = useState(false);
 
   return (
