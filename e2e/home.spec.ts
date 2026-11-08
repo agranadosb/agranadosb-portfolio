@@ -154,11 +154,11 @@ test("on a phone the hidden rail leaves its buttons at the bottom", async ({ pag
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
 
-  await page.getByRole("button", { name: "Ocultar menú" }).click();
+  await page.getByRole("button", { name: "Hide menu" }).click();
 
   for (const button of [
-    page.getByRole("button", { name: "Mostrar menú" }),
-    page.getByRole("button", { name: /^Cambiar a tema/ }),
+    page.getByRole("button", { name: "Show menu" }),
+    page.getByRole("button", { name: /^Switch to/ }),
   ]) {
     const box = await button.boundingBox();
     expect(box?.y).toBeGreaterThan(844 - 80);
@@ -168,7 +168,7 @@ test("on a phone the hidden rail leaves its buttons at the bottom", async ({ pag
 test("with a mouse, hovering a rail link draws its box", async ({ page }) => {
   await page.goto("/");
 
-  const railLink = page.getByRole("link", { name: "Experiencia" });
+  const railLink = page.getByRole("link", { name: "Experience" });
   await railLink.hover();
   await expect(railLink).toHaveCSS("box-shadow", "rgb(138, 88, 0) 0px 0px 0px 1.5px inset");
 });
@@ -181,11 +181,11 @@ test.describe("on a touch screen", () => {
     expect(await page.evaluate(() => matchMedia("(hover: hover)").matches)).toBe(false);
 
     // A real tap leaves the element under :hover; emulated taps do not, so the mouse does it.
-    const railLink = page.getByRole("link", { name: "Experiencia" });
+    const railLink = page.getByRole("link", { name: "Experience" });
     await railLink.hover();
     await expect(railLink).toHaveCSS("box-shadow", "none");
 
-    const coverButton = page.getByRole("link", { name: /Ver cómo resuelvo cada ámbito/ });
+    const coverButton = page.getByRole("link", { name: /See how I approach each sector/ });
     await coverButton.hover();
     await expect(coverButton).toHaveCSS("background-color", "rgb(23, 21, 15)");
   });
