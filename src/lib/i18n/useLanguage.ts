@@ -1,5 +1,5 @@
-import type { Language } from "@/lib/i18n/Language";
+import { DEFAULT_LANGUAGE, type Language } from "@/lib/i18n/Language";
 
 export function useLanguage(): { language: Language } {
-  return { language: "es" };
+  return { language: DEFAULT_LANGUAGE };
 }

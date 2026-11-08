@@ -71,7 +71,7 @@
       }
     },
     {
-      "includes": ["src/api/**", "src/components/**", "src/lib/**"],
+      "includes": ["src/api/**", "src/components/**", "src/config/**", "src/lib/**"],
       "linter": {
         "rules": {
           "style": {

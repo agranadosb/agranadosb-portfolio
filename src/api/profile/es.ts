@@ -10,6 +10,7 @@ export const CONTENT: ProfileContent = {
   profile: {
     name: "Alejandro Granados",
     role: "CTO en Heligráfics · Arquitecto de software · Valencia",
+    address: { locality: "Valencia", countryCode: "ES" },
     headline: {
       lead: "Arquitectura de datos e IA para ",
       highlight:
