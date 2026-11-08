@@ -15,17 +15,14 @@ export function AreaCard({ area, touchedLabel, appliedAILabel }: AreaCardProps) 
         <h4 id={titleId} className="area-card__title">
           {area.title}
         </h4>
-        <span className="area-card__tags">
-          {area.appliesAI && (
-            <span className="ia-badge">
-              <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M4 12l5 5L20 6" />
-              </svg>
-              {appliedAILabel}
-            </span>
-          )}
-          <span className="area-card__code">{area.code}</span>
-        </span>
+        {area.appliesAI && (
+          <span className="ia-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 12l5 5L20 6" />
+            </svg>
+            {appliedAILabel}
+          </span>
+        )}
       </header>
       <dl className="area-card__body">
         <div>

@@ -10,7 +10,7 @@ export function Experience() {
   return (
     <section id="experiencia" className="section" aria-labelledby="experiencia-title">
       <SectionHeader
-        code="A-02"
+        number="02"
         eyebrow={strings.eyebrow}
         title={strings.title}
         titleId="experiencia-title"

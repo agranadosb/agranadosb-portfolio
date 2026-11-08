@@ -10,7 +10,7 @@ export function Contact() {
   return (
     <section id="contacto" className="section" aria-labelledby="contacto-title">
       <SectionHeader
-        code="A-04"
+        number="04"
         eyebrow={strings.eyebrow}
         title={strings.title}
         titleId="contacto-title"

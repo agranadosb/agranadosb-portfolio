@@ -93,7 +93,6 @@ export const CONTENT: ProfileContent = {
   areas: [
     {
       id: "incendios",
-      code: "Á-01",
       title: "Lucha contra incendios",
       appliesAI: true,
       items: [
@@ -117,7 +116,6 @@ export const CONTENT: ProfileContent = {
     },
     {
       id: "forestal",
-      code: "Á-02",
       title: "Gestión forestal",
       appliesAI: true,
       items: [
@@ -139,7 +137,6 @@ export const CONTENT: ProfileContent = {
     },
     {
       id: "emergencias",
-      code: "Á-03",
       title: "Gestión de emergencias",
       appliesAI: true,
       items: [
@@ -154,7 +151,6 @@ export const CONTENT: ProfileContent = {
     },
     {
       id: "fertirrigacion",
-      code: "Á-04",
       title: "Fertirrigación",
       appliesAI: false,
       items: [

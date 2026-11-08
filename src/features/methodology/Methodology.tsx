@@ -10,7 +10,7 @@ export function Methodology({ children }: { children: ReactNode }) {
   return (
     <section id="metodologia" className="section methodology" aria-labelledby="metodologia-title">
       <SectionHeader
-        code="A-01"
+        number="01"
         eyebrow={strings.eyebrow}
         title={strings.title}
         titleId="metodologia-title"

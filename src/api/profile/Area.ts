@@ -5,7 +5,6 @@ export interface AreaItem {
 
 export interface Area {
   id: string;
-  code: string;
   title: string;
   appliesAI: boolean;
   items: AreaItem[];

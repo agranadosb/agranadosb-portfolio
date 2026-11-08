@@ -8,7 +8,7 @@ export function Education() {
   return (
     <section id="formacion" className="section" aria-labelledby="formacion-title">
       <SectionHeader
-        code="A-03"
+        number="03"
         eyebrow={education.institution}
         title={strings.title}
         titleId="formacion-title"
