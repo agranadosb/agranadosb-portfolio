@@ -2,7 +2,7 @@
 
 ## Project
 
-Personal portfolio of Alejandro Granados (portfolio.agranadosb.com) — CTO and software architect in Valencia, Spain. One page, in Spanish (`/`) and English (`/en/`), aimed at recruiters and AI screening tools: the served HTML must show all the content without JavaScript.
+Personal portfolio of Alejandro Granados (portfolio.agranadosb.com) — CTO and software architect in Valencia, Spain. One page, in English (`/`) and Spanish (`/es/`), aimed at recruiters and AI screening tools: the served HTML must show all the content without JavaScript.
 
 Stack: React 19 · TypeScript · React Router v8 (framework mode, pre-rendered) · Vite · plain CSS · Biome. No backend: content is static and the site is deployed as static assets to Cloudflare Workers.
 
@@ -20,7 +20,7 @@ npm run preview               # build + wrangler dev (local Workers runtime)
 npm run deploy                # build + wrangler deploy (Cloudflare)
 ```
 
-Node 22 only exists inside the devcontainer (`.devcontainer/`): run every command there. Always run `npm run build` and `npm run lint` after any change. CI runs both only on PRs ready for review: drafts skip it, and marking a PR ready triggers it. `SCREENSHOTS=1 npx playwright test e2e/screenshots.spec.ts` captures the page at 1440 and 390 px in both themes. `OG_IMAGE=1 npx playwright test e2e/og-image.spec.ts` renders `public/og.png` and `public/og-en.png` (the image shown when each version is shared) from the profile copy: run it again when the name, role or headline change.
+Node 22 only exists inside the devcontainer (`.devcontainer/`): run every command there. Always run `npm run build` and `npm run lint` after any change. CI runs both only on PRs ready for review: drafts skip it, and marking a PR ready triggers it. `SCREENSHOTS=1 npx playwright test e2e/screenshots.spec.ts` captures the page at 1440 and 390 px in both themes. `OG_IMAGE=1 npx playwright test e2e/og-image.spec.ts` renders `public/og.png` and `public/og-es.png` (the image shown when each version is shared) from the profile copy: run it again when the name, role or headline change.
 
 ## Architecture
 
@@ -49,10 +49,10 @@ Biome enforces the import rules (`overrides` in `biome.json` with `noRestrictedI
 
 ## Content and text
 
-- The approved copy lives in `src/api/profile/es.ts`, typed by `ProfileContent`; `en.ts` is its English translation. Change both together, and the English follows the Spanish, never the other way around. Use the copy as it is: never invent or rewrite content, and never name internal projects or clients. Tools only appear in the stack table, never tied to a project.
+- The approved copy lives in `src/api/profile/es.ts`, typed by `ProfileContent`; `en.ts` is its English translation. Change both together, and the English follows the Spanish, never the other way around, even though English is the main page. Use the copy as it is: never invent or rewrite content, and never name internal projects or clients. Tools only appear in the stack table, never tied to a project.
 - Content still to be confirmed is modelled, not faked: the contact email can be `null`, and the page then shows a visible placeholder.
 - UI text (labels, headings, captions) lives in the hook of the component that shows it, as a `Record<Language, {...}>` constant.
-- Spanish is the default language, at `/`; every other language lives under its code (`/en/`). `LANGUAGE_HOME` in `lib/i18n` gives each language's home, and `useLanguage()` reads the language from the route (`meta` functions read it from `location`), so one page component serves every language and `root.tsx` sets `<html lang>`. Each home declares all versions with `hreflang` (`x-default` is the Spanish one), with its own canonical, `og:locale` and Open Graph image, and the rail links to the other language.
+- English is the default language, at `/`; every other language lives under its code (`/es/`). `LANGUAGE_HOME` in `lib/i18n` gives each language's home, and `useLanguage()` reads the language from the route (`meta` functions read it from `location`), so one page component serves every language and `root.tsx` sets `<html lang>`. Each home declares all versions with `hreflang` (`x-default` is the English one), with its own canonical, `og:locale` and Open Graph image, and the rail links to the other language.
 - Adding a language means adding it to `Language` and `LANGUAGE_HOME`, writing its `api/profile` module and translations wherever `tsc` asks, adding its route in `routes.ts`, its home and its `404` to `prerender`, its directory to the 404 rename in `buildEnd`, and its Open Graph image.
 
 ## Pre-rendered HTML
@@ -60,7 +60,7 @@ Biome enforces the import rules (`overrides` in `biome.json` with `noRestrictedI
 - `react-router build` renders every route to HTML (`ssr: false` + `prerender`), and React hydrates it. Nothing may read `window`, `document` or `localStorage` while rendering, or the client render will not match the HTML: read them in effects.
 - The theme button renders both icons and CSS shows the right one; its label starts generic and becomes specific after mount. That keeps the HTML identical whatever theme the visitor has.
 - `public/_redirects` sends the old CV URLs (`/cv.html`, `/cv`) to the home with a 301.
-- Unknown paths get the not-found page with a 404, in their language: `routes/NotFoundPage.tsx` is the catch-all route, pre-rendered at `/404` and `/en/404` and moved to `404.html` and `en/404.html` in `buildEnd`. Cloudflare serves the `404.html` nearest to the requested path (`not_found_handling: "404-page"`), so `/en/anything` gets the English one. The page takes its language from the same path, so hydration matches the file Cloudflare chose.
+- Unknown paths get the not-found page with a 404, in their language: `routes/NotFoundPage.tsx` is the catch-all route, pre-rendered at `/404` and `/es/404` and moved to `404.html` and `es/404.html` in `buildEnd`. Cloudflare serves the `404.html` nearest to the requested path (`not_found_handling: "404-page"`), so `/es/anything` gets the Spanish one. The page takes its language from the same path, so hydration matches the file Cloudflare chose.
 
 ## Theme
 
@@ -80,7 +80,7 @@ Biome enforces the import rules (`overrides` in `biome.json` with `noRestrictedI
 
 - React Router v8 needs Node 22.22+ and React 19.2.7+. `.node-version` makes Cloudflare Workers Builds use Node 22.
 - `react-router build` may install packages it is missing (it added `isbot`) and prune devDependencies while doing it. If the build fails with a missing module, run `npm install` and build again.
-- React Router pre-renders `/404` and `/en/404` as `404/index.html`; `buildEnd` in `react-router.config.ts` runs after pre-rendering and renames them. That config is typed `const config: Config`, not `satisfies Config`: with `buildEnd`, the inferred type cannot be named and `tsc -b` fails (TS2742).
+- React Router pre-renders `/404` and `/es/404` as `404/index.html`; `buildEnd` in `react-router.config.ts` runs after pre-rendering and renames them. That config is typed `const config: Config`, not `satisfies Config`: with `buildEnd`, the inferred type cannot be named and `tsc -b` fails (TS2742).
 - Biome does not merge `noRestrictedImports` options across overrides: the last matching override wins. That is why every override repeats the relative-import patterns.
 - A leftover `.wrangler/deploy/config.json` (from the old Cloudflare Vite plugin) makes wrangler serve `dist/` instead of `build/client`. Delete it.
 - `wrangler dev` breaks (500) if `build/` is rebuilt under it, which `npm run test:e2e` does. Restart it.
