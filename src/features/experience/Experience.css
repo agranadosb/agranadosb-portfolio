@@ -226,7 +226,8 @@
 }
 
 .now {
-  padding: 3px 8px;
+  padding: 2px 7px;
+  border: 1px solid var(--accentEdge);
   background: var(--accent);
   color: var(--onAccent);
   font-size: 12px;

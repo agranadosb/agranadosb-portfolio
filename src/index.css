@@ -8,6 +8,7 @@
   --accent: #eba91c;
   --accentText: #8a5800;
   --onAccent: #17150f;
+  --accentEdge: var(--ink);
   --hexLine: rgba(214, 150, 20, 0.2);
   --hlColor: #17150f;
   --hlBg: linear-gradient(
@@ -31,6 +32,7 @@
     --accent: #f5b83d;
     --accentText: #f5b83d;
     --onAccent: #14130f;
+    --accentEdge: var(--accent);
     --hexLine: rgba(245, 184, 61, 0.1);
     --hlColor: #f5b83d;
     --hlBg: none;
@@ -47,6 +49,7 @@
   --accent: #f5b83d;
   --accentText: #f5b83d;
   --onAccent: #14130f;
+  --accentEdge: var(--accent);
   --hexLine: rgba(245, 184, 61, 0.1);
   --hlColor: #f5b83d;
   --hlBg: none;
@@ -73,6 +76,17 @@ a {
 
 a:hover {
   color: var(--accentText);
+}
+
+p a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accentText);
+  outline-offset: 3px;
 }
 
 .hexbg {

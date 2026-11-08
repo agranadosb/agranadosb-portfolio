@@ -168,7 +168,7 @@
 
 .hm-core {
   fill: var(--accent);
-  stroke: var(--accent);
+  stroke: var(--accentEdge);
   stroke-width: 1.5;
   transform-box: fill-box;
   transform-origin: center;

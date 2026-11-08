@@ -69,8 +69,10 @@ Biome enforces the import rules (`overrides` in `biome.json` with `noRestrictedI
 ## Styling
 
 - Plain CSS: the prototype's tokens and rules. Global tokens and shared classes in `src/index.css`; each component's rules in a stylesheet next to it, imported by the component. No Tailwind.
-- Tokens keep the design spec's names (`--ground`, `--panel`, `--ink`, `--muted`, `--line`, `--accent`, `--accentText`, `--onAccent`, `--hexLine`, `--hlColor`, `--hlBg`).
+- Tokens keep the design spec's names (`--ground`, `--panel`, `--ink`, `--muted`, `--line`, `--accent`, `--accentText`, `--onAccent`, `--hexLine`, `--hlColor`, `--hlBg`), plus `--accentEdge` for the edge of amber fills.
 - Amber is never text on the light theme: text and lines use `--accentText`; `--accent` is only a fill, with `--onAccent` text on it.
+- A meaningful amber fill (a badge, the email card, the hexagon core) has a `--accentEdge` border: `--ink` on the light theme, the fill itself on the dark one.
+- Never colour alone: the focus ring is the global `:focus-visible` (3 px, `--accentText`), rail items draw a box on hover, and links inside a paragraph are underlined. Links that are components (cards, buttons, chips) carry a class and their own cue.
 - Every animation is CSS or SVG and has a `prefers-reduced-motion` rule that leaves only colour changes. The parallax checks the same media query in JS.
 
 ## What the tools impose

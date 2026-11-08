@@ -73,6 +73,12 @@ test("the rail and the page can be walked with the keyboard", async ({ page }) =
   expect(reached.some((name) => name.startsWith("Cambiar a tema"))).toBe(true);
   expect(reached.some((name) => name.startsWith("Ver cómo resuelvo cada ámbito"))).toBe(true);
 
+  const focusRing = await page.evaluate(() => {
+    const style = getComputedStyle(document.activeElement as Element);
+    return { style: style.outlineStyle, width: Number.parseFloat(style.outlineWidth) };
+  });
+  expect(focusRing).toEqual({ style: "solid", width: 3 });
+
   await page.getByRole("link", { name: "Experiencia" }).focus();
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/#experiencia$/);
