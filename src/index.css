@@ -74,8 +74,11 @@ a {
   text-decoration: none;
 }
 
-a:hover {
-  color: var(--accentText);
+/* Hover styles only where there is a pointer: on a touch screen they stay stuck after a tap. */
+@media (hover: hover) {
+  a:hover {
+    color: var(--accentText);
+  }
 }
 
 p a {

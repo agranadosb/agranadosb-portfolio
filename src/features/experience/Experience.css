@@ -138,29 +138,32 @@
   opacity: 0;
 }
 
-.tl-item:hover .hx-i,
-.tl-item:focus-within .hx-i {
-  fill: var(--accent);
-  animation: hxCore 520ms cubic-bezier(0.3, 1.6, 0.5, 1);
-}
+/* Only with a pointer: on a touch screen a tapped role would stay lit like the current one. */
+@media (hover: hover) {
+  .tl-item:hover .hx-i,
+  .tl-item:focus-within .hx-i {
+    fill: var(--accent);
+    animation: hxCore 520ms cubic-bezier(0.3, 1.6, 0.5, 1);
+  }
 
-.tl-item:hover .hx-m,
-.tl-item:focus-within .hx-m {
-  stroke: var(--accentText);
-  stroke-width: 1.5;
-  transition-delay: 140ms;
-}
+  .tl-item:hover .hx-m,
+  .tl-item:focus-within .hx-m {
+    stroke: var(--accentText);
+    stroke-width: 1.5;
+    transition-delay: 140ms;
+  }
 
-.tl-item:hover .hx-o,
-.tl-item:focus-within .hx-o {
-  stroke: var(--accentText);
-  stroke-width: 2;
-  transition-delay: 280ms;
-}
+  .tl-item:hover .hx-o,
+  .tl-item:focus-within .hx-o {
+    stroke: var(--accentText);
+    stroke-width: 2;
+    transition-delay: 280ms;
+  }
 
-.tl-item:hover .hx-wave,
-.tl-item:focus-within .hx-wave {
-  animation: hxWave 700ms ease-out 360ms 1 both;
+  .tl-item:hover .hx-wave,
+  .tl-item:focus-within .hx-wave {
+    animation: hxWave 700ms ease-out 360ms 1 both;
+  }
 }
 
 @keyframes hxCore {

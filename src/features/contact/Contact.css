@@ -23,8 +23,10 @@
   box-shadow: inset 0 0 0 1px var(--accentEdge);
 }
 
-.contact__card--email:hover {
-  color: var(--onAccent);
+@media (hover: hover) {
+  .contact__card--email:hover {
+    color: var(--onAccent);
+  }
 }
 
 .contact__label {

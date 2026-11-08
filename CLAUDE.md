@@ -73,6 +73,7 @@ Biome enforces the import rules (`overrides` in `biome.json` with `noRestrictedI
 - Amber is never text on the light theme: text and lines use `--accentText`; `--accent` is only a fill, with `--onAccent` text on it.
 - A meaningful amber fill (a badge, the email card, the hexagon core) has a `--accentEdge` border: `--ink` on the light theme, the fill itself on the dark one.
 - Never colour alone: the focus ring is the global `:focus-visible` (3 px, `--accentText`), rail items draw a box on hover, and links inside a paragraph are underlined. Links that are components (cards, buttons, chips) carry a class and their own cue.
+- Hover styles go inside `@media (hover: hover)`: on a touch screen a tap leaves the element under `:hover` until the next tap, and the style would stay stuck. Focus styles stay outside. The methodology hexagon is the exception: on touch, its animation plays on tap.
 - Every animation is CSS or SVG and has a `prefers-reduced-motion` rule that leaves only colour changes. The parallax checks the same media query in JS.
 
 ## What the tools impose
