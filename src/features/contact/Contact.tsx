@@ -25,7 +25,7 @@ export function Contact() {
         >
           <span className="contact__label">{strings.professionalNetwork}</span>
           <span className="contact__link">
-            <NetworkIcon network="linkedin" size={30} />
+            <NetworkIcon network="linkedin" size={26} />
             {strings.linkedin} ↗
           </span>
         </a>
@@ -37,7 +37,7 @@ export function Contact() {
         >
           <span className="contact__label">{strings.code}</span>
           <span className="contact__link">
-            <NetworkIcon network="github" size={30} />
+            <NetworkIcon network="github" size={26} />
             {strings.github} ↗
           </span>
         </a>

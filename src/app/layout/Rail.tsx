@@ -78,7 +78,7 @@ export function Rail({ open, onToggle }: RailProps) {
         rel="noopener noreferrer"
         aria-label={strings.linkedin}
       >
-        <NetworkIcon network="linkedin" size={22} />
+        <NetworkIcon network="linkedin" size={20} />
         <span className="tip">{strings.linkedin} ↗</span>
       </a>
       <a
@@ -88,7 +88,7 @@ export function Rail({ open, onToggle }: RailProps) {
         rel="noopener noreferrer"
         aria-label={strings.github}
       >
-        <NetworkIcon network="github" size={22} />
+        <NetworkIcon network="github" size={20} />
         <span className="tip">{strings.github} ↗</span>
       </a>
       <span className="rail-sep" aria-hidden="true" />

@@ -175,6 +175,11 @@ p a {
   stroke-linejoin: round;
 }
 
+.ico--mark {
+  fill: currentColor;
+  stroke: none;
+}
+
 .section {
   display: flex;
   flex-direction: column;
