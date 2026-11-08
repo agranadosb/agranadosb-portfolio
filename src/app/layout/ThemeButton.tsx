@@ -36,7 +36,11 @@ export function ThemeButton({ className, withTip, labels }: ThemeButtonProps) {
       >
         <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" />
       </svg>
-      {withTip && <span className="tip">{label}</span>}
+      {withTip && (
+        <span className="tip" aria-hidden="true">
+          {label}
+        </span>
+      )}
     </button>
   );
 }
