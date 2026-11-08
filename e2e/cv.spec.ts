@@ -1,9 +1,8 @@
 import { expect, test } from "@playwright/test";
-import { PDFDict, PDFDocument, PDFName, PDFString } from "pdf-lib";
+import { PDFDocument, PDFName, PDFString } from "pdf-lib";
 import { CONTENT as EN } from "../src/api/profile/en";
 import { CONTENT as ES } from "../src/api/profile/es";
 import { CV } from "../src/config/site";
-import { cvDocument, cvMetadata, cvSourceHash } from "./cv/document";
 
 const CVS = [
   { language: "en", home: "/", content: EN },
@@ -13,25 +12,22 @@ const CVS = [
 const text = (value: unknown) => (value instanceof PDFString ? value.decodeText() : undefined);
 
 for (const { language, content } of CVS) {
-  test(`the ${language} CV is served, tagged, described and up to date`, async ({ request }) => {
+  test(`the build renders the ${language} CV from the copy, tagged and described`, async ({
+    request,
+  }) => {
     const response = await request.get(`/${CV[language].path}`);
     expect(response.status()).toBe(200);
     expect(response.headers()["content-type"]).toBe("application/pdf");
 
     const pdf = await PDFDocument.load(await response.body(), { updateMetadata: false });
-    const metadata = cvMetadata(content, language);
-    expect(pdf.getTitle()).toBe(metadata.title);
-    expect(pdf.getAuthor()).toBe(metadata.author);
+    expect(pdf.getAuthor()).toBe(content.profile.name);
+    expect(pdf.getTitle()).toMatch(new RegExp(`^${content.profile.name} · `));
+    expect(pdf.getSubject()).toContain(content.profile.role);
+    expect(pdf.getKeywords()).toContain(content.stack[0].tools[0]);
     expect(pdf.getPageCount()).toBeLessThanOrEqual(2);
     expect(text(pdf.catalog.lookup(PDFName.of("Lang")))).toBe(language);
     expect(pdf.catalog.has(PDFName.of("StructTreeRoot"))).toBe(true);
     expect(pdf.catalog.has(PDFName.of("Outlines"))).toBe(true);
-
-    const info = pdf.context.lookup(pdf.context.trailerInfo.Info, PDFDict);
-    expect(
-      text(info.lookup(PDFName.of("CvSource"))),
-      "the CV is stale: run CV_PDF=1 npx playwright test e2e/cv-pdf.spec.ts",
-    ).toBe(cvSourceHash(cvDocument(content, language)));
   });
 }
 
