@@ -99,6 +99,20 @@ test("the rail and the page can be walked with the keyboard", async ({ page }) =
   await expect(page).toHaveURL(/#experiencia$/);
 });
 
+test("on a phone the stack table fits the screen and stays a table", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+
+  const stack = page.locator("#stack");
+  const { clientWidth, scrollWidth } = await stack.evaluate((box) => ({
+    clientWidth: box.clientWidth,
+    scrollWidth: box.scrollWidth,
+  }));
+  expect(scrollWidth).toBeLessThanOrEqual(clientWidth);
+  await expect(page.getByRole("table")).toBeVisible();
+  await expect(page.getByRole("rowheader", { name: "Geoespacial" })).toBeVisible();
+});
+
 test("the chosen theme is saved and applied before React loads", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "light" });
   await page.goto("/");

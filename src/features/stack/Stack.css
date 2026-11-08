@@ -4,11 +4,11 @@
   background: var(--ground);
   padding: 22px 22px 8px;
   scroll-margin-top: 24px;
+  container-type: inline-size;
 }
 
 .stack__table {
   width: 100%;
-  min-width: 640px;
   border-collapse: collapse;
 }
 
@@ -57,4 +57,39 @@
   font-size: 17px;
   font-weight: 700;
   width: 220px;
+}
+
+/* In a narrow box each row stacks: the capability, then its tools. */
+@container (max-width: 600px) {
+  .stack__table,
+  .stack__table caption,
+  .stack__table tbody,
+  .stack__table tr,
+  .stack__table th,
+  .stack__table td {
+    display: block;
+  }
+
+  .stack__table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .stack__table tbody {
+    border-top: 1.5px solid var(--ink);
+  }
+
+  .stack__table tbody th {
+    width: auto;
+    padding: 14px 0 8px;
+    border-bottom: 0;
+  }
+
+  .stack__table td {
+    padding: 0 0 14px;
+  }
 }
