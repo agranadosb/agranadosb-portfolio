@@ -13,6 +13,7 @@ Stack: React 19 · TypeScript · Tailwind v4 · Vite + SWC · Biome. No backend:
 ## Commands
 
 ```bash
+./scripts/localdev/start.sh   # dev server (localhost:5173), from the repo root wherever it's called from
 npm run dev                   # dev server (localhost:5173)
 npm run build                 # tsc -b && vite build
 npm run lint                  # biome lint, including the import rules

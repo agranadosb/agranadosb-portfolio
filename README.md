@@ -17,7 +17,7 @@ Requires [Docker](https://www.docker.com/) and [VS Code](https://code.visualstud
 2. Once attached, start the dev server:
 
    ```bash
-   npm run dev
+   ./scripts/localdev/start.sh
    ```
 
    Available at http://localhost:5173.
@@ -26,6 +26,7 @@ Requires [Docker](https://www.docker.com/) and [VS Code](https://code.visualstud
 
 | Command | Description |
 |---|---|
+| `./scripts/localdev/start.sh` | Start the dev server from the repo root, wherever it's called from |
 | `npm run dev` | Start the Vite dev server |
 | `npm run build` | Type-check and build for production |
 | `npm run preview` | Preview the production build |
