@@ -1,0 +1,51 @@
+.section-header {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  border: 1.5px solid var(--ink);
+  background: var(--panel);
+}
+
+.section-header__number {
+  padding: 8px 16px;
+  border-right: 1.5px solid var(--ink);
+  display: flex;
+  align-items: center;
+}
+
+.section-header__number polygon {
+  fill: var(--ground);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.section-header__number text {
+  fill: var(--ink);
+  font-family: var(--display);
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+}
+
+.section-header__text {
+  padding: 12px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  justify-content: center;
+}
+
+.section-header__eyebrow {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.section-header__title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}

@@ -1,66 +1,69 @@
-import { SocialLink } from "@/components/SocialLink";
 import { useProfileIntroduction } from "@/features/profile/useProfileIntroduction";
+import "@/features/profile/ProfileIntroduction.css";
 
-interface ProfileIntroductionProps {
-  onContact: () => void;
-}
-
-export function ProfileIntroduction({ onContact }: ProfileIntroductionProps) {
-  const { profile, strings } = useProfileIntroduction();
+export function ProfileIntroduction() {
+  const { profile, areas, strings } = useProfileIntroduction();
 
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 bg-surface-base overflow-hidden"
-    >
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 55% at 50% -5%, color-mix(in oklch, var(--color-accent) 13%, transparent), transparent 70%)",
-        }}
-      />
-
-      <div className="relative z-10 flex flex-col items-center">
-        <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-ink-primary mb-4">
-          {profile.name}
-        </h1>
-
-        <p className="text-base md:text-lg text-accent font-semibold mb-6 tracking-wide">
-          {profile.title}
+    <section id="inicio" className="cover" aria-labelledby="inicio-title">
+      <div className="cover__intro">
+        <div className="cover__identity">
+          <h1 id="inicio-title" className="cover__name">
+            {profile.name}
+            <span className="cover__dot">.</span>
+          </h1>
+          <p className="cover__role">{profile.role}</p>
+        </div>
+        <div aria-hidden="true" className="cover__rule" />
+        <p className="cover__headline">
+          {profile.headline.lead}
+          <span className="cover__highlight">{profile.headline.highlight}</span>
         </p>
+      </div>
 
-        <p className="text-ink-secondary max-w-md mx-auto mb-10 text-base md:text-lg leading-relaxed">
-          {profile.tagline}
-        </p>
-
-        <div className="flex flex-wrap gap-3 justify-center mb-6">
-          <a
-            href="#experience"
-            className="px-6 py-2.5 bg-accent text-surface-base font-semibold rounded-lg hover:opacity-90 transition-opacity text-sm"
-          >
-            {strings.viewExperience}
-          </a>
-          <a
-            href="/cv.html?print=auto"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-2.5 border border-border text-ink-secondary font-medium rounded-lg hover:border-accent hover:text-ink-primary transition-colors text-sm"
-          >
-            {strings.downloadCV}
-          </a>
-          <button
-            type="button"
-            onClick={onContact}
-            className="px-6 py-2.5 border border-border text-ink-secondary font-medium rounded-lg hover:border-accent hover:text-ink-primary transition-colors text-sm cursor-pointer"
-          >
-            {strings.contact}
-          </button>
+      <div className="cover__body">
+        <div className="cover__main">
+          <div className="cover__about">
+            <h2 className="sr">{strings.about}</h2>
+            {profile.about.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+          <nav aria-label={strings.areas} className="cover__areas">
+            <span className="cover__label">{strings.areas}</span>
+            <ul className="chips cover__chips">
+              {areas.map((area) => (
+                <li key={area.id}>
+                  <a href={`#ambito-${area.id}`}>{area.title}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div className="cover__actions">
+            <a href="#metodologia" className="cover__button">
+              {strings.seeAreas} <span aria-hidden="true">↓</span>
+            </a>
+          </div>
         </div>
 
-        <div className="flex gap-5">
-          <SocialLink network="linkedin" url={profile.linkedin.url} />
-          <SocialLink network="github" url={profile.github.url} />
+        <div className="summary-box">
+          <div className="summary-box__head">
+            <h2 className="summary-box__title">{strings.summary}</h2>
+            <svg aria-hidden="true" width="20" height="18" viewBox="0 0 20 18">
+              <polygon points="5,1 15,1 19,9 15,17 5,17 1,9" className="summary-box__hex" />
+            </svg>
+          </div>
+          <dl className="summary-box__list">
+            {profile.summary.map((item) => (
+              <div key={item.term} className="summary-box__row">
+                <dt>{item.term}</dt>
+                <dd>
+                  {item.highlight && <strong>{item.highlight}</strong>}
+                  {item.detail}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </section>

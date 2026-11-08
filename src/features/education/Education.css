@@ -1,0 +1,84 @@
+.education {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr));
+  gap: 48px;
+  align-items: start;
+}
+
+.education__degrees {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.degree {
+  border: 1px solid var(--ink);
+  background: var(--panel);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.degree__level {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accentText);
+}
+
+.degree__title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.degree__note {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.education__honors {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.education__honors-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.hexlist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.hexlist li {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  align-items: baseline;
+}
+
+.hexlist li::before {
+  content: "";
+  width: 12px;
+  height: 10.4px;
+  background: var(--accent);
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+  transform: translateY(1px);
+}

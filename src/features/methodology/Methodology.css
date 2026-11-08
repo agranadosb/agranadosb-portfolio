@@ -1,0 +1,315 @@
+.methodology {
+  gap: 48px;
+}
+
+.methodology__figure {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
+  gap: 40px 56px;
+  align-items: center;
+}
+
+.methodology__text {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.methodology__principle {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.methodology__kicker {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accentText);
+}
+
+.methodology__statement {
+  margin: 0;
+  font-stretch: 112%;
+  font-weight: 800;
+  font-size: clamp(28px, 3.2vw, 42px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.methodology__lead {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+.methodology__concepts {
+  margin: 0;
+  border-top: 1.5px solid var(--ink);
+}
+
+.methodology__concepts > div {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.methodology__concepts dt {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  padding-top: 2px;
+}
+
+.methodology__concepts dd {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.methodology__practice {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.methodology__label {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.methodology__practice dl {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.methodology__practice dl > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.methodology__practice dt {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.methodology__practice dd {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.methodology__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.methodology__legend strong {
+  color: var(--ink);
+}
+
+.methodology__legend span:nth-child(2) strong {
+  color: var(--accentText);
+}
+
+.hexmeth {
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+  justify-self: center;
+  overflow: visible;
+}
+
+.hm-outer {
+  fill: var(--ground);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.hm-middle {
+  fill: var(--panel);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.hm-links {
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.hm-adp {
+  fill: var(--ground);
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+
+.hm-port {
+  fill: var(--ink);
+}
+
+.hm-core {
+  fill: var(--accent);
+  stroke: var(--accentEdge);
+  stroke-width: 1.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: filter 300ms;
+}
+
+.hm-core-number {
+  fill: var(--onAccent);
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 26px;
+}
+
+.hm-core-label {
+  fill: var(--onAccent);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+}
+
+.hm-label {
+  fill: var(--ink);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+}
+
+.hexmeth .hm-adp rect,
+.hexmeth .hm-port rect {
+  transition: fill 220ms ease;
+}
+
+.hexmeth .hm-sig path {
+  fill: none;
+  stroke: var(--accentText);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 26 600;
+  stroke-dashoffset: 26;
+  opacity: 0;
+}
+
+.hexmeth:hover .hm-sig path {
+  opacity: 1;
+  animation: hmSig 1.8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.hexmeth:hover .hm-sig path:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+.hexmeth:hover .hm-sig path:nth-child(3) {
+  animation-delay: 1.2s;
+}
+
+.hexmeth:hover .hm-core {
+  animation: hmCore 0.6s ease-in-out infinite;
+}
+
+.hexmeth:hover .hm-links {
+  animation: hmFlow 0.5s linear infinite;
+}
+
+.hexmeth:hover .hm-port rect {
+  fill: var(--accentText);
+}
+
+.hexmeth:hover .hm-adp rect {
+  fill: var(--accent);
+}
+
+.hexmeth:hover .hm-port rect:nth-child(2),
+.hexmeth:hover .hm-adp rect:nth-child(2) {
+  transition-delay: 80ms;
+}
+
+.hexmeth:hover .hm-port rect:nth-child(3),
+.hexmeth:hover .hm-adp rect:nth-child(3) {
+  transition-delay: 160ms;
+}
+
+.hexmeth:hover .hm-port rect:nth-child(4),
+.hexmeth:hover .hm-adp rect:nth-child(4) {
+  transition-delay: 240ms;
+}
+
+.hexmeth:hover .hm-port rect:nth-child(5),
+.hexmeth:hover .hm-adp rect:nth-child(5) {
+  transition-delay: 320ms;
+}
+
+.hexmeth:hover .hm-port rect:nth-child(6),
+.hexmeth:hover .hm-adp rect:nth-child(6) {
+  transition-delay: 400ms;
+}
+
+@keyframes hmSig {
+  0% {
+    stroke-dashoffset: 26;
+    opacity: 0;
+  }
+
+  8% {
+    opacity: 1;
+  }
+
+  92% {
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dashoffset: -282;
+    opacity: 0;
+  }
+}
+
+@keyframes hmCore {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.045);
+  }
+}
+
+@keyframes hmFlow {
+  to {
+    stroke-dashoffset: -6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hexmeth:hover .hm-sig path,
+  .hexmeth:hover .hm-core,
+  .hexmeth:hover .hm-links {
+    animation: none;
+  }
+
+  .hexmeth .hm-sig {
+    display: none;
+  }
+}

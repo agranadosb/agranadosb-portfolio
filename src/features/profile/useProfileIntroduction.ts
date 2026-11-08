@@ -1,21 +1,21 @@
 import { getProfileContent } from "@/api/profile";
 import type { Language } from "@/lib/i18n/Language";
-import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { useLanguage } from "@/lib/i18n/useLanguage";
 
-const STRINGS: Record<Language, { viewExperience: string; downloadCV: string; contact: string }> = {
-  en: {
-    viewExperience: "View Experience",
-    downloadCV: "Download CV",
-    contact: "Contact",
-  },
+const STRINGS: Record<
+  Language,
+  { about: string; areas: string; seeAreas: string; summary: string }
+> = {
   es: {
-    viewExperience: "Ver experiencia",
-    downloadCV: "Descargar CV",
-    contact: "Contacto",
+    about: "Sobre mí",
+    areas: "Ámbitos en los que trabajo",
+    seeAreas: "Ver cómo resuelvo cada ámbito",
+    summary: "En resumen",
   },
 };
 
 export function useProfileIntroduction() {
   const { language } = useLanguage();
-  return { profile: getProfileContent(language).profile, strings: STRINGS[language] };
+  const { profile, areas } = getProfileContent(language);
+  return { profile, areas, strings: STRINGS[language] };
 }
