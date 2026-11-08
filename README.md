@@ -1,13 +1,12 @@
 # agranadosb · Portfolio
 
-Personal portfolio and CV for Alejandro Granados — CTO, Staff AI Engineer, and Software Architect based in Valencia, Spain.
+Personal portfolio of Alejandro Granados — CTO and software architect based in Valencia, Spain: data architecture and AI in production.
 
-Built with **React 19 · TypeScript · Tailwind v4 · Vite + SWC · Biome**, following the Heligrafics frontend standard: a feature-based structure derived from Bulletproof React.
+Built with **React 19 · TypeScript · React Router v8 · Vite · Biome**, pre-rendered to static HTML and following the Heligrafics frontend standard: a feature-based structure derived from Bulletproof React.
 
-## Pages
+## Page
 
-- `/` — Portfolio (profile, about, skills, experience, education, honors, contact)
-- `/cv` — Print-optimized CV (A4, downloadable as PDF)
+`/` — one page in Spanish: cover, methodology and work areas, technology stack, experience, education and contact. Every word is in the served HTML, readable without JavaScript.
 
 ## Getting started
 
@@ -27,9 +26,10 @@ Requires [Docker](https://www.docker.com/) and [VS Code](https://code.visualstud
 | Command | Description |
 |---|---|
 | `./scripts/localdev/start.sh` | Start the dev server from the repo root, wherever it's called from |
-| `npm run dev` | Start the Vite dev server |
-| `npm run build` | Type-check and build for production |
-| `npm run preview` | Preview the production build |
+| `npm run dev` | Start the React Router dev server |
+| `npm run build` | Type-check and pre-render the site into `build/client` |
+| `npm run preview` | Serve the production build with wrangler |
+| `npm run test:e2e` | Run the Playwright end-to-end checks |
 | `npm run lint` | Run Biome linter |
 | `npm run lint:fix` | Run Biome linter with auto-fix |
 | `npm run format` | Format with Biome |
@@ -41,14 +41,15 @@ Feature-based, with imports flowing one way: shared code → features → app.
 
 ```
 src/
-  app/         # Shell: entry points, providers, layout and pages (routes/)
-  features/    # One folder per user-facing concept (about, experience, cv, ...)
-  api/         # The only data source: profile content and its types
+  app/         # Shell: HTML document, routes, layout (rail, hexagon background) and pages
+  features/    # One folder per section (profile, methodology, areas, stack, experience, ...)
+  api/         # The only data source: the approved content and its types
   components/  # UI with no business concept
-  lib/         # Shared capabilities: i18n, theme, focus-trap
+  lib/         # Shared capabilities: i18n, theme
+  config/      # Site configuration
 ```
 
-Biome enforces the import boundaries, and CI runs build and lint on pull requests ready for review (not on drafts). All portfolio content lives in `src/api/profile/`: language-independent job facts in `jobs.ts`, translated text in `en.ts` and `es.ts`.
+Biome enforces the import boundaries, and CI runs build and lint on pull requests ready for review (not on drafts). All the content lives in `src/api/profile/es.ts`.
 
 ## License
 

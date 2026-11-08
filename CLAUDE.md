@@ -2,28 +2,25 @@
 
 ## Project
 
-Personal portfolio and CV for Alejandro Granados — CTO, Staff AI Engineer, and Software Architect based in Valencia, Spain.
+Personal portfolio of Alejandro Granados (portfolio.agranadosb.com) — CTO and software architect in Valencia, Spain. One page, in Spanish for now, aimed at recruiters and AI screening tools: the served HTML must show all the content without JavaScript.
 
-Two pages, both in English and Spanish:
-- **`/`** — Portfolio: profile, about, skills, experience, education, honors, contact
-- **`/cv`** (`cv.html`) — Print-optimized CV (A4, always light mode, downloadable as PDF)
-
-Stack: React 19 · TypeScript · Tailwind v4 · Vite + SWC · Biome. No backend: content is static and the site is deployed as static assets to Cloudflare Workers.
+Stack: React 19 · TypeScript · React Router v8 (framework mode, pre-rendered) · Vite · plain CSS · Biome. No backend: content is static and the site is deployed as static assets to Cloudflare Workers.
 
 ## Commands
 
 ```bash
 ./scripts/localdev/start.sh   # dev server (localhost:5173), from the repo root wherever it's called from
 npm run dev                   # dev server (localhost:5173)
-npm run build                 # tsc -b && vite build
+npm run build                 # tsc -b && react-router build (pre-renders the HTML into build/client)
 npm run lint                  # biome lint, including the import rules
 npm run check                 # biome lint + format check
 npm run format                # biome format --write
+npm run test:e2e              # build, serve with wrangler and run the Playwright checks
 npm run preview               # build + wrangler dev (local Workers runtime)
 npm run deploy                # build + wrangler deploy (Cloudflare)
 ```
 
-Node only exists inside the devcontainer (`.devcontainer/`): run every command there. Always run `npm run build` and `npm run lint` after any change. CI runs both only on PRs ready for review: drafts skip it, and marking a PR ready triggers it.
+Node 22 only exists inside the devcontainer (`.devcontainer/`): run every command there. Always run `npm run build` and `npm run lint` after any change. CI runs both only on PRs ready for review: drafts skip it, and marking a PR ready triggers it. `SCREENSHOTS=1 npx playwright test e2e/screenshots.spec.ts` captures the page at 1440 and 390 px in both themes.
 
 ## Architecture
 
@@ -33,16 +30,17 @@ Every folder has a closed definition. If something doesn't fit the sentence, it 
 
 | Folder | What goes in |
 |---|---|
-| `src/app/` | The shell: entry points, global providers, the layout (navigation) and the pages in `routes/`. The only place that composes features. |
-| `src/features/<concept>/` | One user-facing concept with one objective, named in the product's words (`experience`, `cv`). Its public contract is the component at its root, named after it (`features/education/Education.tsx`), with its hook next to it. Everything else is internal and lives in `components/`, each component's hook next to it. |
+| `src/app/` | The shell: `root.tsx` (the HTML document), `routes.ts`, the layout (rail, hexagon background) and the pages in `routes/`. The only place that composes features. |
+| `src/features/<concept>/` | One section of the page with one objective, named in the product's words (`experience`, `methodology`). Its public contract is the component at its root, named after it (`features/education/Education.tsx`), with its hook and stylesheet next to it. Everything else is internal and lives in `components/`. |
 | `src/api/` | The only data source, one module per domain. `api/profile` exposes the content and its types; the day there is a backend, only this module changes. |
-| `src/components/` | UI that knows no business concept (`SectionTitle`, `SocialLinks`). |
-| `src/lib/` | One shared capability per module, named after it (`i18n`, `theme`, `focus-trap`). |
+| `src/components/` | UI that knows no business concept (`SectionHeader`, `NetworkIcon`). |
+| `src/lib/` | One shared capability per module, named after it (`i18n`, `theme`). |
+| `src/config/` | Site configuration (`SITE_URL`). |
 
 Rules:
-- Imports flow shared code (`api`, `components`, `lib`) → features → `app`. A feature imports only its own folder and shared code: never another feature, never `app`.
+- Imports flow shared code (`api`, `components`, `config`, `lib`) → features → `app`. A feature imports only its own folder and shared code: never another feature, never `app`.
 - `app` imports a feature only through its contract (`import { Education } from "@/features/education/Education"`), never its `components/` or its hooks, so a feature can reorganize itself without touching anyone else.
-- When one feature must trigger another, the page wires them with a callback: `profile` exposes `onContact`, and `HomePage` opens `contact`.
+- When a feature must show another inside its own UI, it leaves a slot that the page fills: `Methodology` receives `Areas` and `Stack` as `children` in `HomePage`.
 - Code starts inside its feature. It moves to `components/` or `lib/` only when a second consumer needs it and it knows no business concept.
 - No generic names (`utils`, `helpers`, `common`, `misc`, `types`) for folders or files.
 - Absolute imports with `@/` everywhere: relative imports are rejected, so the import rules stay checkable.
@@ -51,30 +49,36 @@ Biome enforces the import rules (`overrides` in `biome.json` with `noRestrictedI
 
 ## Content and text
 
-- Portfolio content (profile, bio, jobs, skills, education, honors) lives in `src/api/profile/`. What doesn't depend on language is written once: each job's role, company, location and period live in `jobs.ts`. The translated text lives in `en.ts` and `es.ts`, which export the same names; job texts are keyed by the job's `id`, so `tsc` fails if a job is missing a translation.
-- UI text lives in the hook of the component that shows it, as a `Record<Language, {...}>` constant, so `tsc` fails if a language is missing.
-- No content or text hardcoded in components; asset paths are the only literals.
+- The approved copy lives in `src/api/profile/es.ts`, typed by `ProfileContent`. Use it as it is: never invent or rewrite content, and never name internal projects or clients. Tools only appear in the stack table, never tied to a project.
+- Content still to be confirmed is modelled, not faked: the contact email is `null`, and the page shows a visible placeholder until it is set.
+- UI text (labels, headings, captions) lives in the hook of the component that shows it, as a `Record<Language, {...}>` constant.
+- Only Spanish for now: `Language` is `"es"`. Adding a language means adding it to `Language`, writing its `api/profile` module and translations wherever `tsc` asks, adding its routes and `hreflang`. `useLanguage()` is the seam: today it returns the default; then it will read the route.
 
-## Language and theme
+## Pre-rendered HTML
 
-- Language: stored preference (`language` in localStorage), else `navigator.language`. `LanguageProvider` holds it; features read it with `useLanguage()`.
-- Theme: `light`, `dark` or `system` (the default). The inline script in `index.html` applies a stored theme before React loads, to avoid a flash. The toggle always sets an explicit theme; nothing in the UI goes back to `system`.
-- In `src/index.css`, no class follows the system through `prefers-color-scheme`, and `:root.light` / `:root.dark` override it.
+- `react-router build` renders every route to HTML (`ssr: false` + `prerender`), and React hydrates it. Nothing may read `window`, `document` or `localStorage` while rendering, or the client render will not match the HTML: read them in effects.
+- The theme button renders both icons and CSS shows the right one; its label starts generic and becomes specific after mount. That keeps the HTML identical whatever theme the visitor has.
+- `public/_redirects` sends the old CV URLs (`/cv.html`, `/cv`) to the home with a 301. Unknown paths get `public/404.html` with a 404 (`not_found_handling: "404-page"`).
+
+## Theme
+
+- `light` or `dark`, following the system until the visitor chooses. The choice is stored as `theme-mode` and applied as `data-theme` on `<html>` by the inline script in `root.tsx`, before the first paint.
+- In `src/index.css`, `prefers-color-scheme` sets the default tokens and `[data-theme]` overrides them.
 
 ## Styling
 
-- Semantic tokens in `src/index.css` under `@theme` (`surface-*`, `ink-*`, `accent`, `border`) for all portfolio UI.
-- Raw Tailwind palette colors (`gray-*`, `blue-*`) only on the CV, which is always light and print-optimized.
-- `HIGHLIGHTS_BY_INDEX` in the CV caps how many highlights each job shows, so the CV fits its print length. `?print=auto` opens the print dialog on load.
-
-## TypeScript
-
-`erasableSyntaxOnly: true` is set: no parameter properties (assign fields in the constructor body) and no enums with runtime values (use string unions or `as const`).
+- Plain CSS: the prototype's tokens and rules. Global tokens and shared classes in `src/index.css`; each component's rules in a stylesheet next to it, imported by the component. No Tailwind.
+- Tokens keep the design spec's names (`--ground`, `--panel`, `--ink`, `--muted`, `--line`, `--accent`, `--accentText`, `--onAccent`, `--hexLine`, `--hlColor`, `--hlBg`).
+- Amber is never text on the light theme: text and lines use `--accentText`; `--accent` is only a fill, with `--onAccent` text on it.
+- Every animation is CSS or SVG and has a `prefers-reduced-motion` rule that leaves only colour changes. The parallax checks the same media query in JS.
 
 ## What the tools impose
 
-- Biome does not merge `noRestrictedImports` options across overrides: the last matching override wins. That is why every feature override repeats the relative-import patterns.
-- Biome needs `"css": { "parser": { "tailwindDirectives": true } }` for `@theme` to parse.
+- React Router v8 needs Node 22.22+ and React 19.2.7+. `.node-version` makes Cloudflare Workers Builds use Node 22.
+- `react-router build` may install packages it is missing (it added `isbot`) and prune devDependencies while doing it. If the build fails with a missing module, run `npm install` and build again.
+- Biome does not merge `noRestrictedImports` options across overrides: the last matching override wins. That is why every override repeats the relative-import patterns.
+- A leftover `.wrangler/deploy/config.json` (from the old Cloudflare Vite plugin) makes wrangler serve `dist/` instead of `build/client`. Delete it.
+- `wrangler dev` breaks (500) if `build/` is rebuilt under it, which `npm run test:e2e` does. Restart it.
 - The `node_modules` in the repo folder is installed from the devcontainer (Linux binaries); it does not run on macOS.
 
 ## How we work
@@ -82,3 +86,4 @@ Biome enforces the import rules (`overrides` in `biome.json` with `noRestrictedI
 - One issue per task, with Objetivo, Criterio de entrega and Notas de diseño. A branch per task and a PR that closes it (`Closes #N`).
 - Conventional Commits.
 - What Claude writes on GitHub ends with the Claude Code attribution line.
+- The redesign brief (spec, approved copy, prototype) lives in `docs/rediseno/`, which git ignores: it holds internal notes and the repo is public.
