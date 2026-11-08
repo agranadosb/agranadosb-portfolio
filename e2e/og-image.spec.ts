@@ -1,22 +1,28 @@
 import { test } from "@playwright/test";
-import { CONTENT } from "../src/api/profile/es";
+import { CONTENT as EN } from "../src/api/profile/en";
+import { CONTENT as ES } from "../src/api/profile/es";
+import type { Profile } from "../src/api/profile/Profile";
 
-// Renders public/og.png, the image shown when the site is shared, from the approved copy.
+// Renders the images shown when the site is shared, one per language, from its copy.
 // The card reuses the site's fonts and tokens: it loads the page and swaps its body.
 
-test.skip(!process.env.OG_IMAGE, "set OG_IMAGE=1 to render public/og.png");
+test.skip(!process.env.OG_IMAGE, "set OG_IMAGE=1 to render public/og.png and public/og-en.png");
 
-const { profile } = CONTENT;
+const IMAGES = [
+  { language: "es", profile: ES.profile, path: "public/og.png" },
+  { language: "en", profile: EN.profile, path: "public/og-en.png" },
+];
 
 const escapeHtml = (text: string) =>
   text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-const initials = profile.name
-  .split(" ")
-  .map((word) => word[0])
-  .join("");
+const initials = (name: string) =>
+  name
+    .split(" ")
+    .map((word) => word[0])
+    .join("");
 
-const CARD = `
+const card = (profile: Profile) => `
 <style>
   .og { position: relative; isolation: isolate; width: 1200px; height: 630px; box-sizing: border-box;
     padding: 56px 64px; display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 0 48px;
@@ -77,22 +83,28 @@ const CARD = `
       <rect x="249" y="200" width="8" height="8" /><rect x="196" y="231" width="8" height="8" />
       <rect x="143" y="200" width="8" height="8" /><rect x="143" y="138" width="8" height="8" />
     </g>
-    <text x="200" y="185" text-anchor="middle" class="initials">${escapeHtml(initials)}</text>
+    <text x="200" y="185" text-anchor="middle" class="initials">${escapeHtml(initials(profile.name))}</text>
   </svg>
 </div>`;
 
 test.use({ viewport: { width: 1200, height: 630 }, colorScheme: "dark" });
 
-test("render the Open Graph image", async ({ page }) => {
-  await page.route("**/assets/**/*.js", (route) => route.abort());
-  await page.goto("/");
+for (const { language, profile, path } of IMAGES) {
+  test(`render the Open Graph image in ${language}`, async ({ page }) => {
+    await page.route("**/assets/**/*.js", (route) => route.abort());
+    await page.goto("/");
 
-  await page.evaluate(async (card) => {
-    document.documentElement.dataset.theme = "dark";
-    document.body.innerHTML = card;
-    document.body.getBoundingClientRect();
-    await document.fonts.ready;
-  }, CARD);
+    await page.evaluate(
+      async ({ language, html }) => {
+        document.documentElement.lang = language;
+        document.documentElement.dataset.theme = "dark";
+        document.body.innerHTML = html;
+        document.body.getBoundingClientRect();
+        await document.fonts.ready;
+      },
+      { language, html: card(profile) },
+    );
 
-  await page.screenshot({ path: "public/og.png" });
-});
+    await page.screenshot({ path });
+  });
+}

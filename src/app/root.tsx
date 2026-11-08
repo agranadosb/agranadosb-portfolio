@@ -5,6 +5,7 @@ import "@fontsource/ibm-plex-mono/400.css";
 import "@fontsource/ibm-plex-mono/500.css";
 import "@fontsource/ibm-plex-mono/600.css";
 import "@/index.css";
+import { useLanguage } from "@/lib/i18n/useLanguage";
 
 const APPLY_STORED_THEME = `try {
   const theme = localStorage.getItem("theme-mode");
@@ -12,8 +13,10 @@ const APPLY_STORED_THEME = `try {
 } catch {}`;
 
 export function Layout({ children }: { children: ReactNode }) {
+  const { language } = useLanguage();
+
   return (
-    <html lang="es">
+    <html lang={language}>
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />

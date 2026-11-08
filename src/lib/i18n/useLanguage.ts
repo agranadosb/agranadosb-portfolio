@@ -1,5 +1,7 @@
-import { DEFAULT_LANGUAGE, type Language } from "@/lib/i18n/Language";
+import { useLocation } from "react-router";
+import { type Language, languageFromPath } from "@/lib/i18n/Language";
 
 export function useLanguage(): { language: Language } {
-  return { language: DEFAULT_LANGUAGE };
+  const { pathname } = useLocation();
+  return { language: languageFromPath(pathname) };
 }
