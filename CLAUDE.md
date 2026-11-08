@@ -20,7 +20,7 @@ npm run preview               # build + wrangler dev (local Workers runtime)
 npm run deploy                # build + wrangler deploy (Cloudflare)
 ```
 
-Node 22 only exists inside the devcontainer (`.devcontainer/`): run every command there. Always run `npm run build` and `npm run lint` after any change. CI runs both only on PRs ready for review: drafts skip it, and marking a PR ready triggers it. `SCREENSHOTS=1 npx playwright test e2e/screenshots.spec.ts` captures the page at 1440 and 390 px in both themes. `OG_IMAGE=1 npx playwright test e2e/og-image.spec.ts` renders `public/og.png` and `public/og-es.png` (the image shown when each version is shared) from the profile copy: run it again when the name, role or headline change. `CV_PDF=1 npx playwright test e2e/cv-pdf.spec.ts` renders the CV of each language into `public/`; `e2e/cv.spec.ts` fails when a PDF no longer matches the copy or its template, so run it after changing either. `tsc -b` also type-checks `e2e/` (`tsconfig.e2e.json`).
+Node 22 only exists inside the devcontainer (`.devcontainer/`): run every command there. Always run `npm run build` and `npm run lint` after any change. CI runs both only on PRs ready for review: drafts skip it, and marking a PR ready triggers it. `SCREENSHOTS=1 npx playwright test e2e/screenshots.spec.ts` captures the page at 1440 and 390 px in both themes. `OG_IMAGE=1 npx playwright test e2e/og-image.spec.ts` renders `public/og.png` and `public/og-es.png` (the image shown when each version is shared) from the profile copy: run it again when the name, role or headline change. `tsc -b` also type-checks `e2e/` (`tsconfig.e2e.json`).
 
 ## Architecture
 
@@ -30,7 +30,7 @@ Every folder has a closed definition. If something doesn't fit the sentence, it 
 
 | Folder | What goes in |
 |---|---|
-| `src/app/` | The shell: `root.tsx` (the HTML document), `routes.ts`, the layout (rail, hexagon background) and the pages in `routes/`. The only place that composes features. |
+| `src/app/` | The shell: `root.tsx` (the HTML document), `routes.ts`, the layout (rail, hexagon background) and the pages in `routes/`, the CV among them. The only place that composes features. |
 | `src/features/<concept>/` | One section of the page with one objective, named in the product's words (`experience`, `methodology`). Its public contract is the component at its root, named after it (`features/education/Education.tsx`), with its hook and stylesheet next to it. Everything else is internal and lives in `components/`. |
 | `src/api/` | The only data source, one module per domain. `api/profile` exposes the content and its types; the day there is a backend, only this module changes. |
 | `src/components/` | UI that knows no business concept (`SectionHeader`, `NetworkIcon`). |
@@ -50,15 +50,15 @@ Biome enforces the import rules (`overrides` in `biome.json` with `noRestrictedI
 ## Content and text
 
 - The approved copy lives in `src/api/profile/es.ts`, typed by `ProfileContent`; `en.ts` is its English translation. Change both together, and the English follows the Spanish, never the other way around, even though English is the main page. Use the copy as it is: never invent or rewrite content, and never name internal projects or clients. Tools only appear in the stack table, never tied to a project.
-- The CV PDFs (`public/alejandro-granados-cv*.pdf`) come from the same copy through `e2e/cv/document.ts`: never edit them by hand. They are made for text extractors as much as for people: one column, real text, standard headings, roles in reverse chronological order, URLs written out, tagged PDF with bookmarks and metadata, two pages at most.
+- The CV of each language (`/alejandro-granados-cv.pdf`, `/alejandro-granados-cv-es.pdf`, paths in `CV` in `config/site.ts`) is a resource route, `routes/CvDocument.ts`, that draws the PDF with pdfkit from the same copy. The dev server renders it on request and the build pre-renders it next to the pages, so it is never a file in the repo and never stale. It is made for text extractors as much as for people: one column, real text, standard headings, roles in reverse chronological order, URLs written out, tagged PDF with bookmarks and metadata, two pages at most.
 - Content still to be confirmed is modelled, not faked: the contact email can be `null`, and the page then shows a visible placeholder.
 - UI text (labels, headings, captions) lives in the hook of the component that shows it, as a `Record<Language, {...}>` constant.
 - English is the default language, at `/`; every other language lives under its code (`/es/`). `LANGUAGE_HOME` in `lib/i18n` gives each language's home, and `useLanguage()` reads the language from the route (`meta` functions read it from `location`), so one page component serves every language and `root.tsx` sets `<html lang>`. Each home declares all versions with `hreflang` (`x-default` is the English one), with its own canonical, `og:locale` and Open Graph image, and the rail links to the other language.
-- Adding a language means adding it to `Language` and `LANGUAGE_HOME`, writing its `api/profile` module and translations wherever `tsc` asks, adding its route in `routes.ts`, its home and its `404` to `prerender`, its directory to the 404 rename in `buildEnd`, and its Open Graph image.
+- Adding a language means adding it to `Language` and `LANGUAGE_HOME`, writing its `api/profile` module and translations wherever `tsc` asks, adding its home and its CV to `routes.ts` (with the CV's path in `CV`), its `404` to `prerender`, its directory to the 404 rename in `buildEnd`, and its Open Graph image.
 
 ## Pre-rendered HTML
 
-- `react-router build` renders every route to HTML (`ssr: false` + `prerender`), and React hydrates it. Nothing may read `window`, `document` or `localStorage` while rendering, or the client render will not match the HTML: read them in effects.
+- `react-router build` renders every route to HTML (`ssr: false` + `prerender`, which takes every static route plus the 404s), and React hydrates it. Nothing may read `window`, `document` or `localStorage` while rendering, or the client render will not match the HTML: read them in effects.
 - The theme button renders both icons and CSS shows the right one; its label starts generic and becomes specific after mount. That keeps the HTML identical whatever theme the visitor has.
 - `public/_redirects` sends the old CV URLs (`/cv.html`, `/cv`) to the English CV PDF with a 301: the old CV page was in English.
 - Unknown paths get the not-found page with a 404, in their language: `routes/NotFoundPage.tsx` is the catch-all route, pre-rendered at `/404` and `/es/404` and moved to `404.html` and `es/404.html` in `buildEnd`. Cloudflare serves the `404.html` nearest to the requested path (`not_found_handling: "404-page"`), so `/es/anything` gets the Spanish one. The page takes its language from the same path, so hydration matches the file Cloudflare chose.
@@ -87,8 +87,10 @@ Biome enforces the import rules (`overrides` in `biome.json` with `noRestrictedI
 - A leftover `.wrangler/deploy/config.json` (from the old Cloudflare Vite plugin) makes wrangler serve `dist/` instead of `build/client`. Delete it.
 - `wrangler dev` breaks (500) if `build/` is rebuilt under it, which `npm run test:e2e` does. Restart it.
 - The `node_modules` in the repo folder is installed from the devcontainer (Linux binaries); it does not run on macOS.
-- Chromium's PDFs carry no space characters: text extractors infer spaces from the gaps between glyphs, and Archivo's narrow space made them merge words ("Datamanagement"). The CV widens `word-spacing` and turns off kerning and ligatures for that. A line that cannot wrap makes Chromium shrink the whole page to fit it, so every `nowrap` item needs a space next to it.
-- pdf-lib keeps `getInfoDict()` private (reach the Info dictionary through `context.trailerInfo.Info`) and joins `setKeywords()` with spaces (pass one comma-separated string).
+- `routes.ts` is loaded before Vite's `@/` alias exists, so it imports `config/site` with a relative path and a `biome-ignore`.
+- Pre-rendering a resource route also writes the `.data` file of a client navigation; `buildEnd` deletes the CVs' ones. Inside the loader, `request.url` carries that `.data` suffix: read the normalized `url`.
+- pdfkit cannot embed an instance of a variable font, and fontkit cannot subset fontsource's IBM Plex Mono: the CV uses only Archivo's static cuts (`@fontsource/archivo`).
+- pdfkit applies ligatures, and text extractors read the "fi" glyph as a bare "f" ("Heligráfcs"). Every CV text call takes its options from `style()`, which turns them off; fontkit takes an object for that, although pdfkit's types only list arrays.
 
 ## How we work
 
