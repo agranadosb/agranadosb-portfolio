@@ -1,4 +1,5 @@
 import { getProfileContent } from "@/api/profile";
+import { CV } from "@/config/site";
 import type { Language } from "@/lib/i18n/Language";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 
@@ -13,6 +14,8 @@ const STRINGS: Record<
     code: string;
     linkedin: string;
     github: string;
+    cv: string;
+    cvLink: string;
     credits: string;
   }
 > = {
@@ -25,6 +28,8 @@ const STRINGS: Record<
     code: "Código",
     linkedin: "LinkedIn",
     github: "GitHub",
+    cv: "Currículum",
+    cvLink: "CV · PDF",
     credits: "Diseñado y construido por Alejandro Granados · Valencia",
   },
   en: {
@@ -36,11 +41,17 @@ const STRINGS: Record<
     code: "Code",
     linkedin: "LinkedIn",
     github: "GitHub",
+    cv: "Curriculum vitae",
+    cvLink: "CV · PDF",
     credits: "Designed and built by Alejandro Granados · Valencia",
   },
 };
 
 export function useContact() {
   const { language } = useLanguage();
-  return { profile: getProfileContent(language).profile, strings: STRINGS[language] };
+  return {
+    profile: getProfileContent(language).profile,
+    cv: { href: `/${CV[language].path}`, fileName: CV[language].fileName },
+    strings: STRINGS[language],
+  };
 }

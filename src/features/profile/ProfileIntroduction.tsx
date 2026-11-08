@@ -2,7 +2,7 @@ import { useProfileIntroduction } from "@/features/profile/useProfileIntroductio
 import "@/features/profile/ProfileIntroduction.css";
 
 export function ProfileIntroduction() {
-  const { profile, areas, strings } = useProfileIntroduction();
+  const { profile, areas, cv, strings } = useProfileIntroduction();
 
   return (
     <section id="inicio" className="cover" aria-labelledby="inicio-title">
@@ -42,6 +42,9 @@ export function ProfileIntroduction() {
           <div className="cover__actions">
             <a href="#metodologia" className="cover__button">
               {strings.seeAreas} <span aria-hidden="true">↓</span>
+            </a>
+            <a href={cv.href} download={cv.fileName} className="cover__download">
+              {strings.downloadCv} <span aria-hidden="true">↓</span>
             </a>
           </div>
         </div>

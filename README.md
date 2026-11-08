@@ -8,6 +8,8 @@ Built with **React 19 · TypeScript · React Router v8 · Vite · Biome**, pre-r
 
 `/` — one page in English, and `/es/` the same page in Spanish: cover, methodology and work areas, technology stack, experience, education and contact. Every word is in the served HTML, readable without JavaScript.
 
+`/alejandro-granados-cv.pdf` and `/alejandro-granados-cv-es.pdf` — the CV in each language, generated from the same copy and made to be read by recruiters and by screening tools.
+
 ## Getting started
 
 Requires [Docker](https://www.docker.com/) and [VS Code](https://code.visualstudio.com/) with the **Dev Containers** extension.
