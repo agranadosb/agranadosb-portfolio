@@ -9,7 +9,5 @@
     "directory": "./build/client",
     "not_found_handling": "404-page"
   },
-  "compatibility_flags": [
-    "nodejs_compat"
-  ]
+  "compatibility_flags": ["nodejs_compat"]
 }
