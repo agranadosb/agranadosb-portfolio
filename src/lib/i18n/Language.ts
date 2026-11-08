@@ -1,11 +1,11 @@
-export type Language = "es" | "en";
+export type Language = "en" | "es";
 
-export const DEFAULT_LANGUAGE: Language = "es";
+export const DEFAULT_LANGUAGE: Language = "en";
 
 // Each language's home page: the default one at the root, the others under their code.
 export const LANGUAGE_HOME: Record<Language, string> = {
-  es: "/",
-  en: "/en/",
+  en: "/",
+  es: "/es/",
 };
 
 const LANGUAGES = Object.keys(LANGUAGE_HOME) as Language[];

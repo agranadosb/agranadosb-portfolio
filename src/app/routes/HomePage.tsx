@@ -16,8 +16,8 @@ import {
   languageFromPath,
 } from "@/lib/i18n/Language";
 
-const LOCALE: Record<Language, string> = { es: "es_ES", en: "en_US" };
-const SHARE_IMAGE: Record<Language, string> = { es: "og.png", en: "og-en.png" };
+const LOCALE: Record<Language, string> = { en: "en_US", es: "es_ES" };
+const SHARE_IMAGE: Record<Language, string> = { en: "og.png", es: "og-es.png" };
 
 const homeUrl = (language: Language) => new URL(LANGUAGE_HOME[language], SITE_URL).href;
 

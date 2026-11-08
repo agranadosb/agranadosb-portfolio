@@ -6,11 +6,11 @@ import type { Profile } from "../src/api/profile/Profile";
 // Renders the images shown when the site is shared, one per language, from its copy.
 // The card reuses the site's fonts and tokens: it loads the page and swaps its body.
 
-test.skip(!process.env.OG_IMAGE, "set OG_IMAGE=1 to render public/og.png and public/og-en.png");
+test.skip(!process.env.OG_IMAGE, "set OG_IMAGE=1 to render public/og.png and public/og-es.png");
 
 const IMAGES = [
-  { language: "es", profile: ES.profile, path: "public/og.png" },
-  { language: "en", profile: EN.profile, path: "public/og-en.png" },
+  { language: "en", profile: EN.profile, path: "public/og.png" },
+  { language: "es", profile: ES.profile, path: "public/og-es.png" },
 ];
 
 const escapeHtml = (text: string) =>
