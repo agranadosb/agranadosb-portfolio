@@ -133,9 +133,12 @@ test("old CV links redirect to the home", async ({ request }) => {
   }
 });
 
-test("an unknown path answers with the not-found page", async ({ request }) => {
-  const response = await request.get("/no-existe");
+test("an unknown path answers with the not-found page", async ({ page }) => {
+  const response = await page.goto("/no-existe");
 
-  expect(response.status()).toBe(404);
-  expect(await response.text()).toContain("Página no encontrada");
+  expect(response?.status()).toBe(404);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Ningún adaptador responde a esta dirección.",
+  );
+  await expect(page.getByRole("link", { name: /Volver al inicio/ })).toHaveAttribute("href", "/");
 });

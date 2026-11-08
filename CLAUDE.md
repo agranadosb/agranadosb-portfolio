@@ -58,7 +58,8 @@ Biome enforces the import rules (`overrides` in `biome.json` with `noRestrictedI
 
 - `react-router build` renders every route to HTML (`ssr: false` + `prerender`), and React hydrates it. Nothing may read `window`, `document` or `localStorage` while rendering, or the client render will not match the HTML: read them in effects.
 - The theme button renders both icons and CSS shows the right one; its label starts generic and becomes specific after mount. That keeps the HTML identical whatever theme the visitor has.
-- `public/_redirects` sends the old CV URLs (`/cv.html`, `/cv`) to the home with a 301. Unknown paths get `public/404.html` with a 404 (`not_found_handling: "404-page"`).
+- `public/_redirects` sends the old CV URLs (`/cv.html`, `/cv`) to the home with a 301.
+- Unknown paths get the not-found page with a 404: `routes/NotFoundPage.tsx` is the catch-all route, pre-rendered at `/404` and moved to `404.html` in `buildEnd`, which is the file Cloudflare serves (`not_found_handling: "404-page"`). It matches the catch-all on hydration, so it never depends on the URL.
 
 ## Theme
 
@@ -76,6 +77,7 @@ Biome enforces the import rules (`overrides` in `biome.json` with `noRestrictedI
 
 - React Router v8 needs Node 22.22+ and React 19.2.7+. `.node-version` makes Cloudflare Workers Builds use Node 22.
 - `react-router build` may install packages it is missing (it added `isbot`) and prune devDependencies while doing it. If the build fails with a missing module, run `npm install` and build again.
+- React Router pre-renders `/404` as `404/index.html`; `buildEnd` in `react-router.config.ts` runs after pre-rendering and renames it. That config is typed `const config: Config`, not `satisfies Config`: with `buildEnd`, the inferred type cannot be named and `tsc -b` fails (TS2742).
 - Biome does not merge `noRestrictedImports` options across overrides: the last matching override wins. That is why every override repeats the relative-import patterns.
 - A leftover `.wrangler/deploy/config.json` (from the old Cloudflare Vite plugin) makes wrangler serve `dist/` instead of `build/client`. Delete it.
 - `wrangler dev` breaks (500) if `build/` is rebuilt under it, which `npm run test:e2e` does. Restart it.
