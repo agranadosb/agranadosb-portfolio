@@ -22,6 +22,15 @@ const STRINGS: Record<
     figureLabel:
       "Tres hexágonos concéntricos: en el centro el dominio, alrededor los puertos y en el anillo exterior los adaptadores",
   },
+  en: {
+    eyebrow: "Domain · ports · adapters",
+    title: "My methodology and where I apply it",
+    principle: "Principle",
+    practice: "In practice",
+    legend: "Hexagon legend:",
+    figureLabel:
+      "Three concentric hexagons: the domain at the center, the ports around it and the adapters in the outer ring",
+  },
 };
 
 export function useMethodology() {

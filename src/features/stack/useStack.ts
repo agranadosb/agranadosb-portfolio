@@ -12,6 +12,12 @@ const STRINGS: Record<
     capability: "Capacidad",
     tools: "Herramientas",
   },
+  en: {
+    title: "Tech stack",
+    caption: "The adapters: tools and practices grouped by capability.",
+    capability: "Capability",
+    tools: "Tools",
+  },
 };
 
 export function useStack() {

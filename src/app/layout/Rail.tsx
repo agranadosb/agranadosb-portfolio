@@ -9,7 +9,7 @@ interface RailProps {
 }
 
 export function Rail({ open, onToggle }: RailProps) {
-  const { profile, initials, strings } = useRail();
+  const { profile, initials, strings, otherLanguage } = useRail();
 
   if (!open) {
     return (
@@ -31,7 +31,7 @@ export function Rail({ open, onToggle }: RailProps) {
 
   return (
     <nav className="rail" aria-label={strings.navigation}>
-      <a href="#inicio" aria-label={`${strings.home} · ${profile.name}`}>
+      <a href="#inicio" aria-label={`${initials} · ${strings.home} · ${profile.name}`}>
         <span aria-hidden="true" className="rail__monogram">
           {initials}
         </span>
@@ -92,6 +92,17 @@ export function Rail({ open, onToggle }: RailProps) {
         <span className="tip">{strings.github} ↗</span>
       </a>
       <span className="rail-sep" aria-hidden="true" />
+      <a
+        href={otherLanguage.href}
+        hrefLang={otherLanguage.code}
+        lang={otherLanguage.code}
+        aria-label={`${otherLanguage.code.toUpperCase()} · ${otherLanguage.label}`}
+      >
+        <span aria-hidden="true" className="rail__language">
+          {otherLanguage.code.toUpperCase()}
+        </span>
+        <span className="tip">{otherLanguage.label}</span>
+      </a>
       <ThemeButton withTip labels={strings} />
       <button type="button" className="rail-end" onClick={onToggle} aria-label={strings.hideMenu}>
         <svg className="ico" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">

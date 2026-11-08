@@ -6,7 +6,7 @@ Built with **React 19 · TypeScript · React Router v8 · Vite · Biome**, pre-r
 
 ## Page
 
-`/` — one page in Spanish: cover, methodology and work areas, technology stack, experience, education and contact. Every word is in the served HTML, readable without JavaScript.
+`/` — one page in English, and `/es/` the same page in Spanish: cover, methodology and work areas, technology stack, experience, education and contact. Every word is in the served HTML, readable without JavaScript.
 
 ## Getting started
 

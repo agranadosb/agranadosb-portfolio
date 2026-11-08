@@ -12,6 +12,12 @@ const STRINGS: Record<
     seeAreas: "Ver cómo resuelvo cada ámbito",
     summary: "En resumen",
   },
+  en: {
+    about: "About me",
+    areas: "Sectors I work in",
+    seeAreas: "See how I approach each sector",
+    summary: "At a glance",
+  },
 };
 
 export function useProfileIntroduction() {

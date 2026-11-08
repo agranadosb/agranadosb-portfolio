@@ -12,6 +12,12 @@ const STRINGS: Record<
     currentRole: "Puesto actual",
     progression: "Trayectoria en",
   },
+  en: {
+    eyebrow: "Career · 2015 — 2026",
+    title: "Experience",
+    currentRole: "Current role",
+    progression: "Career path at",
+  },
 };
 
 export function useExperience() {

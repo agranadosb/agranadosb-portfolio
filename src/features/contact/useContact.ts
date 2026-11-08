@@ -27,6 +27,17 @@ const STRINGS: Record<
     github: "GitHub",
     credits: "Diseñado y construido por Alejandro Granados · Valencia",
   },
+  en: {
+    eyebrow: "Links and documents",
+    title: "Contact",
+    email: "Email",
+    emailPending: "[YOUR CONTACT EMAIL]",
+    professionalNetwork: "Professional network",
+    code: "Code",
+    linkedin: "LinkedIn",
+    github: "GitHub",
+    credits: "Designed and built by Alejandro Granados · Valencia",
+  },
 };
 
 export function useContact() {

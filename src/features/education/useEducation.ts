@@ -7,6 +7,10 @@ const STRINGS: Record<Language, { title: string; honors: string }> = {
     title: "Formación",
     honors: "Matrícula de Honor",
   },
+  en: {
+    title: "Education",
+    honors: "Honors",
+  },
 };
 
 export function useEducation() {

@@ -1,5 +1,5 @@
-import type { Language } from "@/lib/i18n/Language";
-import { DEFAULT_LANGUAGE } from "@/lib/i18n/Language";
+import type { MetaFunction } from "react-router";
+import { LANGUAGE_HOME, type Language, languageFromPath } from "@/lib/i18n/Language";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import "@/app/routes/NotFoundPage.css";
 
@@ -14,10 +14,17 @@ const STRINGS: Record<
     text: "La página que buscas no existe o ha cambiado de sitio. Todo lo demás sigue en su lugar.",
     backHome: "Volver al inicio",
   },
+  en: {
+    title: "Page not found · Alejandro Granados",
+    eyebrow: "Route not found",
+    heading: "No adapter answers at this address.",
+    text: "The page you are looking for does not exist or has moved. Everything else is still in place.",
+    backHome: "Back to home",
+  },
 };
 
-export const meta = () => [
-  { title: STRINGS[DEFAULT_LANGUAGE].title },
+export const meta: MetaFunction = ({ location }) => [
+  { title: STRINGS[languageFromPath(location.pathname)].title },
   { name: "robots", content: "noindex" },
 ];
 
@@ -35,7 +42,7 @@ export default function NotFoundPage() {
           </div>
           <h1 className="not-found__heading">{strings.heading}</h1>
           <p className="not-found__lead">{strings.text}</p>
-          <a href="/" className="not-found__button">
+          <a href={LANGUAGE_HOME[language]} className="not-found__button">
             {strings.backHome} <span aria-hidden="true">→</span>
           </a>
         </div>

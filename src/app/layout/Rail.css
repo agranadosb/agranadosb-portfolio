@@ -58,6 +58,13 @@
   box-sizing: border-box;
 }
 
+.rail__language {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
 .tip {
   position: absolute;
   right: 54px;
