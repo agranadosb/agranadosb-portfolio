@@ -137,26 +137,6 @@
       }
     },
     {
-      "includes": ["src/features/cv/**"],
-      "linter": {
-        "rules": {
-          "style": {
-            "noRestrictedImports": {
-              "level": "error",
-              "options": {
-                "patterns": [
-                  {
-                    "group": ["@/features/**", "!@/features/cv/**", "@/app/**", "./**", "../**"],
-                    "message": "A feature imports only its own folder and shared code (api, components, lib)."
-                  }
-                ]
-              }
-            }
-          }
-        }
-      }
-    },
-    {
       "includes": ["src/features/education/**"],
       "linter": {
         "rules": {

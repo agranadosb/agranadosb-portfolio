@@ -32,8 +32,6 @@ export const ABOUT: About = {
     { label: "Expertise", value: "Software Engineering · AI" },
     { label: "Education", value: "MSc · BSc" },
   ],
-  cvSummary:
-    "Engineering leader, software architect, and hands-on AI practitioner with 10+ years turning technology into software that creates real value for users and the business. Currently CTO at Heligráfics, leading 20–40 engineers across AI research, data engineering, and infrastructure. Core expertise in machine learning (PyTorch, computer vision, LLMs), distributed data pipelines (Kafka, Spark), cloud infrastructure (GCP, Kubernetes), and ISO 42001 / ISO 27001 compliance.",
 };
 
 export const JOB_DETAILS: Record<JobId, JobDetails> = {

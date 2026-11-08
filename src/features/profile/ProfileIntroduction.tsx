@@ -41,14 +41,6 @@ export function ProfileIntroduction({ onContact }: ProfileIntroductionProps) {
           >
             {strings.viewExperience}
           </a>
-          <a
-            href="/cv.html?print=auto"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-2.5 border border-border text-ink-secondary font-medium rounded-lg hover:border-accent hover:text-ink-primary transition-colors text-sm"
-          >
-            {strings.downloadCV}
-          </a>
           <button
             type="button"
             onClick={onContact}

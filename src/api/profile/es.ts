@@ -22,8 +22,6 @@ export const ABOUT: About = {
     { label: "Especialidad", value: "Ingeniería de Software · IA" },
     { label: "Formación", value: "Máster · Grado" },
   ],
-  cvSummary:
-    "Líder técnico, arquitecto de software e ingeniero de IA con más de 10 años desarrollando software con impacto real para usuarios y negocio. Actualmente CTO en Heligráfics, donde lidero equipos de investigación de IA, ingeniería de datos e infraestructura. Experiencia principal en machine learning con PyTorch, visión por computador, LLMs, pipelines de datos distribuidos con Kafka y Spark, infraestructura cloud en GCP y Kubernetes, y cumplimiento ISO 42001 / ISO 27001.",
 };
 
 export const JOB_DETAILS: Record<JobId, JobDetails> = {
