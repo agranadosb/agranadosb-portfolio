@@ -46,3 +46,15 @@ test("each page offers the CV of its language", async ({ page }) => {
     }
   }
 });
+
+// The old CV page was in English: its links now open the English PDF.
+test("old CV links open the English CV", async ({ request }) => {
+  for (const path of ["/cv.html", "/cv", "/cv/"]) {
+    const redirect = await request.get(path, { maxRedirects: 0 });
+    expect(redirect.status()).toBe(301);
+    expect(redirect.headers().location).toMatch(new RegExp(`/${CV.en.path}$`));
+
+    const response = await request.get(path);
+    expect(response.headers()["content-type"]).toBe("application/pdf");
+  }
+});

@@ -60,7 +60,7 @@ Biome enforces the import rules (`overrides` in `biome.json` with `noRestrictedI
 
 - `react-router build` renders every route to HTML (`ssr: false` + `prerender`), and React hydrates it. Nothing may read `window`, `document` or `localStorage` while rendering, or the client render will not match the HTML: read them in effects.
 - The theme button renders both icons and CSS shows the right one; its label starts generic and becomes specific after mount. That keeps the HTML identical whatever theme the visitor has.
-- `public/_redirects` sends the old CV URLs (`/cv.html`, `/cv`) to the home with a 301.
+- `public/_redirects` sends the old CV URLs (`/cv.html`, `/cv`) to the English CV PDF with a 301: the old CV page was in English.
 - Unknown paths get the not-found page with a 404, in their language: `routes/NotFoundPage.tsx` is the catch-all route, pre-rendered at `/404` and `/es/404` and moved to `404.html` and `es/404.html` in `buildEnd`. Cloudflare serves the `404.html` nearest to the requested path (`not_found_handling: "404-page"`), so `/es/anything` gets the Spanish one. The page takes its language from the same path, so hydration matches the file Cloudflare chose.
 
 ## Theme

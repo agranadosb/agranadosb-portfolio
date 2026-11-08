@@ -215,14 +215,6 @@ test("LinkedIn and GitHub links open in a new tab", async ({ page }) => {
   }
 });
 
-test("old CV links redirect to the home", async ({ request }) => {
-  for (const path of ["/cv.html", "/cv"]) {
-    const response = await request.get(path, { maxRedirects: 0 });
-    expect(response.status()).toBe(301);
-    expect(response.headers().location).toMatch(/\/$/);
-  }
-});
-
 test("an unknown path answers with the not-found page", async ({ page }) => {
   const response = await page.goto("/does-not-exist");
 
