@@ -5,7 +5,7 @@ import { useContact } from "@/features/contact/useContact";
 import "@/features/contact/Contact.css";
 
 export function Contact() {
-  const { profile, strings } = useContact();
+  const { profile, cv, strings } = useContact();
 
   return (
     <section id="contacto" className="section" aria-labelledby="contacto-title">
@@ -39,6 +39,16 @@ export function Contact() {
           <span className="contact__link">
             <NetworkIcon network="github" size={26} />
             {strings.github} ↗
+          </span>
+        </a>
+        <a href={cv.href} download={cv.fileName} className="contact__card">
+          <span className="contact__label">{strings.cv}</span>
+          <span className="contact__link">
+            <svg className="ico" width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 3h8l4 4v14H6z" />
+              <path d="M14 3v4h4M9 12h6M9 16h6" />
+            </svg>
+            {strings.cvLink} ↓
           </span>
         </a>
       </div>

@@ -136,6 +136,25 @@
   }
 }
 
+.cover__download {
+  min-height: 48px;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--ink);
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+@media (hover: hover) {
+  .cover__download:hover {
+    background: var(--ink);
+    color: var(--ground);
+  }
+}
+
 .summary-box {
   border: 1.5px solid var(--ink);
   background: var(--panel);
