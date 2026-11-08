@@ -2,11 +2,11 @@
 
 Personal portfolio and CV for Alejandro Granados — CTO, Staff AI Engineer, and Software Architect based in Valencia, Spain.
 
-Built with **React 19 · TypeScript · Tailwind v4 · Vite + SWC · Biome**, following hexagonal architecture and SOLID principles.
+Built with **React 19 · TypeScript · Tailwind v4 · Vite + SWC · Biome**, following the Heligrafics frontend standard: a feature-based structure derived from Bulletproof React.
 
 ## Pages
 
-- `/` — Portfolio (hero, about, skills, experience, education, honors, contact)
+- `/` — Portfolio (profile, about, skills, experience, education, honors, contact)
 - `/cv` — Print-optimized CV (A4, downloadable as PDF)
 
 ## Getting started
@@ -17,7 +17,7 @@ Requires [Docker](https://www.docker.com/) and [VS Code](https://code.visualstud
 2. Once attached, start the dev server:
 
    ```bash
-   npm run dev
+   ./scripts/localdev/start.sh
    ```
 
    Available at http://localhost:5173.
@@ -26,6 +26,7 @@ Requires [Docker](https://www.docker.com/) and [VS Code](https://code.visualstud
 
 | Command | Description |
 |---|---|
+| `./scripts/localdev/start.sh` | Start the dev server from the repo root, wherever it's called from |
 | `npm run dev` | Start the Vite dev server |
 | `npm run build` | Type-check and build for production |
 | `npm run preview` | Preview the production build |
@@ -36,17 +37,18 @@ Requires [Docker](https://www.docker.com/) and [VS Code](https://code.visualstud
 
 ## Architecture
 
-Hexagonal architecture (Ports & Adapters) with strict layer separation:
+Feature-based, with imports flowing one way: shared code → features → app.
 
 ```
 src/
-  domain/         # Pure types
-  application/    # Use cases + port interfaces
-  infrastructure/ # Port implementations (StaticProfileRepository, theme adapters)
-  ui/             # Presenters, hooks, components, screens
+  app/         # Shell: entry points, providers, layout and pages (routes/)
+  features/    # One folder per user-facing concept (about, experience, cv, ...)
+  api/         # The only data source: profile content and its types
+  components/  # UI with no business concept
+  lib/         # Shared capabilities: i18n, theme, focus-trap
 ```
 
-All portfolio content lives in `src/infrastructure/profile/StaticProfileRepository.ts`.
+Biome enforces the import boundaries, and CI runs build and lint on pull requests ready for review (not on drafts). All portfolio content lives in `src/api/profile/`: language-independent job facts in `jobs.ts`, translated text in `en.ts` and `es.ts`.
 
 ## License
 
