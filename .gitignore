@@ -12,6 +12,9 @@ dist
 dist-ssr
 build
 .react-router
+test-results
+playwright-report
+screenshots
 *.local
 
 # Editor directories and files

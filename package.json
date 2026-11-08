@@ -8,6 +8,7 @@
     "build": "tsc -b && react-router build",
     "preview": "npm run build && wrangler dev",
     "lint": "biome lint",
+    "test:e2e": "playwright test",
     "lint:fix": "biome check --write",
     "format": "biome format --write",
     "check": "biome check",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.7",
+    "@playwright/test": "^1.65.0",
     "@react-router/dev": "^8.5.1",
     "@types/node": "^22.15.29",
     "@types/react": "^19.1.2",
